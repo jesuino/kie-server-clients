@@ -1,5 +1,7 @@
 package org.fxapps;
 
+import org.fxapps.navigation.Navigation;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

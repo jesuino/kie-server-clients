@@ -81,9 +81,9 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	}
 
 	@Override
-	public void executeCommand(String containerId,
+	public ServiceResponse<String> executeCommand(String containerId,
 			BatchExecutionCommandImpl batchCmd) {
-		rulesClient.executeCommands(containerId, batchCmd);
+		return rulesClient.executeCommands(containerId, batchCmd);
 
 	}
 

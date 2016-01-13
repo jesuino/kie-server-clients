@@ -1,6 +1,8 @@
-package org.fxapps;
+package org.fxapps.navigation;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXMLLoader;
@@ -17,15 +19,16 @@ public class Navigation {
 	/**
 	 * Used to transfer data between screens
 	 */
-	private Object data;
-	
+	private Map<Param, Object> data;
+
 	private static Navigation INSTANCE;
-	
+
 	private Scene scene;
 
 	private Navigation(Scene scene) {
 		super();
 		this.scene = scene;
+		this.data  = new HashMap<>();
 	}
 
 	public void goTo(Screen screen) {
@@ -73,12 +76,8 @@ public class Navigation {
 		return scene;
 	}
 
-	public Object getData() {
+	public Map<Param, Object> getData() {
 		return data;
-	}
-
-	public void setData(Object data) {
-		this.data = data;
 	}
 
 }

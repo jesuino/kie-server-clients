@@ -2,6 +2,7 @@ package org.fxapps.controllers;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -20,9 +21,11 @@ import javafx.scene.control.TextArea;
 
 import org.drools.core.command.impl.GenericCommand;
 import org.drools.core.command.runtime.BatchExecutionCommandImpl;
-import org.fxapps.Navigation;
-import org.fxapps.Screen;
+import org.fxapps.navigation.Navigation;
+import org.fxapps.navigation.Param;
+import org.fxapps.navigation.Screen;
 import org.fxapps.service.KieServerClientManager;
+import org.fxapps.service.KieServerClientService;
 import org.fxapps.utils.AppUtils;
 import org.kie.api.KieServices;
 import org.kie.api.command.Command;
@@ -31,6 +34,7 @@ import org.kie.server.api.marshalling.Marshaller;
 import org.kie.server.api.marshalling.MarshallerFactory;
 import org.kie.server.api.marshalling.MarshallingFormat;
 import org.kie.server.api.model.KieContainerResource;
+import org.kie.server.api.model.ServiceResponse;
 
 /**
  * 
@@ -99,29 +103,42 @@ public class ExecuteCommandsController implements Initializable {
 
 	private BatchExecutionCommandImpl batchCmd;
 
+	private KieServerClientService service;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		container = (KieContainerResource) Navigation.getInstance().getData();
+		Map<Param, Object> data = Navigation.getInstance().getData();
+		container = (KieContainerResource) data.get(Param.CONTAINER);
 		cmdFactory = KieServices.Factory.get().getCommands();
 		marshaller = MarshallerFactory.getMarshaller(MarshallingFormat.JSON,
 				getClass().getClassLoader());
+		service = KieServerClientManager.getInstance();
 		batchCmd = (BatchExecutionCommandImpl) cmdFactory
 				.newBatchExecution(new ArrayList<>());
 		initializeInterface();
 		doBindings();
-		updateText();
+		if (data.containsKey(Param.REQUEST)) {
+			txtCommand.setText(data.get(Param.REQUEST).toString());
+			validateAndSaveCommands();
+		} else {
+			updateText();
+		}
 		previousTextProperty.set(txtCommand.getText());
 	}
 
 	public void executeCommands() {
-		if (validateCommands()) {
-			KieServerClientManager.getInstance().executeCommand(
-					container.getContainerId(), batchCmd);
+		if (validateCommandsString()) {
+			Map<Param, Object> data = Navigation.getInstance().getData();
+			String id = container.getContainerId();
+			ServiceResponse<String> resp = service.executeCommand(id, batchCmd);
+			data.put(Param.REQUEST, txtCommand.getText());
+			data.put(Param.RESPONSE, resp);
+			Navigation.getInstance().goTo(Screen.EXECUTION_RESULTS);
 		}
 	}
 
 	public void validateAndSaveCommands() {
-		if (validateCommands()) {
+		if (validateCommandsString()) {
 			lstCommands.getItems().setAll(batchCmd.getCommands());
 			previousTextProperty.set(txtCommand.getText());
 		}
@@ -196,7 +213,7 @@ public class ExecuteCommandsController implements Initializable {
 		return Optional.of(cmd);
 	}
 
-	private boolean validateCommands() {
+	private boolean validateCommandsString() {
 		boolean validated = false;
 		try {
 			batchCmd = marshaller.unmarshall(txtCommand.getText(),

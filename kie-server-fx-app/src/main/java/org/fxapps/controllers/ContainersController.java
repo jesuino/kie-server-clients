@@ -16,8 +16,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
-import org.fxapps.Navigation;
-import org.fxapps.Screen;
+import org.fxapps.navigation.Navigation;
+import org.fxapps.navigation.Param;
+import org.fxapps.navigation.Screen;
 import org.fxapps.service.KieServerClientManager;
 import org.fxapps.service.KieServerClientService;
 import org.fxapps.utils.AppUtils;
@@ -113,7 +114,7 @@ public class ContainersController implements Initializable {
 	public void executeCommands() {
 		KieContainerResource container = lstContainers.getSelectionModel()
 				.getSelectedItem();
-		Navigation.getInstance().setData(container);
+		Navigation.getInstance().getData().put(Param.CONTAINER, container);
 		Navigation.getInstance().goTo(Screen.COMMANDS);
 	}
 

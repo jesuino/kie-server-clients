@@ -46,7 +46,7 @@ public interface KieServerClientService {
 		return service;
 	}
 
-	public void executeCommand(String containerId,
+	public ServiceResponse<String>  executeCommand(String containerId,
 			BatchExecutionCommandImpl batchCmd);
 	
 	public boolean canRunRules();
