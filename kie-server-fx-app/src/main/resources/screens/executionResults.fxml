@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <VBox id="VBox" alignment="CENTER" layoutX="0.0" layoutY="1.0" prefHeight="393.0" spacing="10.0">
+      <children>
+        <Label prefWidth="600.0" styleClass="titleLabel" text="Execution results" />
+        <HBox alignment="BOTTOM_LEFT" prefHeight="20.0" prefWidth="600.0">
+          <children>
+            <Label text="request:">
+              <font>
+                <Font name="System Bold Italic" size="13.0" fx:id="x1" />
+              </font>
+              <HBox.margin>
+                <Insets left="15.0" />
+              </HBox.margin>
+            </Label>
+            <Label font="$x1" text="response:">
+              <HBox.margin>
+                <Insets left="240.0" />
+              </HBox.margin>
+            </Label>
+          </children>
+        </HBox>
+        <HBox id="HBox" alignment="CENTER" prefHeight="233.0" prefWidth="600.0" spacing="15.0">
+          <children>
+            <TextArea fx:id="txtRequest" editable="false" prefHeight="215.0" prefWidth="280.0" wrapText="true" />
+            <TextArea fx:id="txtResponse" editable="false" prefHeight="215.0" prefWidth="280.0" wrapText="true" />
+          </children>
+        </HBox>
+        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="113.0" styleClass="defaultButton, plus" text="Back" />
+      </children>
+    </VBox>
+  </children>
+  <stylesheets>
+    <URL value="@../style/main.css" />
+  </stylesheets>
+</AnchorPane>

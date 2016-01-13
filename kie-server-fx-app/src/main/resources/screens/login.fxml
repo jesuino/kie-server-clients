@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="org.fxapps.controllers.LoginController">
+  <children>
+    <VBox id="VBox" alignment="CENTER" layoutX="14.0" layoutY="0.0" prefHeight="400.0" prefWidth="572.0" spacing="5.0">
+      <children>
+        <Label prefHeight="53.0" prefWidth="407.0" text="KIE Server Manager Client" textAlignment="CENTER" textFill="#0052cc">
+          <effect>
+            <GaussianBlur radius="1.857142857142857">
+              <input>
+                <Reflection bottomOpacity="0.047244094488188976" fraction="1.0" topOffset="-10.0" topOpacity="0.0590551181102362" />
+              </input>
+            </GaussianBlur>
+          </effect>
+          <font>
+            <Font name="System Bold" size="25.0" />
+          </font>
+        </Label>
+        <GridPane alignment="CENTER" prefHeight="272.0" prefWidth="572.0">
+          <children>
+            <Label styleClass="infoLabel" text="Server URL" GridPane.columnIndex="0" GridPane.rowIndex="0">
+              <font>
+                <Font name="System Bold Italic" size="15.0" fx:id="x1" />
+              </font>
+            </Label>
+            <Label font="$x1" styleClass="infoLabel" text="Username" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Label font="$x1" styleClass="infoLabel" text="Password" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <TextField fx:id="txtURL" prefHeight="35.0" prefWidth="242.0" promptText="http://localhost:8080/kie-server/services/rest;server" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <TextField id="txtUsername" fx:id="txtUsr" prefHeight="35.0" prefWidth="242.0" promptText="kieserver" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <PasswordField id="txtPassword" fx:id="txtPsw" prefHeight="35.0" prefWidth="242.0" promptText="kieserver1!" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="172.0" minWidth="10.0" prefWidth="107.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="457.0" minWidth="10.0" prefWidth="457.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+        <HBox id="HBox" alignment="CENTER" spacing="150.0">
+          <children>
+            <Button cancelButton="true" defaultButton="false" mnemonicParsing="false" onAction="#doExit" prefHeight="34.0" prefWidth="141.0" styleClass="danger, defaultButton" text="EXIT" textFill="RED" />
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#doLogin" prefHeight="34.0" prefWidth="141.0" styleClass="plus, defaultButton" text="LOGIN" textFill="#0021cc" />
+          </children>
+        </HBox>
+      </children>
+    </VBox>
+  </children>
+  <stylesheets>
+    <URL value="@../style/main.css" />
+  </stylesheets>
+</AnchorPane>

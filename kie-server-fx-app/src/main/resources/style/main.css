@@ -1,0 +1,28 @@
+.root {
+	-fx-base: lightblue;
+	-fx-background: #eeeeee;
+	-fx-font: 13px "System";
+}
+
+.defaultButton {
+	-fx-background-radius: 30;
+}
+
+}
+.plus {
+	-fx-text-fill: blue;
+}
+
+.danger {
+	-fx-text-fill: red;
+}
+
+.infoLabel {
+	-fx-font: bold 15px "System";
+}
+
+.titleLabel {
+	-fx-font: bold 25px "System";
+	-fx-text-fill: blue;
+	-fx-alignment: center;
+}

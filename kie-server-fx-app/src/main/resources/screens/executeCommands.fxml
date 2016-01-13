@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="org.fxapps.controllers.ExecuteCommandsController">
+  <children>
+    <VBox id="VBox" alignment="CENTER" layoutX="7.0" layoutY="0.0" prefHeight="400.0" prefWidth="593.0" spacing="5.0">
+      <children>
+        <Label id="lblServerInfo" fx:id="lblContainerId" alignment="CENTER" contentDisplay="LEFT" prefHeight="28.0" prefWidth="582.0" styleClass="titleLabel" text="kie-server-testing" textAlignment="CENTER" textFill="#0021cc">
+          <font>
+            <Font name="System Bold" size="25.0" />
+          </font>
+        </Label>
+        <HBox id="HBox" alignment="CENTER" prefHeight="300.0" prefWidth="593.0" spacing="5.0">
+          <children>
+            <StackPane id="StackPane" minWidth="220.0" prefWidth="150.0">
+              <children>
+                <ListView fx:id="lstCommands" minWidth="-Infinity" prefHeight="300.0" prefWidth="205.0" />
+                <Label fx:id="lblListEmpty" prefHeight="106.0" prefWidth="248.0" text="List Empty! Add commands to the list using the combo box below" textAlignment="CENTER" wrapText="true">
+                  <font>
+                    <Font name="System Italic" size="20.0" />
+                  </font>
+                </Label>
+              </children>
+            </StackPane>
+            <TextArea fx:id="txtCommand" prefHeight="300.0" prefWidth="405.0" wrapText="true" />
+          </children>
+        </HBox>
+        <HBox id="HBox" alignment="CENTER" prefHeight="35.0" prefWidth="593.0" spacing="3.0">
+          <children>
+            <ComboBox fx:id="cmbCommands" prefWidth="144.0" promptText="Commands">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Item 1" />
+                  <String fx:value="Item 2" />
+                  <String fx:value="Item 3" />
+                </FXCollections>
+              </items>
+              <HBox.margin>
+                <Insets left="6.0" />
+              </HBox.margin>
+            </ComboBox>
+            <Button fx:id="btnAdd" defaultButton="true" minHeight="-Infinity" mnemonicParsing="false" onAction="#addCommand" prefHeight="25.0" prefWidth="35.0" styleClass="defaultButton, plus" text="+">
+              <HBox.margin>
+                <Insets />
+              </HBox.margin>
+            </Button>
+            <Button id="removeCommand" fx:id="btnRemove" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#removeCommand" prefHeight="25.0" prefWidth="35.0" styleClass="defaultButton, danger" text="-" />
+            <Button id="removeCommand" fx:id="btnUp" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moveUp" prefHeight="25.0" prefWidth="35.0" styleClass="null, plus" text="↑">
+              <font>
+                <Font name="System Bold" size="12.0" fx:id="x1" />
+              </font>
+            </Button>
+            <Button id="removeCommand" fx:id="btnDown" font="$x1" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moveDown" prefHeight="25.0" prefWidth="35.0" styleClass="null, plus" text="↓" />
+            <Separator orientation="VERTICAL" prefHeight="35.0" prefWidth="46.0" />
+            <Button minHeight="-Infinity" minWidth="70.0" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="67.0" styleClass="defaultButton, danger" text="Cancel">
+              <HBox.margin>
+                <Insets />
+              </HBox.margin>
+            </Button>
+            <Button fx:id="btnSave" minHeight="-Infinity" minWidth="70.0" mnemonicParsing="false" onAction="#validateAndSaveCommands" prefHeight="30.0" prefWidth="76.0" styleClass="defaultButton, plus" text="Save" />
+            <Button id="btnAdd" fx:id="btnExecute" minHeight="-Infinity" minWidth="70.0" mnemonicParsing="false" onAction="#executeCommands" prefHeight="30.0" prefWidth="76.0" styleClass="defaultButton, plus" text="Execute">
+              <HBox.margin>
+                <Insets right="10.0" />
+              </HBox.margin>
+            </Button>
+          </children>
+        </HBox>
+      </children>
+      <stylesheets>
+        <URL value="@../style/main.css" />
+      </stylesheets>
+    </VBox>
+  </children>
+</AnchorPane>
