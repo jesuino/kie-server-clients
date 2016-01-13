@@ -22,16 +22,23 @@ public class Navigation {
 	private Map<Param, Object> data;
 
 	private static Navigation INSTANCE;
+	
+	private Screen previousScreen;
+	private Screen currentScreen;
 
 	private Scene scene;
 
 	private Navigation(Scene scene) {
 		super();
+		// we start at login screen
+		currentScreen = Screen.LOGIN;
 		this.scene = scene;
 		this.data  = new HashMap<>();
 	}
 
 	public void goTo(Screen screen) {
+		previousScreen = currentScreen;
+		currentScreen = screen;
 		Parent current = scene.getRoot();
 		FadeTransition hideCurrent = new FadeTransition();
 		hideCurrent.setDuration(Duration.millis(TRANSITION_DURATION));
@@ -78,6 +85,10 @@ public class Navigation {
 
 	public Map<Param, Object> getData() {
 		return data;
+	}
+
+	public void goToPreviousScreen() {
+		goTo(previousScreen);
 	}
 
 }

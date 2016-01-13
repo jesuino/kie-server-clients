@@ -30,9 +30,6 @@ import org.fxapps.utils.AppUtils;
 import org.kie.api.KieServices;
 import org.kie.api.command.Command;
 import org.kie.api.command.KieCommands;
-import org.kie.server.api.marshalling.Marshaller;
-import org.kie.server.api.marshalling.MarshallerFactory;
-import org.kie.server.api.marshalling.MarshallingFormat;
 import org.kie.server.api.model.KieContainerResource;
 import org.kie.server.api.model.ServiceResponse;
 
@@ -99,8 +96,6 @@ public class ExecuteCommandsController implements Initializable {
 
 	private KieCommands cmdFactory;
 
-	Marshaller marshaller;
-
 	private BatchExecutionCommandImpl batchCmd;
 
 	private KieServerClientService service;
@@ -110,8 +105,6 @@ public class ExecuteCommandsController implements Initializable {
 		Map<Param, Object> data = Navigation.getInstance().getData();
 		container = (KieContainerResource) data.get(Param.CONTAINER);
 		cmdFactory = KieServices.Factory.get().getCommands();
-		marshaller = MarshallerFactory.getMarshaller(MarshallingFormat.JSON,
-				getClass().getClassLoader());
 		service = KieServerClientManager.getInstance();
 		batchCmd = (BatchExecutionCommandImpl) cmdFactory
 				.newBatchExecution(new ArrayList<>());
@@ -175,14 +168,14 @@ public class ExecuteCommandsController implements Initializable {
 	}
 
 	public void goBack() {
-		Navigation.getInstance().goTo(Screen.CONTAINERS);
+		Navigation.getInstance().goToPreviousScreen();
 	}
 
 	private void updateText() {
 		batchCmd.getCommands().clear();
 		lstCommands.getItems().stream().map(c -> (GenericCommand<?>) c)
 				.forEach(batchCmd.getCommands()::add);
-		txtCommand.setText(marshaller.marshall(batchCmd));
+		txtCommand.setText(service.getMarshaller().marshall(batchCmd));
 	}
 
 	private Optional<Command<?>> cmdFromString(String selectedCommand) {
@@ -216,7 +209,7 @@ public class ExecuteCommandsController implements Initializable {
 	private boolean validateCommandsString() {
 		boolean validated = false;
 		try {
-			batchCmd = marshaller.unmarshall(txtCommand.getText(),
+			batchCmd = service.getMarshaller().unmarshall(txtCommand.getText(),
 					BatchExecutionCommandImpl.class);
 			validated = true;
 			txtCommand.setStyle("-fx-text-fill: blue;");

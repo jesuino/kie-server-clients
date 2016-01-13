@@ -10,7 +10,6 @@ import javafx.scene.control.TextArea;
 
 import org.fxapps.navigation.Navigation;
 import org.fxapps.navigation.Param;
-import org.fxapps.navigation.Screen;
 import org.kie.server.api.model.ServiceResponse;
 import org.kie.server.api.model.ServiceResponse.ResponseType;
 
@@ -39,7 +38,7 @@ public class ExecutionResultController implements Initializable {
 	}
 
 	public void goBack() {
-		Navigation.getInstance().goTo(Screen.COMMANDS);
+		Navigation.getInstance().goToPreviousScreen();
 	}
 
 }

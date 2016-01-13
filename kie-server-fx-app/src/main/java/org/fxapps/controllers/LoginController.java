@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
 import org.fxapps.navigation.Navigation;
+import org.fxapps.navigation.Param;
 import org.fxapps.navigation.Screen;
 import org.fxapps.service.KieServerClientManager;
 import org.fxapps.utils.AppUtils;
@@ -52,6 +53,8 @@ public class LoginController implements Initializable {
 		}
 		try {
 			KieServerClientManager.login(url, usr, psw);
+			Navigation.getInstance().getData().put(Param.USER, usr);
+			Navigation.getInstance().getData().put(Param.PASSWORD, psw);
 			Navigation.getInstance().goTo(Screen.CONTAINERS);
 		} catch (Exception e) {
 			logger.warning("Error connecting to the server: " + e.getMessage());

@@ -3,9 +3,12 @@ package org.fxapps.service;
 import java.util.List;
 
 import org.drools.core.command.runtime.BatchExecutionCommandImpl;
+import org.kie.server.api.marshalling.Marshaller;
 import org.kie.server.api.model.KieContainerResource;
 import org.kie.server.api.model.KieServerInfo;
 import org.kie.server.api.model.ServiceResponse;
+import org.kie.server.api.model.definition.ProcessDefinition;
+import org.kie.server.api.model.definition.ProcessDefinitionList;
 
 /**
  * The contract of a kie server client. It is also a factory of implementations,
@@ -52,5 +55,9 @@ public interface KieServerClientService {
 	public boolean canRunRules();
 	
 	public boolean canRunProcess();
+	
+	public ProcessDefinitionList getProcessesDefinitions(String containerId) throws Exception;
+
+	Marshaller getMarshaller();
 
 }
