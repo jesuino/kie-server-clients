@@ -8,7 +8,6 @@ import org.kie.server.api.model.KieContainerResource;
 import org.kie.server.api.model.KieServerInfo;
 import org.kie.server.api.model.ServiceResponse;
 import org.kie.server.api.model.definition.ProcessDefinition;
-import org.kie.server.api.model.definition.ProcessDefinitionList;
 
 /**
  * The contract of a kie server client. It is also a factory of implementations,
@@ -56,7 +55,7 @@ public interface KieServerClientService {
 	
 	public boolean canRunProcess();
 	
-	public ProcessDefinitionList getProcessesDefinitions(String containerId) throws Exception;
+	public List<ProcessDefinition> getProcessesDefinitions(String containerId) throws Exception;
 
 	Marshaller getMarshaller();
 

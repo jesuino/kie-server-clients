@@ -2,11 +2,7 @@ package org.fxapps.service;
 
 import java.util.List;
 
-import javax.ws.rs.core.MediaType;
-
 import org.drools.core.command.runtime.BatchExecutionCommandImpl;
-import org.fxapps.utils.ClientRequestUtil;
-import org.jboss.resteasy.client.ClientRequest;
 import org.kie.server.api.marshalling.Marshaller;
 import org.kie.server.api.marshalling.MarshallerFactory;
 import org.kie.server.api.marshalling.MarshallingFormat;
@@ -14,12 +10,12 @@ import org.kie.server.api.model.KieContainerResource;
 import org.kie.server.api.model.KieServerInfo;
 import org.kie.server.api.model.ReleaseId;
 import org.kie.server.api.model.ServiceResponse;
-import org.kie.server.api.model.definition.ProcessDefinitionList;
-import org.kie.server.api.rest.RestURI;
+import org.kie.server.api.model.definition.ProcessDefinition;
 import org.kie.server.client.KieServicesClient;
 import org.kie.server.client.KieServicesConfiguration;
 import org.kie.server.client.KieServicesFactory;
 import org.kie.server.client.ProcessServicesClient;
+import org.kie.server.client.QueryServicesClient;
 import org.kie.server.client.RuleServicesClient;
 
 /**
@@ -37,6 +33,7 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	private KieServerInfo kieServerInfo;
 	private RuleServicesClient rulesClient;
 	private ProcessServicesClient processesClient;
+	private QueryServicesClient queryClient;
 	private Marshaller marshaller;
 
 	/**
@@ -63,6 +60,7 @@ class KieServerClientServiceImpl implements KieServerClientService {
 						.getServicesClient(RuleServicesClient.class);
 			}
 		}
+		queryClient = client.getServicesClient(QueryServicesClient.class);
 		marshaller = MarshallerFactory.getMarshaller(FORMAT, getClass()
 				.getClassLoader());
 	}
@@ -108,16 +106,9 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	}
 
 	@Override
-	public ProcessDefinitionList getProcessesDefinitions(String containerId)
+	public List<ProcessDefinition> getProcessesDefinitions(String containerId)
 			throws Exception {
-		// This is a method that does not seem to be implemented on the API!
-		// hence we are making a manual HTTP request
-		ClientRequest cr = ClientRequestUtil.create(RestURI.QUERY_URI,
-				RestURI.PROCESS_DEFINITIONS_BY_CONTAINER_ID_GET_URI);
-		cr.pathParameter(RestURI.CONTAINER_ID, containerId);
-		cr.accept(MediaType.APPLICATION_JSON);
-		String payload = cr.get(String.class).getEntity();
-		return marshaller.unmarshall(payload, ProcessDefinitionList.class);
+		return queryClient.findProcessesByContainerId(containerId, 0, 1000);
 	}
 
 	@Override
