@@ -11,7 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 import org.fxapps.navigation.Navigation;
-import org.fxapps.navigation.Screen;
 import org.fxapps.service.KieServerClientManager;
 import org.fxapps.service.KieServerClientService;
 import org.fxapps.utils.AppUtils;
