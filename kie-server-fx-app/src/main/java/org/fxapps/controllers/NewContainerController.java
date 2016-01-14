@@ -47,7 +47,7 @@ public class NewContainerController implements Initializable {
 	}
 	
 	public void goBack() {
-		Navigation.getInstance().goToPreviousScreen();
+		Navigation.get().goToPreviousScreen();
 	}
 
 	public void addContainer() {

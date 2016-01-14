@@ -14,7 +14,7 @@ public class App extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		Scene scene = Navigation.getInstance().getScene();
+		Scene scene = Navigation.get().getScene();
 		stage.setScene(scene);
 		stage.setTitle("KIE Server Management Client");
 		stage.show();

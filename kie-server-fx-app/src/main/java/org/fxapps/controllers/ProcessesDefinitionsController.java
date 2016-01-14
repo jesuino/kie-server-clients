@@ -44,7 +44,7 @@ public class ProcessesDefinitionsController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		container = (KieContainerResource) Navigation.getInstance().getData()
+		container = (KieContainerResource) Navigation.get().data()
 				.get(Param.CONTAINER);
 		configureTableColumns();
 		updateInterface();
@@ -61,7 +61,7 @@ public class ProcessesDefinitionsController implements Initializable {
 	}
 
 	public void goBack() {
-		Navigation.getInstance().goTo(Screen.CONTAINERS);
+		Navigation.get().goTo(Screen.CONTAINERS);
 	}
 
 	public void openInstancesScreen() {
@@ -70,11 +70,11 @@ public class ProcessesDefinitionsController implements Initializable {
 
 	public void openDefinitionsDetailsScreen() {
 		saveSelectedProcess();
-		Navigation.getInstance().goTo(Screen.PROCESS_DEFINITION_DETAIL);
+		Navigation.get().goTo(Screen.PROCESS_DEFINITION_DETAIL);
 	}
 
 	private void saveSelectedProcess() {
-		Navigation.getInstance().getData().put(Param.PROCESS_DEFINITION, tblProcesses.getSelectionModel().getSelectedItem());
+		Navigation.get().data().put(Param.PROCESS_DEFINITION, tblProcesses.getSelectionModel().getSelectedItem());
 	}
 
 	private void updateTable() {

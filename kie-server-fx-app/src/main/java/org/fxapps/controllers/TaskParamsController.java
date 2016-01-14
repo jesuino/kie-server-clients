@@ -37,8 +37,8 @@ public class TaskParamsController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		Navigation n = Navigation.getInstance();
-		UserTaskDefinition t = (UserTaskDefinition) n.getData().get(
+		Navigation n = Navigation.get();
+		UserTaskDefinition t = (UserTaskDefinition) n.data().get(
 				Param.USER_TASK_DEFINITION);
 		AppUtils.configureColumnsForPair(clInName, clInType);
 		AppUtils.configureColumnsForPair(clOutName, clOutType);
@@ -50,7 +50,7 @@ public class TaskParamsController implements Initializable {
 	}
 
 	public void goBack() {
-		Navigation.getInstance().goToPreviousScreen();
+		Navigation.get().goToPreviousScreen();
 	}
 
 }

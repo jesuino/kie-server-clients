@@ -24,7 +24,7 @@ public class ExecutionResultController implements Initializable {
 	@Override
 	@SuppressWarnings("unchecked")
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		Map<Param, Object> data = Navigation.getInstance().getData();
+		Map<Param, Object> data = Navigation.get().data();
 		ServiceResponse<String> resp = (ServiceResponse<String>) data
 				.get(Param.RESPONSE);
 		String req = data.get(Param.REQUEST).toString();
@@ -38,6 +38,6 @@ public class ExecutionResultController implements Initializable {
 	}
 
 	public void goBack() {
-		Navigation.getInstance().goToPreviousScreen();
+		Navigation.get().goToPreviousScreen();
 	}
 }

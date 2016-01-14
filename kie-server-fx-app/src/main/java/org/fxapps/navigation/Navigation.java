@@ -65,7 +65,7 @@ public class Navigation {
 
 	}
 
-	public static Navigation getInstance() {
+	public static Navigation get() {
 		if (INSTANCE == null) {
 			try {
 				Parent root = FXMLLoader.load(Screen.LOGIN.getURL());
@@ -83,7 +83,7 @@ public class Navigation {
 		return scene;
 	}
 
-	public Map<Param, Object> getData() {
+	public Map<Param, Object> data() {
 		return data;
 	}
 

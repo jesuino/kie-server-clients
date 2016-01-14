@@ -102,7 +102,7 @@ public class ExecuteCommandsController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		Map<Param, Object> data = Navigation.getInstance().getData();
+		Map<Param, Object> data = Navigation.get().data();
 		container = (KieContainerResource) data.get(Param.CONTAINER);
 		cmdFactory = KieServices.Factory.get().getCommands();
 		service = KieServerClientManager.getInstance();
@@ -120,17 +120,17 @@ public class ExecuteCommandsController implements Initializable {
 	}
 	
 	public void goBack() {
-		Navigation.getInstance().goToPreviousScreen();
+		Navigation.get().goToPreviousScreen();
 	}
 
 	public void executeCommands() {
 		if (validateCommandsString()) {
-			Map<Param, Object> data = Navigation.getInstance().getData();
+			Map<Param, Object> data = Navigation.get().data();
 			String id = container.getContainerId();
 			ServiceResponse<String> resp = service.executeCommand(id, batchCmd);
 			data.put(Param.REQUEST, txtCommand.getText());
 			data.put(Param.RESPONSE, resp);
-			Navigation.getInstance().goTo(Screen.EXECUTION_RESULTS);
+			Navigation.get().goTo(Screen.EXECUTION_RESULTS);
 		}
 	}
 

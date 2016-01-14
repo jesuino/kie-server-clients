@@ -58,7 +58,7 @@ public class ContainersController implements Initializable {
 	}
 
 	public void doLogout() {
-		Navigation.getInstance().goTo(Screen.LOGIN);
+		Navigation.get().goTo(Screen.LOGIN);
 	}
 
 	public void disposeContainer() {
@@ -83,13 +83,13 @@ public class ContainersController implements Initializable {
 	}
 
 	public void addNewContainer() {
-		Navigation.getInstance().goTo(Screen.NEW_CONTAINER);
+		Navigation.get().goTo(Screen.NEW_CONTAINER);
 	}
 
 
 	public void executeCommands() {
 		saveSelectedContainer();
-		Navigation.getInstance().goTo(Screen.COMMANDS);
+		Navigation.get().goTo(Screen.COMMANDS);
 	}
 
 	private class ContainerListCell extends ListCell<KieContainerResource> {
@@ -122,7 +122,7 @@ public class ContainersController implements Initializable {
 	
 	public void openProcesses() {
 		saveSelectedContainer();
-		Navigation.getInstance().goTo(Screen.PROCESSES_DEFINITIONS);
+		Navigation.get().goTo(Screen.PROCESSES_DEFINITIONS);
 	}
 
 	private void updateData() {
@@ -153,6 +153,6 @@ public class ContainersController implements Initializable {
 	private void saveSelectedContainer() {
 		KieContainerResource container = lstContainers.getSelectionModel()
 				.getSelectedItem();
-		Navigation.getInstance().getData().put(Param.CONTAINER, container);
+		Navigation.get().data().put(Param.CONTAINER, container);
 	}
 }

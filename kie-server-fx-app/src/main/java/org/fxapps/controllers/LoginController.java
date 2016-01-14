@@ -53,9 +53,9 @@ public class LoginController implements Initializable {
 		}
 		try {
 			KieServerClientManager.login(url, usr, psw);
-			Navigation.getInstance().getData().put(Param.USER, usr);
-			Navigation.getInstance().getData().put(Param.PASSWORD, psw);
-			Navigation.getInstance().goTo(Screen.CONTAINERS);
+			Navigation.get().data().put(Param.USER, usr);
+			Navigation.get().data().put(Param.PASSWORD, psw);
+			Navigation.get().goTo(Screen.CONTAINERS);
 		} catch (Exception e) {
 			logger.warning("Error connecting to the server: " + e.getMessage());
 			e.printStackTrace();

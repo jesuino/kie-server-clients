@@ -65,9 +65,9 @@ public class ProcessDefinitionDetailsController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		container = (KieContainerResource) Navigation.getInstance().getData()
+		container = (KieContainerResource) Navigation.get().data()
 				.get(Param.CONTAINER);
-		definition = (ProcessDefinition) Navigation.getInstance().getData()
+		definition = (ProcessDefinition) Navigation.get().data()
 				.get(Param.PROCESS_DEFINITION);
 		service = KieServerClientManager.getInstance();
 		lblTitle.setText("Process " + definition.getName() + " details");
@@ -92,14 +92,14 @@ public class ProcessDefinitionDetailsController implements Initializable {
 	}
 
 	public void goBack() {
-		Navigation.getInstance().goTo(Screen.PROCESSES_DEFINITIONS);
+		Navigation.get().goTo(Screen.PROCESSES_DEFINITIONS);
 	}
 
 	public void viewTaskParameters() {
 		UserTaskDefinition def = tblUserTasks.getSelectionModel()
 				.getSelectedItem();
-		Navigation n = Navigation.getInstance();
-		n.getData().put(Param.USER_TASK_DEFINITION, def);
+		Navigation n = Navigation.get();
+		n.data().put(Param.USER_TASK_DEFINITION, def);
 		n.goTo(Screen.TASK_PARAMETERS);
 	}
 
