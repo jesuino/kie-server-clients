@@ -55,7 +55,7 @@ public class ProcessDefinitionDetailsController implements Initializable {
 	TableColumn<String, String> clServiceName;
 	@FXML
 	TableColumn<String, String> clServiceType;
-	
+
 	@FXML
 	Button btnViewTasksParams;
 
@@ -73,13 +73,13 @@ public class ProcessDefinitionDetailsController implements Initializable {
 		lblTitle.setText("Process " + definition.getName() + " details");
 		configureColumns();
 		performAsyncCalls();
-		AppUtils.disableIfNotSelected(tblUserTasks.getSelectionModel(), btnViewTasksParams);
+		AppUtils.disableIfNotSelected(tblUserTasks.getSelectionModel(),
+				btnViewTasksParams);
 	}
 
 	private void configureColumns() {
-		clVarName.setCellValueFactory(new PropertyValueFactory<>("key"));
-		clVarType.setCellValueFactory(new PropertyValueFactory<>("value"));
-
+		AppUtils.configureColumnsForPair(clVarName, clVarType);
+		AppUtils.configureColumnsForPair(clServiceName, clServiceType);
 		clTaskName.setCellValueFactory(new PropertyValueFactory<>("name"));
 		clTaskPriority.setCellValueFactory(new PropertyValueFactory<>(
 				"priority"));
@@ -89,23 +89,17 @@ public class ProcessDefinitionDetailsController implements Initializable {
 				"createdBy"));
 		clTaskSkippable.setCellValueFactory(new PropertyValueFactory<>(
 				"skippable"));
-
-		clServiceName.setCellValueFactory(new PropertyValueFactory<>("key"));
-		clServiceType.setCellValueFactory(new PropertyValueFactory<>("value"));
-
 	}
 
 	public void goBack() {
-		Navigation.getInstance().goToPreviousScreen();
+		Navigation.getInstance().goTo(Screen.PROCESSES_DEFINITIONS);
 	}
-	
+
 	public void viewTaskParameters() {
-		UserTaskDefinition def = tblUserTasks.getSelectionModel().getSelectedItem();
-		Map<String, String> outParams = def.getTaskOutputMappings();
-		Map<String, String> inParams = def.getTaskOutputMappings();
+		UserTaskDefinition def = tblUserTasks.getSelectionModel()
+				.getSelectedItem();
 		Navigation n = Navigation.getInstance();
-		n.getData().put(Param.TASK_OUT_PARAMS, outParams);
-		n.getData().put(Param.TASK_IN_PARAMS, inParams);
+		n.getData().put(Param.USER_TASK_DEFINITION, def);
 		n.goTo(Screen.TASK_PARAMETERS);
 	}
 

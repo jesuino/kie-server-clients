@@ -11,6 +11,8 @@ import javafx.concurrent.Task;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.SelectionModel;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Pair;
 
 public class AppUtils {
@@ -96,6 +98,13 @@ public class AppUtils {
 		Thread t = new Thread(tarefaCargaPg);
 		t.setDaemon(true);
 		t.start();
+	}
+
+	public static void configureColumnsForPair(
+			TableColumn<String, String> clKey,
+			TableColumn<String, String> clValue) {
+		clKey.setCellValueFactory(new PropertyValueFactory<>("key"));
+		clValue.setCellValueFactory(new PropertyValueFactory<>("value"));
 	}
 
 }
