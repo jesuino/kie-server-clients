@@ -4,13 +4,12 @@ import java.net.URL;
 
 public enum Screen {
 
-	LOGIN("/screens/login.fxml"), CONTAINERS("/screens/containers.fxml"), NEW_CONTAINER(
-			"/screens/newContainer.fxml"), COMMANDS(
-			"/screens/executeCommands.fxml"), EXECUTION_RESULTS(
-			"/screens/executionResults.fxml"), PROCESSES_DEFINITIONS(
-			"/screens/processesDefinitions.fxml"), PROCESS_DEFINITION_DETAIL(
-			"/screens/processDefinitionDetails.fxml"), TASK_PARAMETERS(
-			"/screens/taskParameters.fxml");
+	LOGIN("login.fxml"), CONTAINERS("containers.fxml"), NEW_CONTAINER(
+			"newContainer.fxml"), COMMANDS("executeCommands.fxml"), EXECUTION_RESULTS(
+			"executionResults.fxml"), PROCESSES_DEFINITIONS(
+			"processesDefinitions.fxml"), PROCESS_DEFINITION_DETAIL(
+			"processDefinitionDetails.fxml"), TASK_PARAMETERS(
+			"taskParameters.fxml");
 
 	private String path;
 
@@ -19,7 +18,7 @@ public enum Screen {
 	}
 
 	public URL getURL() {
-		return this.getClass().getResource(path);
+		return this.getClass().getResource("/screens/" + path);
 	}
 
 }
