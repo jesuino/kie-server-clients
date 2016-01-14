@@ -118,6 +118,10 @@ public class ExecuteCommandsController implements Initializable {
 		}
 		previousTextProperty.set(txtCommand.getText());
 	}
+	
+	public void goBack() {
+		Navigation.getInstance().goToPreviousScreen();
+	}
 
 	public void executeCommands() {
 		if (validateCommandsString()) {
@@ -165,10 +169,6 @@ public class ExecuteCommandsController implements Initializable {
 		if (currentPos != 0) {
 			swapItems(currentPos, currentPos - 1);
 		}
-	}
-
-	public void goBack() {
-		Navigation.getInstance().goToPreviousScreen();
 	}
 
 	private void updateText() {

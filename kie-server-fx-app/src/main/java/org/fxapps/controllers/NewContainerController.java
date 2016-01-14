@@ -45,16 +45,7 @@ public class NewContainerController implements Initializable {
 		addButtonBinding();
 
 	}
-
-	private void addButtonBinding() {
-		BooleanBinding id = txtContainerId.textProperty().isEmpty();
-		BooleanBinding group = txtGroupID.textProperty().isEmpty();
-		BooleanBinding artifact = txtArtifactId.textProperty().isEmpty();
-		BooleanBinding version = txtVersion.textProperty().isEmpty();
-		BooleanBinding emptyFields = id.or(group).or(artifact).or(version);
-		btnAdd.disableProperty().bind(emptyFields);
-	}
-
+	
 	public void goBack() {
 		Navigation.getInstance().goToPreviousScreen();
 	}
@@ -80,6 +71,15 @@ public class NewContainerController implements Initializable {
 			e.printStackTrace();
 		}
 
+	}
+	
+	private void addButtonBinding() {
+		BooleanBinding id = txtContainerId.textProperty().isEmpty();
+		BooleanBinding group = txtGroupID.textProperty().isEmpty();
+		BooleanBinding artifact = txtArtifactId.textProperty().isEmpty();
+		BooleanBinding version = txtVersion.textProperty().isEmpty();
+		BooleanBinding emptyFields = id.or(group).or(artifact).or(version);
+		btnAdd.disableProperty().bind(emptyFields);
 	}
 
 }

@@ -40,5 +40,4 @@ public class ExecutionResultController implements Initializable {
 	public void goBack() {
 		Navigation.getInstance().goToPreviousScreen();
 	}
-
 }
