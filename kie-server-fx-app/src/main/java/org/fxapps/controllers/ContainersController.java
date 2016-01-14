@@ -86,35 +86,9 @@ public class ContainersController implements Initializable {
 		Navigation.getInstance().goTo(Screen.NEW_CONTAINER);
 	}
 
-	private void updateData() {
-		fillServerInfo(service.getServerInfo());
-		fillContainers(service.listContainers());
-	}
-
-	private void configureBindings() {
-		boolean runProcess = service.canRunProcess();
-		boolean runRules = service.canRunRules();
-		BooleanProperty runProcessProp = new SimpleBooleanProperty(runProcess);
-		BooleanProperty runRulesProp = new SimpleBooleanProperty(runRules);
-		BooleanBinding selectedItem = lstContainers.getSelectionModel()
-				.selectedItemProperty().isNull();
-		btnProcesses.disableProperty().bind(selectedItem);
-		btnDispose.disableProperty().bind(selectedItem.and(runRulesProp));
-		btnCommands.disableProperty().bind(selectedItem.and(runProcessProp));
-	}
-
-	private void fillContainers(List<KieContainerResource> listContainers) {
-		lstContainers.getItems().clear();
-		listContainers.forEach(lstContainers.getItems()::add);
-		lstContainers.setCellFactory(lst -> {
-			return new ContainerListCell();
-		});
-	}
 
 	public void executeCommands() {
-		KieContainerResource container = lstContainers.getSelectionModel()
-				.getSelectedItem();
-		Navigation.getInstance().getData().put(Param.CONTAINER, container);
+		saveSelectedContainer();
 		Navigation.getInstance().goTo(Screen.COMMANDS);
 	}
 
@@ -145,5 +119,40 @@ public class ContainersController implements Initializable {
 			setText(txt);
 		}
 	}
+	
+	public void openProcesses() {
+		saveSelectedContainer();
+		Navigation.getInstance().goTo(Screen.PROCESSES_DEFINITIONS);
+	}
 
+	private void updateData() {
+		fillServerInfo(service.getServerInfo());
+		fillContainers(service.listContainers());
+	}
+
+	private void configureBindings() {
+		boolean runProcess = service.canRunProcess();
+		boolean runRules = service.canRunRules();
+		BooleanProperty runProcessProp = new SimpleBooleanProperty(runProcess);
+		BooleanProperty runRulesProp = new SimpleBooleanProperty(runRules);
+		BooleanBinding selectedItem = lstContainers.getSelectionModel()
+				.selectedItemProperty().isNull();
+		btnProcesses.disableProperty().bind(selectedItem);
+		btnDispose.disableProperty().bind(selectedItem.and(runRulesProp));
+		btnCommands.disableProperty().bind(selectedItem.and(runProcessProp));
+	}
+
+	private void fillContainers(List<KieContainerResource> listContainers) {
+		lstContainers.getItems().clear();
+		listContainers.forEach(lstContainers.getItems()::add);
+		lstContainers.setCellFactory(lst -> {
+			return new ContainerListCell();
+		});
+	}
+	
+	private void saveSelectedContainer() {
+		KieContainerResource container = lstContainers.getSelectionModel()
+				.getSelectedItem();
+		Navigation.getInstance().getData().put(Param.CONTAINER, container);
+	}
 }

@@ -18,6 +18,7 @@ import org.kie.server.client.ProcessServicesClient;
 import org.kie.server.client.QueryServicesClient;
 import org.kie.server.client.RuleServicesClient;
 
+
 /**
  * 
  * An implementation of KieServerClient that uses the kie-server-client API
@@ -27,6 +28,8 @@ import org.kie.server.client.RuleServicesClient;
  */
 class KieServerClientServiceImpl implements KieServerClientService {
 
+	// TODO: Add UIServiceClient methods once it is available
+	
 	private static final MarshallingFormat FORMAT = MarshallingFormat.JSON;
 	static KieServerClientServiceImpl INSTANCE;
 	private KieServicesClient client;
@@ -106,14 +109,19 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	}
 
 	@Override
-	public List<ProcessDefinition> getProcessesDefinitions(String containerId)
-			throws Exception {
+	public List<ProcessDefinition> getProcessesDefinitions(String containerId) {
 		return queryClient.findProcessesByContainerId(containerId, 0, 1000);
 	}
 
 	@Override
 	public Marshaller getMarshaller() {
 		return marshaller;
+	}
+
+	@Override
+	public String getProcessForm(String containerId, String processId,
+			String language) {
+		return null;
 	}
 
 }

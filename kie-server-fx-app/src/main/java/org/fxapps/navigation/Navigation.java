@@ -12,7 +12,7 @@ import javafx.util.Duration;
 
 public class Navigation {
 
-	private static final int TRANSITION_DURATION = 300;
+	private static final int TRANSITION_DURATION = 100;
 
 	final Screen INITIAL_SCREEN = Screen.LOGIN;
 

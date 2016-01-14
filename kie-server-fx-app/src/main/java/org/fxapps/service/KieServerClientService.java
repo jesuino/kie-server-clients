@@ -41,7 +41,6 @@ public interface KieServerClientService {
 			break;
 
 		default:
-			// the default is the only implementation we have
 			service = new KieServerClientServiceImpl();
 			break;
 		}
@@ -55,8 +54,10 @@ public interface KieServerClientService {
 	
 	public boolean canRunProcess();
 	
-	public List<ProcessDefinition> getProcessesDefinitions(String containerId) throws Exception;
+	public List<ProcessDefinition> getProcessesDefinitions(String containerId);
 
-	Marshaller getMarshaller();
+	public Marshaller getMarshaller();
+	
+	public String getProcessForm(String containerId, String processId, String language);
 
 }

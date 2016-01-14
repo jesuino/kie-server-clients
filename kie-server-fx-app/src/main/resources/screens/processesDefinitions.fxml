@@ -7,20 +7,28 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="org.fxapps.controller.ProcessesDefinitionsController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="org.fxapps.controllers.ProcessesDefinitionsController">
   <children>
-    <Label fx:id="lblTitle" layoutX="7.0" layoutY="14.0" prefWidth="579.0" styleClass="titleLabel" text="container test processes" />
-    <TableView layoutX="63.0" layoutY="100.0" prefHeight="200.0" prefWidth="497.0">
-      <columns>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="120.0" text="ID" />
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="180.0" text="Name" />
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="130.0" text="Package" />
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="66.0" text="Version" />
-      </columns>
-    </TableView>
-    <Button layoutX="396.0" layoutY="316.0" mnemonicParsing="false" text="Manage Instances" />
-    <Button layoutX="214.0" layoutY="316.0" mnemonicParsing="false" text="Definition Details" />
-    <Button layoutX="89.0" layoutY="317.0" mnemonicParsing="false" text="Back" />
+    <VBox id="VBox" alignment="CENTER" layoutX="7.0" layoutY="14.0" prefHeight="379.0" spacing="40.0">
+      <children>
+        <Label fx:id="lblTitle" prefWidth="579.0" styleClass="titleLabel" text="container test processes" />
+        <TableView fx:id="tblProcesses" prefHeight="226.0" prefWidth="579.0">
+          <columns>
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="161.0" text="ID" fx:id="clId" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="179.0" text="Name" fx:id="clName" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="174.0" text="Package" fx:id="clPackage" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="66.0" text="Version" fx:id="clVersion" />
+          </columns>
+        </TableView>
+        <HBox id="HBox" alignment="CENTER" prefHeight="30.0" prefWidth="579.0" spacing="40.0">
+          <children>
+            <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="150.0" styleClass="danger, defaultButton" text="Back" />
+            <Button fx:id="btnDefinitions" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openDefinitionsDetailsScreen" prefHeight="30.0" prefWidth="150.0" styleClass="defaultButton" text="Definition Details" />
+            <Button fx:id="btnInstances" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openInstancesScreen" prefHeight="30.0" prefWidth="150.0" styleClass="defaultButton" text="Manage Instances" />
+          </children>
+        </HBox>
+      </children>
+    </VBox>
   </children>
   <stylesheets>
     <URL value="@../style/main.css" />

@@ -34,7 +34,7 @@
                   </font>
                 </Button>
                 <Button fx:id="btnCommands" cancelButton="false" defaultButton="true" font="$x2" minHeight="30.0" minWidth="110.0" mnemonicParsing="false" onAction="#executeCommands" prefHeight="35.0" prefWidth="140.0" style="" styleClass="defaultButton" text="Commands" />
-                <Button fx:id="btnProcesses" cancelButton="false" defaultButton="true" font="$x2" minHeight="30.0" minWidth="110.0" mnemonicParsing="false" onAction="#executeCommands" prefHeight="35.0" prefWidth="140.0" style="" styleClass="defaultButton" text="Processes" />
+                <Button fx:id="btnProcesses" cancelButton="false" defaultButton="true" font="$x2" minHeight="30.0" minWidth="110.0" mnemonicParsing="false" onAction="#openProcesses" prefHeight="35.0" prefWidth="140.0" style="" styleClass="defaultButton" text="Processes" />
                 <Button fx:id="btnDispose" cancelButton="true" contentDisplay="CENTER" defaultButton="false" minHeight="30.0" minWidth="60.0" mnemonicParsing="false" onAction="#disposeContainer" prefHeight="35.0" prefWidth="63.0" style="" styleClass="defaultButton, danger" text="-" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
                   <font>
                     <Font name="System Bold" size="20.0" fx:id="x3" />
