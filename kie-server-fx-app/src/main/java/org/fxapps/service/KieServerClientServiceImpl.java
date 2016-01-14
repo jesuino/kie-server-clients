@@ -11,6 +11,9 @@ import org.kie.server.api.model.KieServerInfo;
 import org.kie.server.api.model.ReleaseId;
 import org.kie.server.api.model.ServiceResponse;
 import org.kie.server.api.model.definition.ProcessDefinition;
+import org.kie.server.api.model.definition.ServiceTasksDefinition;
+import org.kie.server.api.model.definition.UserTaskDefinitionList;
+import org.kie.server.api.model.definition.VariablesDefinition;
 import org.kie.server.client.KieServicesClient;
 import org.kie.server.client.KieServicesConfiguration;
 import org.kie.server.client.KieServicesFactory;
@@ -124,4 +127,20 @@ class KieServerClientServiceImpl implements KieServerClientService {
 		return null;
 	}
 
+	@Override
+	public VariablesDefinition getVariableDefinitions(String containerId,
+			String processId) {
+		return processesClient.getProcessVariableDefinitions(containerId, processId);
+	}
+
+	@Override
+	public UserTaskDefinitionList getUserTaskDefinitions(String containerId,
+			String processId) {
+		return processesClient.getUserTaskDefinitions(containerId, processId);
+	}
+	
+	@Override
+	public ServiceTasksDefinition getServiceTaskDefinitions(String containerId, String processId) {
+		return processesClient.getServiceTaskDefinitions(containerId, processId);
+	}
 }

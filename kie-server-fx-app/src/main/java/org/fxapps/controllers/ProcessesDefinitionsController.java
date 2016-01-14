@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.beans.binding.BooleanBinding;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -17,6 +16,7 @@ import org.fxapps.navigation.Navigation;
 import org.fxapps.navigation.Param;
 import org.fxapps.navigation.Screen;
 import org.fxapps.service.KieServerClientManager;
+import org.fxapps.utils.AppUtils;
 import org.kie.server.api.model.KieContainerResource;
 import org.kie.server.api.model.definition.ProcessDefinition;
 
@@ -61,7 +61,7 @@ public class ProcessesDefinitionsController implements Initializable {
 	}
 
 	public void goBack() {
-		Navigation.getInstance().goToPreviousScreen();
+		Navigation.getInstance().goTo(Screen.CONTAINERS);
 	}
 
 	public void openInstancesScreen() {
@@ -71,7 +71,6 @@ public class ProcessesDefinitionsController implements Initializable {
 	public void openDefinitionsDetailsScreen() {
 		saveSelectedProcess();
 		Navigation.getInstance().goTo(Screen.PROCESS_DEFINITION_DETAIL);
-
 	}
 
 	private void saveSelectedProcess() {
@@ -90,10 +89,8 @@ public class ProcessesDefinitionsController implements Initializable {
 	}
 
 	private void bindings() {
-		BooleanBinding selectedItem = tblProcesses.getSelectionModel()
-				.selectedItemProperty().isNull();
-		btnDefinitions.disableProperty().bind(selectedItem);
-		btnInstances.disableProperty().bind(selectedItem);
+		AppUtils.disableIfNotSelected(tblProcesses.getSelectionModel(), btnDefinitions, btnInstances);
+		
 	}
 
 }

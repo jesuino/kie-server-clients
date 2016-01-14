@@ -8,6 +8,9 @@ import org.kie.server.api.model.KieContainerResource;
 import org.kie.server.api.model.KieServerInfo;
 import org.kie.server.api.model.ServiceResponse;
 import org.kie.server.api.model.definition.ProcessDefinition;
+import org.kie.server.api.model.definition.ServiceTasksDefinition;
+import org.kie.server.api.model.definition.UserTaskDefinitionList;
+import org.kie.server.api.model.definition.VariablesDefinition;
 
 /**
  * The contract of a kie server client. It is also a factory of implementations,
@@ -59,5 +62,11 @@ public interface KieServerClientService {
 	public Marshaller getMarshaller();
 	
 	public String getProcessForm(String containerId, String processId, String language);
+	
+	public VariablesDefinition getVariableDefinitions(String containerId, String processId);
+	
+	public UserTaskDefinitionList getUserTaskDefinitions(String containerId, String processId);
+
+	public ServiceTasksDefinition getServiceTaskDefinitions(String containerId, String processId);
 
 }
