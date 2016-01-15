@@ -155,4 +155,10 @@ class KieServerClientServiceImpl implements KieServerClientService {
 				page, pageSize);
 	}
 
+	@Override
+	public void abortProcessInstances(String containerId,
+			List<Long> processInstanceIds) {
+		processesClient.abortProcessInstances(containerId, processInstanceIds);
+	}
+
 }

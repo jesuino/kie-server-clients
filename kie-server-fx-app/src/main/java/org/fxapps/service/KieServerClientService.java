@@ -72,4 +72,6 @@ public interface KieServerClientService {
 
 	public List<ProcessInstance> findProcessInstancesByProcessId(String processId, List<Integer> status, Integer page, Integer pageSize);
 
+	public void abortProcessInstances(String containerId, List<Long> processInstanceIds);
+
 }

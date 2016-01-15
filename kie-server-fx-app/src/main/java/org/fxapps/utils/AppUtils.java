@@ -10,8 +10,10 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.concurrent.Task;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.SelectionModel;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Pair;
 
@@ -33,7 +35,6 @@ public class AppUtils {
 	public static void showExceptionDialog(String title, Throwable e) {
 		Alert dialog = new Alert(Alert.AlertType.ERROR);
 		dialog.setTitle(title);
-
 		if (e.getCause() != null) {
 			dialog.setHeaderText(e.getMessage());
 			dialog.setContentText(e.getCause().getMessage());
@@ -54,7 +55,16 @@ public class AppUtils {
 		dialog.setHeaderText(null);
 		dialog.setContentText(content);
 		dialog.showAndWait();
-
+	}
+	
+	public static boolean askIfOk(String msg) {
+		Alert dialog = new Alert(AlertType.CONFIRMATION);
+		dialog.setTitle("Confirmation");
+		dialog.setResizable(true);
+		dialog.setContentText(msg);
+		dialog.setHeaderText(null);
+		dialog.showAndWait();
+		return dialog.getResult() == ButtonType.OK;
 	}
 
 	public static void showErrorDialog(String content) {
@@ -70,7 +80,6 @@ public class AppUtils {
 		return m.entrySet().stream()
 				.map(e -> new Pair<String, String>(e.getKey(), e.getValue()))
 				.collect(Collectors.toList());
-
 	}
 
 	/**
@@ -110,4 +119,6 @@ public class AppUtils {
 		clKey.setCellValueFactory(new PropertyValueFactory<>("key"));
 		clValue.setCellValueFactory(new PropertyValueFactory<>("value"));
 	}
+
+
 }
