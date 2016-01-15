@@ -11,6 +11,7 @@ import org.kie.server.api.model.definition.ProcessDefinition;
 import org.kie.server.api.model.definition.ServiceTasksDefinition;
 import org.kie.server.api.model.definition.UserTaskDefinitionList;
 import org.kie.server.api.model.definition.VariablesDefinition;
+import org.kie.server.api.model.instance.ProcessInstance;
 
 /**
  * The contract of a kie server client. It is also a factory of implementations,
@@ -68,5 +69,7 @@ public interface KieServerClientService {
 	public UserTaskDefinitionList getUserTaskDefinitions(String containerId, String processId);
 
 	public ServiceTasksDefinition getServiceTaskDefinitions(String containerId, String processId);
+
+	public List<ProcessInstance> findProcessInstancesByProcessId(String processId, List<Integer> status, Integer page, Integer pageSize);
 
 }

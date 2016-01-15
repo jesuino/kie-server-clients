@@ -2,7 +2,6 @@ package org.fxapps.controllers;
 
 import java.net.URL;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -114,7 +113,7 @@ public class ProcessDefinitionDetailsController implements Initializable {
 							.convertMapToPair(v.getVariables());
 					tblVariables.getItems().setAll(list);
 
-				}, this::handleException);
+				}, AppUtils::showExceptionDialog);
 
 		AppUtils.doAsyncWork(
 				() -> {
@@ -125,18 +124,13 @@ public class ProcessDefinitionDetailsController implements Initializable {
 					List<Pair<String, String>> list = AppUtils
 							.convertMapToPair(t.getServiceTasks());
 					tblServiceTasks.getItems().setAll(list);
-				}, this::handleException);
+				}, AppUtils::showExceptionDialog);
 		AppUtils.doAsyncWork(
 				() -> {
 					return service.getUserTaskDefinitions(
 							container.getContainerId(), definition.getId());
 				}, t -> {
 					tblUserTasks.getItems().setAll(t.getTasks());
-				}, this::handleException);
+				}, AppUtils::showExceptionDialog);
 	}
-
-	private void handleException(Throwable e) {
-		AppUtils.showExceptionDialog("Error when sending request", e);
-	}
-
 }

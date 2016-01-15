@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="org.fxapps.controllers.ProcessInstancesController">
+  <children>
+    <VBox id="VBox" alignment="CENTER" layoutX="0.0" layoutY="0.0" prefHeight="400.0" prefWidth="600.0" spacing="20.0">
+      <children>
+        <Label fx:id="lblTitle" prefWidth="593.0" styleClass="titleLabel" text="Container Processes Instances" />
+        <TableView fx:id="tblInstances" prefHeight="288.0" prefWidth="600.0">
+          <columns>
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="38.0" text="ID" fx:id="clId" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="144.0" text="P. ID" fx:id="clProcId" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="136.0" text="P. Name" fx:id="clProcName" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="75.0" text="P. Version" fx:id="clVersion" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="42.0" text="State" fx:id="clState" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="102.0" text="Started" fx:id="clStarted" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="61.0" text="Initiator" fx:id="clInitiator" />
+          </columns>
+        </TableView>
+        <HBox id="HBox" alignment="CENTER" spacing="5.0">
+          <children>
+            <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="120.0" styleClass="defaultButton, danger" text="Back" />
+            <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" styleClass="defaultButton, plus" text="Signal" />
+            <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" styleClass="defaultButton, plus" text="Abort" />
+            <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" styleClass="defaultButton, plus" text="Variables" />
+            <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" styleClass="defaultButton, plus" text="User Tasks" />
+          </children>
+        </HBox>
+      </children>
+    </VBox>
+  </children>
+  <stylesheets>
+    <URL value="@../style/main.css" />
+  </stylesheets>
+</AnchorPane>

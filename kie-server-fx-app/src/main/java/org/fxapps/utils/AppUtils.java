@@ -44,6 +44,10 @@ public class AppUtils {
 		dialog.showAndWait();
 	}
 
+	public static void showExceptionDialog(Throwable e) {
+		showExceptionDialog("Error when sending request", e);
+	}
+
 	public static void showSuccessDialog(String content) {
 		Alert dialog = new Alert(Alert.AlertType.INFORMATION);
 		dialog.setTitle("Success!");
@@ -106,5 +110,4 @@ public class AppUtils {
 		clKey.setCellValueFactory(new PropertyValueFactory<>("key"));
 		clValue.setCellValueFactory(new PropertyValueFactory<>("value"));
 	}
-
 }

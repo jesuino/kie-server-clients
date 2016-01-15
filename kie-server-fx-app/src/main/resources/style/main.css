@@ -22,7 +22,7 @@
 }
 
 .titleLabel {
-	-fx-font: bold 25px "System";
+	-fx-font: bold 20px "System";
 	-fx-text-fill: blue;
 	-fx-alignment: center;
 }

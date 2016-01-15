@@ -65,7 +65,8 @@ public class ProcessesDefinitionsController implements Initializable {
 	}
 
 	public void openInstancesScreen() {
-
+		saveSelectedProcess();
+		Navigation.get().goTo(Screen.PROCESS_INSTANCES);
 	}
 
 	public void openDefinitionsDetailsScreen() {

@@ -14,13 +14,13 @@ import org.kie.server.api.model.definition.ProcessDefinition;
 import org.kie.server.api.model.definition.ServiceTasksDefinition;
 import org.kie.server.api.model.definition.UserTaskDefinitionList;
 import org.kie.server.api.model.definition.VariablesDefinition;
+import org.kie.server.api.model.instance.ProcessInstance;
 import org.kie.server.client.KieServicesClient;
 import org.kie.server.client.KieServicesConfiguration;
 import org.kie.server.client.KieServicesFactory;
 import org.kie.server.client.ProcessServicesClient;
 import org.kie.server.client.QueryServicesClient;
 import org.kie.server.client.RuleServicesClient;
-
 
 /**
  * 
@@ -32,7 +32,7 @@ import org.kie.server.client.RuleServicesClient;
 class KieServerClientServiceImpl implements KieServerClientService {
 
 	// TODO: Add UIServiceClient methods once it is available
-	
+
 	private static final MarshallingFormat FORMAT = MarshallingFormat.JSON;
 	static KieServerClientServiceImpl INSTANCE;
 	private KieServicesClient client;
@@ -130,7 +130,8 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	@Override
 	public VariablesDefinition getVariableDefinitions(String containerId,
 			String processId) {
-		return processesClient.getProcessVariableDefinitions(containerId, processId);
+		return processesClient.getProcessVariableDefinitions(containerId,
+				processId);
 	}
 
 	@Override
@@ -138,9 +139,20 @@ class KieServerClientServiceImpl implements KieServerClientService {
 			String processId) {
 		return processesClient.getUserTaskDefinitions(containerId, processId);
 	}
-	
+
 	@Override
-	public ServiceTasksDefinition getServiceTaskDefinitions(String containerId, String processId) {
-		return processesClient.getServiceTaskDefinitions(containerId, processId);
+	public ServiceTasksDefinition getServiceTaskDefinitions(String containerId,
+			String processId) {
+		return processesClient
+				.getServiceTaskDefinitions(containerId, processId);
 	}
+
+	@Override
+	public List<ProcessInstance> findProcessInstancesByProcessId(
+			String processId, List<Integer> status, Integer page,
+			Integer pageSize) {
+		return queryClient.findProcessInstancesByProcessId(processId, status,
+				page, pageSize);
+	}
+
 }
