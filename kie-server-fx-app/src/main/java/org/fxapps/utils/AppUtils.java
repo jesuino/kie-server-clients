@@ -35,6 +35,7 @@ public class AppUtils {
 	public static void showExceptionDialog(String title, Throwable e) {
 		Alert dialog = new Alert(Alert.AlertType.ERROR);
 		dialog.setTitle(title);
+		dialog.setResizable(true);
 		if (e.getCause() != null) {
 			dialog.setHeaderText(e.getMessage());
 			dialog.setContentText(e.getCause().getMessage());
@@ -52,11 +53,12 @@ public class AppUtils {
 	public static void showSuccessDialog(String content) {
 		Alert dialog = new Alert(Alert.AlertType.INFORMATION);
 		dialog.setTitle("Success!");
+		dialog.setResizable(true);
 		dialog.setHeaderText(null);
 		dialog.setContentText(content);
 		dialog.showAndWait();
 	}
-	
+
 	public static boolean askIfOk(String msg) {
 		Alert dialog = new Alert(AlertType.CONFIRMATION);
 		dialog.setTitle("Confirmation");
@@ -119,6 +121,5 @@ public class AppUtils {
 		clKey.setCellValueFactory(new PropertyValueFactory<>("key"));
 		clValue.setCellValueFactory(new PropertyValueFactory<>("value"));
 	}
-
 
 }

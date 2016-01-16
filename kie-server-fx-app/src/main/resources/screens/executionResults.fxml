@@ -37,7 +37,7 @@
             <TextArea fx:id="txtResponse" editable="false" prefHeight="215.0" prefWidth="280.0" wrapText="true" />
           </children>
         </HBox>
-        <Button alignment="CENTER" mnemonicParsing="false" onAction="#goBack" prefHeight="40.0" prefWidth="113.0" styleClass="defaultButton, plus" text="Back" />
+        <Button alignment="CENTER" mnemonicParsing="false" onAction="#goBack" prefHeight="40.0" prefWidth="113.0" styleClass="defaultButton, danger" text="←" />
       </children>
     </VBox>
   </children>

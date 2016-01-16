@@ -56,6 +56,8 @@ public class ProcessInstancesController implements Initializable {
 	Button btnVariables;
 	@FXML
 	Button btnUserTasks;
+	@FXML
+	Button btnDetails;
 
 	private KieServerClientService service;
 	private ProcessDefinition proc;
@@ -70,9 +72,10 @@ public class ProcessInstancesController implements Initializable {
 				.get(Param.PROCESS_DEFINITION);
 		lblTitle.setText("Process " + proc.getName() + " v" + proc.getVersion()
 				+ " Instances");
-		tblInstances.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		tblInstances.getSelectionModel().setSelectionMode(
+				SelectionMode.MULTIPLE);
 		AppUtils.disableIfNotSelected(tblInstances.getSelectionModel(),
-				btnAbort, btnSignal, btnUserTasks, btnVariables);
+				btnAbort, btnSignal, btnUserTasks, btnVariables, btnDetails);
 		configureColumns();
 		fillData();
 	}
@@ -104,7 +107,7 @@ public class ProcessInstancesController implements Initializable {
 	public void abort() {
 		List<ProcessInstance> selected = tblInstances.getSelectionModel()
 				.getSelectedItems();
-		
+
 		String selectedStr = selected.stream().map(p -> p.getId().toString())
 				.collect(Collectors.joining(", "));
 		List<Long> ids = selected.stream().map(ProcessInstance::getId)
@@ -127,6 +130,10 @@ public class ProcessInstancesController implements Initializable {
 	}
 
 	public void userTasks() {
+
+	}
+
+	public void details() {
 
 	}
 }

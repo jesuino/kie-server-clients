@@ -32,7 +32,7 @@
             </TableView>
           </children>
         </HBox>
-        <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goBack" prefHeight="40.0" prefWidth="120.0" styleClass="defaultButton, danger" text="Back" />
+        <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goBack" prefHeight="40.0" prefWidth="120.0" styleClass="defaultButton, danger" text="←" />
       </children>
     </VBox>
   </children>
