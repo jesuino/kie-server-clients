@@ -11,13 +11,11 @@ import javafx.scene.control.TextArea;
 
 import org.fxapps.navigation.Navigation;
 import org.fxapps.navigation.Param;
-import org.fxapps.navigation.Screen;
 import org.fxapps.service.KieServerClientManager;
 import org.fxapps.utils.FormatUtils;
 import org.kie.server.api.marshalling.Marshaller;
-import org.kie.server.api.model.instance.ProcessInstance;
 
-public class ProcInstanceDetailsController implements Initializable {
+public class DetailsController implements Initializable {
 
 	private final String JSON = "JSON";
 	private final String PLAIN_TEXT = "Plain Text";
@@ -27,13 +25,13 @@ public class ProcInstanceDetailsController implements Initializable {
 	ComboBox<String> cmbFormat;
 	@FXML
 	TextArea txtDetails;
-	private List<ProcessInstance> pi;
+	private List<Object> obj;
 	private Marshaller marshaller;
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		pi = (List<ProcessInstance>) Navigation.get().data().get(Param.PROC_INSTANCE);
+		obj = (List<Object>) Navigation.get().data().get(Param.DETAILS);
 		marshaller = KieServerClientManager.getInstance().getMarshaller();
 		configureCmbFormat();
 	}
@@ -52,13 +50,13 @@ public class ProcInstanceDetailsController implements Initializable {
 		String newContent = "";
 		switch (n) {
 		case PLAIN_TEXT:
-			newContent = FormatUtils.toPlainText(pi);
+			newContent = FormatUtils.toPlainText(obj);
 			break;
 		case JSON:
-			newContent = marshaller.marshall(pi);
+			newContent = marshaller.marshall(obj);
 			break;
 		case CSV:
-			newContent = FormatUtils.toCSV(pi);
+			newContent = FormatUtils.toCSV(obj);
 			break;
 		default:
 			break;
@@ -71,7 +69,7 @@ public class ProcInstanceDetailsController implements Initializable {
 	}
 
 	public void goBack() {
-		Navigation.get().goTo(Screen.PROCESS_INSTANCES);
+		Navigation.get().goToPreviousScreen();
 	}
 
 }

@@ -24,21 +24,22 @@
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="131.0" text="Status" fx:id="clStatus" />
           </columns>
         </TableView>
-        <HBox id="HBox" alignment="CENTER_RIGHT" prefHeight="55.000099999997474" prefWidth="582.0" spacing="5.0">
+        <HBox id="HBox" alignment="CENTER_RIGHT" prefHeight="52.0" prefWidth="600.0000999999975" spacing="5.0">
           <children>
-            <Button cancelButton="true" defaultButton="false" graphicTextGap="4.0" minHeight="30.0" minWidth="110.0" mnemonicParsing="false" onAction="#doLogout" prefHeight="35.0" prefWidth="140.0" style="" styleClass="defaultButton, danger" text="Logout" textFill="RED" underline="false">
+            <Button cancelButton="true" defaultButton="false" graphicTextGap="4.0" minHeight="30.0" minWidth="110.0" mnemonicParsing="false" onAction="#doLogout" prefHeight="35.0" prefWidth="100.0" style="" styleClass="defaultButton, danger" text="Logout" textFill="RED" underline="false">
               <font>
                 <Font size="14.0" fx:id="x2" />
               </font>
             </Button>
-            <Button fx:id="btnCommands" cancelButton="false" defaultButton="true" font="$x2" minHeight="30.0" minWidth="110.0" mnemonicParsing="false" onAction="#executeCommands" prefHeight="35.0" prefWidth="140.0" style="" styleClass="defaultButton, plus" text="Commands" />
-            <Button fx:id="btnProcesses" cancelButton="false" defaultButton="true" font="$x2" minHeight="30.0" minWidth="110.0" mnemonicParsing="false" onAction="#openProcesses" prefHeight="35.0" prefWidth="140.0" style="" styleClass="defaultButton, plus" text="Processes" />
-            <Button fx:id="btnDispose" cancelButton="true" contentDisplay="CENTER" defaultButton="false" minHeight="30.0" minWidth="60.0" mnemonicParsing="false" onAction="#disposeContainer" prefHeight="35.0" prefWidth="63.0" style="" styleClass="defaultButton, danger" text="-" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+            <Button mnemonicParsing="false" onAction="#details" prefHeight="35.0" prefWidth="100.0" styleClass="defaultButton, plus" text="Details" />
+            <Button fx:id="btnCommands" cancelButton="false" defaultButton="false" font="$x2" minHeight="30.0" minWidth="110.0" mnemonicParsing="false" onAction="#executeCommands" prefHeight="35.0" prefWidth="100.0" style="" styleClass="defaultButton, plus" text="Commands" />
+            <Button fx:id="btnProcesses" cancelButton="false" defaultButton="false" font="$x2" minHeight="30.0" minWidth="110.0" mnemonicParsing="false" onAction="#openProcesses" prefHeight="35.0" prefWidth="100.0" style="" styleClass="defaultButton, plus" text="Processes" />
+            <Button fx:id="btnDispose" alignment="TOP_CENTER" cancelButton="true" contentDisplay="CENTER" defaultButton="false" minHeight="30.0" minWidth="60.0" mnemonicParsing="false" onAction="#disposeContainer" prefHeight="35.0" prefWidth="50.0" style="" styleClass="defaultButton, danger" text="-" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
               <font>
                 <Font name="System Bold" size="20.0" fx:id="x3" />
               </font>
             </Button>
-            <Button id="btnAdd" cancelButton="false" defaultButton="true" font="$x3" minHeight="30.0" minWidth="60.0" mnemonicParsing="false" onAction="#addNewContainer" prefHeight="35.0" prefWidth="54.0" style="" styleClass="defaultButton, plus" text="+" />
+            <Button id="btnAdd" cancelButton="false" defaultButton="true" font="$x3" minHeight="30.0" minWidth="60.0" mnemonicParsing="false" onAction="#addNewContainer" prefHeight="35.0" prefWidth="50.0" style="" styleClass="defaultButton, plus" text="+" />
           </children>
         </HBox>
       </children>

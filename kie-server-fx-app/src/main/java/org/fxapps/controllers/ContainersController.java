@@ -11,12 +11,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 
 import org.fxapps.navigation.Navigation;
 import org.fxapps.navigation.Param;
@@ -138,8 +135,11 @@ public class ContainersController implements Initializable {
 	private void saveSelectedContainer() {
 		KieContainerResource container = tblContainers.getSelectionModel()
 				.getSelectedItem();
-		System.out.println(container.getScanner().getPollInterval());
-		System.out.println(container.getScanner().getStatus());
 		Navigation.get().data().put(Param.CONTAINER, container);
+	}
+	
+	public void details() {
+		Navigation.get().data().put(Param.DETAILS, tblContainers.getItems());
+		Navigation.get().goTo(Screen.DETAILS);
 	}
 }

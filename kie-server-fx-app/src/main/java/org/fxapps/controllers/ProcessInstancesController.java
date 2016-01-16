@@ -56,8 +56,6 @@ public class ProcessInstancesController implements Initializable {
 	@FXML
 	Button btnVariables;
 	@FXML
-	Button btnUserTasks;
-	@FXML
 	Button btnDetails;
 
 	private KieServerClientService service;
@@ -76,13 +74,13 @@ public class ProcessInstancesController implements Initializable {
 		tblInstances.getSelectionModel().setSelectionMode(
 				SelectionMode.MULTIPLE);
 		AppUtils.disableIfNotSelected(tblInstances.getSelectionModel(),
-				btnAbort, btnSignal, btnUserTasks, btnVariables, btnDetails);
+				btnAbort, btnSignal, btnVariables, btnDetails);
 		configureColumns();
 		fillData();
 	}
 
 	public void goBack() {
-		Navigation.get().goToPreviousScreen();
+		Navigation.get().goTo(Screen.PROCESSES_DEFINITIONS);
 	}
 
 	private void fillData() {
@@ -135,8 +133,9 @@ public class ProcessInstancesController implements Initializable {
 	}
 
 	public void details() {
-		List<ProcessInstance> pi = tblInstances.getSelectionModel().getSelectedItems();
-		Navigation.get().data().put(Param.PROC_INSTANCE, pi);
-		Navigation.get().goTo(Screen.PROC_INSTANCE_DETAILS);
+		List<ProcessInstance> pi = tblInstances.getSelectionModel()
+				.getSelectedItems();
+		Navigation.get().data().put(Param.DETAILS, pi);
+		Navigation.get().goTo(Screen.DETAILS);
 	}
 }

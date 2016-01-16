@@ -133,4 +133,9 @@ public class ProcessDefinitionDetailsController implements Initializable {
 					tblUserTasks.getItems().setAll(t.getTasks());
 				}, AppUtils::showExceptionDialog);
 	}
+
+	public void details() {
+		Navigation.get().data().put(Param.DETAILS, tblUserTasks.getItems());
+		Navigation.get().goTo(Screen.DETAILS);
+	}
 }

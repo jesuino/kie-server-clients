@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="org.fxapps.controllers.ProcInstanceDetailsController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="org.fxapps.controllers.DetailsController">
   <children>
     <VBox id="VBox" alignment="CENTER" layoutX="0.0" layoutY="0.0" prefHeight="400.0" prefWidth="600.0" spacing="5.0">
       <children>
-        <Label fx:id="lblTitle" prefWidth="600.0" styleClass="titleLabel" text="Selected Instances Details" />
+        <Label fx:id="lblTitle" prefWidth="600.0" styleClass="titleLabel" text="Object Details" />
         <TextArea id="txtDetail" fx:id="txtDetails" editable="false" prefHeight="300.0" prefWidth="600.0" wrapText="true" />
         <HBox id="HBox" alignment="CENTER" spacing="5.0">
           <children>

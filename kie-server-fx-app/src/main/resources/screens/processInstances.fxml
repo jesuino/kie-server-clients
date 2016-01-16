@@ -26,10 +26,9 @@
         <HBox id="HBox" alignment="CENTER" prefHeight="43.0" prefWidth="600.0" spacing="5.0">
           <children>
             <Button minHeight="-Infinity" minWidth="50.0" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0001220703125" prefWidth="57.0" styleClass="defaultButton, danger" text="←" />
+            <Button fx:id="btnAbort" minHeight="-Infinity" minWidth="75.0" mnemonicParsing="false" onAction="#abort" prefHeight="30.0" prefWidth="95.0" styleClass="defaultButton, danger" text="Abort" />
             <Button fx:id="btnSignal" minHeight="-Infinity" minWidth="75.0" mnemonicParsing="false" onAction="#signal" prefHeight="30.0" prefWidth="95.0" styleClass="defaultButton, plus" text="Signal" />
-            <Button fx:id="btnAbort" minHeight="-Infinity" minWidth="75.0" mnemonicParsing="false" onAction="#abort" prefHeight="30.0" prefWidth="95.0" styleClass="defaultButton, plus" text="Abort" />
             <Button fx:id="btnVariables" minHeight="-Infinity" minWidth="75.0" mnemonicParsing="false" onAction="#variables" prefHeight="30.0" prefWidth="95.0" styleClass="defaultButton, plus" text="Variables" />
-            <Button fx:id="btnUserTasks" minHeight="-Infinity" minWidth="75.0" mnemonicParsing="false" onAction="#userTasks" prefHeight="30.0" prefWidth="95.0" styleClass="defaultButton, plus" text="User Tasks" />
             <Button fx:id="btnDetails" minHeight="-Infinity" minWidth="75.0" mnemonicParsing="false" onAction="#details" prefHeight="30.0" prefWidth="95.0" styleClass="defaultButton, plus" text="Details" />
           </children>
         </HBox>

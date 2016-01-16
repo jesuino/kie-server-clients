@@ -41,7 +41,8 @@
                         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="92.0" text="Skippable" fx:id="clTaskSkippable" />
                       </columns>
                     </TableView>
-                    <Button fx:id="btnViewTasksParams" layoutX="184.0" layoutY="272.0" mnemonicParsing="false" onAction="#viewTaskParameters" styleClass="defaultButton, plus" text="View tasks parameters" />
+                    <Button fx:id="btnViewTasksParams" layoutX="254.0" layoutY="272.0" mnemonicParsing="false" onAction="#viewTaskParameters" styleClass="defaultButton, plus" text="View tasks parameters" />
+                    <Button layoutX="118.0" layoutY="272.0" mnemonicParsing="false" onAction="#details" styleClass="plus, defaultButton" text="Details" />
                   </children>
                 </AnchorPane>
               </content>

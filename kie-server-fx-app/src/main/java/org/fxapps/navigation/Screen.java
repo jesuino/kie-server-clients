@@ -9,7 +9,8 @@ public enum Screen {
 			"executionResults.fxml"), PROCESSES_DEFINITIONS(
 			"processesDefinitions.fxml"), PROCESS_DEFINITION_DETAIL(
 			"processDefinitionDetails.fxml"), TASK_PARAMETERS(
-			"taskParameters.fxml"), PROCESS_INSTANCES("processInstances.fxml"), PROC_INSTANCE_DETAILS("procInstanceDetails.fxml");
+			"taskParameters.fxml"), PROCESS_INSTANCES("processInstances.fxml"), DETAILS(
+			"details.fxml");
 
 	private String path;
 
