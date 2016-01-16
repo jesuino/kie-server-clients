@@ -12,7 +12,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
@@ -43,7 +45,13 @@ public class ContainersController implements Initializable {
 	Label lblInfo;
 
 	@FXML
-	ListView<KieContainerResource> lstContainers;
+	TableView<KieContainerResource> tblContainers;
+	@FXML
+	TableColumn<KieContainerResource, String> clContainerId;
+	@FXML
+	TableColumn<KieContainerResource, String> clResolvedReleaseId;
+	@FXML
+	TableColumn<KieContainerResource, String> clStatus;
 
 	private KieServerClientService service;
 
@@ -53,6 +61,7 @@ public class ContainersController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		service = KieServerClientManager.getInstance();
+		configureTableColumns();
 		configureBindings();
 		updateData();
 	}
@@ -64,7 +73,7 @@ public class ContainersController implements Initializable {
 	public void disposeContainer() {
 		KieContainerResource container;
 		try {
-			container = lstContainers.getSelectionModel().getSelectedItem();
+			container = tblContainers.getSelectionModel().getSelectedItem();
 			service.disposeContainer(container.getContainerId());
 			AppUtils.showSuccessDialog("Container "
 					+ container.getContainerId() + " disposed");
@@ -86,43 +95,23 @@ public class ContainersController implements Initializable {
 		Navigation.get().goTo(Screen.NEW_CONTAINER);
 	}
 
-
 	public void executeCommands() {
 		saveSelectedContainer();
 		Navigation.get().goTo(Screen.COMMANDS);
 	}
 
-	private class ContainerListCell extends ListCell<KieContainerResource> {
-		@Override
-		public void updateItem(KieContainerResource item, boolean empty) {
-			super.updateItem(item, empty);
-			if (item == null)
-				return;
-			Paint color;
-			String id = item.getContainerId();
-			String resolvedRelease = "Artifact not resolved";
-			if (item.getResolvedReleaseId() != null) {
-				resolvedRelease = item.getResolvedReleaseId().toString();
-			}
-			switch (item.getStatus()) {
-			case STARTED:
-				color = Color.DARKBLUE;
-				break;
-			case STOPPED:
-				color = Color.RED;
-			default:
-				color = Color.DARKORANGE;
-				break;
-			}
-			setTextFill(color);
-			String txt = id + " (" + resolvedRelease + ")";
-			setText(txt);
-		}
-	}
-	
 	public void openProcesses() {
 		saveSelectedContainer();
 		Navigation.get().goTo(Screen.PROCESSES_DEFINITIONS);
+	}
+
+	private void configureTableColumns() {
+		clContainerId.setCellValueFactory(new PropertyValueFactory<>(
+				"containerId"));
+		clResolvedReleaseId.setCellValueFactory(new PropertyValueFactory<>(
+				"resolvedReleaseId"));
+		clStatus.setCellValueFactory(new PropertyValueFactory<>(
+				"status"));
 	}
 
 	private void updateData() {
@@ -135,7 +124,7 @@ public class ContainersController implements Initializable {
 		boolean runRules = service.canRunRules();
 		BooleanProperty runProcessProp = new SimpleBooleanProperty(runProcess);
 		BooleanProperty runRulesProp = new SimpleBooleanProperty(runRules);
-		BooleanBinding selectedItem = lstContainers.getSelectionModel()
+		BooleanBinding selectedItem = tblContainers.getSelectionModel()
 				.selectedItemProperty().isNull();
 		btnProcesses.disableProperty().bind(selectedItem);
 		btnDispose.disableProperty().bind(selectedItem.and(runRulesProp));
@@ -143,16 +132,14 @@ public class ContainersController implements Initializable {
 	}
 
 	private void fillContainers(List<KieContainerResource> listContainers) {
-		lstContainers.getItems().clear();
-		listContainers.forEach(lstContainers.getItems()::add);
-		lstContainers.setCellFactory(lst -> {
-			return new ContainerListCell();
-		});
+		tblContainers.getItems().setAll(listContainers);
 	}
-	
+
 	private void saveSelectedContainer() {
-		KieContainerResource container = lstContainers.getSelectionModel()
+		KieContainerResource container = tblContainers.getSelectionModel()
 				.getSelectedItem();
+		System.out.println(container.getScanner().getPollInterval());
+		System.out.println(container.getScanner().getStatus());
 		Navigation.get().data().put(Param.CONTAINER, container);
 	}
 }
