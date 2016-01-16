@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -19,6 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import org.fxapps.navigation.Navigation;
 import org.fxapps.navigation.Param;
+import org.fxapps.navigation.Screen;
 import org.fxapps.service.KieServerClientManager;
 import org.fxapps.service.KieServerClientService;
 import org.fxapps.utils.AppUtils;
@@ -134,6 +136,8 @@ public class ProcessInstancesController implements Initializable {
 	}
 
 	public void details() {
-
+		List<ProcessInstance> pi = tblInstances.getSelectionModel().getSelectedItems();
+		Navigation.get().data().put(Param.PROC_INSTANCE, pi);
+		Navigation.get().goTo(Screen.PROC_INSTANCE_DETAILS);
 	}
 }

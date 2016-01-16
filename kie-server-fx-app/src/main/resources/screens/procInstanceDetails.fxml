@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="org.fxapps.controllers.ProcInstanceDetailsController">
+  <children>
+    <VBox id="VBox" alignment="CENTER" layoutX="0.0" layoutY="0.0" prefHeight="400.0" prefWidth="600.0" spacing="5.0">
+      <children>
+        <Label fx:id="lblTitle" prefWidth="600.0" styleClass="titleLabel" text="Selected Instances Details" />
+        <TextArea id="txtDetail" fx:id="txtDetails" editable="false" prefHeight="300.0" prefWidth="600.0" wrapText="true" />
+        <HBox id="HBox" alignment="CENTER" spacing="5.0">
+          <children>
+            <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#goBack" prefHeight="31.0" prefWidth="39.0" styleClass="defaultButton, danger" text="←">
+              <HBox.margin>
+                <Insets left="10.0" right="310.0" />
+              </HBox.margin>
+            </Button>
+            <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#selectText" prefHeight="31.0" prefWidth="110.0" styleClass="defaultButton, plus" text="Select Text" />
+            <ComboBox fx:id="cmbFormat" prefHeight="31.0" prefWidth="149.0" promptText="Select Format">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Item 1" />
+                  <String fx:value="Item 2" />
+                  <String fx:value="Item 3" />
+                </FXCollections>
+              </items>
+            </ComboBox>
+          </children>
+        </HBox>
+      </children>
+    </VBox>
+  </children>
+  <stylesheets>
+    <URL value="@../style/main.css" />
+  </stylesheets>
+</AnchorPane>
