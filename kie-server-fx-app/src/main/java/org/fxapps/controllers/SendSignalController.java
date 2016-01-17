@@ -53,7 +53,7 @@ public class SendSignalController implements Initializable {
 	public void sendSignal() {
 		String signalName = cmbSignal.getSelectionModel().getSelectedItem();
 		String signalContent = txtContent.getText();
-		AppUtils.doAsyncWork(() -> {
+		AppUtils.doBlockingAsyncWork(() -> {
 			service.signalProcessInstances(containerId, pInstances, signalName, signalContent);
 			return null;
 		} , r -> {

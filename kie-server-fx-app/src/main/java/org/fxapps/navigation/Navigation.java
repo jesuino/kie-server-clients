@@ -8,6 +8,8 @@ import javafx.animation.FadeTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
 public class Navigation {
@@ -15,6 +17,8 @@ public class Navigation {
 	private static final int TRANSITION_DURATION = 100;
 
 	final Screen INITIAL_SCREEN = Screen.LOGIN;
+	final int WIDTH = 640;
+	final int HEIGHT = 480;
 
 	/**
 	 * Used to transfer data between screens
@@ -22,18 +26,20 @@ public class Navigation {
 	private Map<Param, Object> data;
 
 	private static Navigation INSTANCE;
-	
+
 	private Screen previousScreen;
 	private Screen currentScreen;
 
 	private Scene scene;
+
+	private Parent oldParent;
 
 	private Navigation(Scene scene) {
 		super();
 		// we start at login screen
 		currentScreen = Screen.LOGIN;
 		this.scene = scene;
-		this.data  = new HashMap<>();
+		this.data = new HashMap<>();
 	}
 
 	public void goTo(Screen screen) {
@@ -77,6 +83,18 @@ public class Navigation {
 			}
 		}
 		return INSTANCE;
+	}
+
+	public void showProgressIndicator() {
+		oldParent = scene.getRoot();
+		oldParent.setDisable(true);
+		StackPane newParent = new StackPane(oldParent, new ProgressIndicator());
+		scene.setRoot(newParent);
+	}
+	
+	public void hideProgressIndicator() {
+		oldParent.setDisable(false);
+		scene.setRoot(oldParent);
 	}
 
 	public Scene getScene() {

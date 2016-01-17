@@ -6,14 +6,16 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import org.fxapps.navigation.Navigation;
+
 import javafx.beans.binding.BooleanBinding;
 import javafx.concurrent.Task;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.SelectionModel;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Pair;
 
@@ -107,6 +109,40 @@ public class AppUtils {
 
 			@Override
 			protected void failed() {
+				error.accept(getException());
+			}
+		};
+		Thread t = new Thread(tarefaCargaPg);
+		t.setDaemon(true);
+		t.start();
+	}
+	
+	/**
+	 * 
+	 * Perform an async call and show a progress indicator
+	 * 
+	 * @param action
+	 * @param success
+	 * @param error
+	 */
+	public static <T extends Object> void doBlockingAsyncWork(Supplier<T> action,
+			Consumer<T> success, Consumer<Throwable> error) {
+		Navigation n = Navigation.get();
+		Task<T> tarefaCargaPg = new Task<T>() {
+			@Override
+			protected T call() throws Exception {
+				return action.get();
+			}
+
+			@Override
+			protected void succeeded() {
+				n.showProgressIndicator();
+				success.accept(getValue());
+			}
+
+			@Override
+			protected void failed() {
+				n.hideProgressIndicator();
 				error.accept(getException());
 			}
 		};
