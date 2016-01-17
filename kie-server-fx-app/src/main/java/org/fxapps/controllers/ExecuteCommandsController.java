@@ -120,7 +120,7 @@ public class ExecuteCommandsController implements Initializable {
 	}
 	
 	public void goBack() {
-		Navigation.get().goToPreviousScreen();
+		Navigation.get().goTo(Screen.CONTAINERS);
 	}
 
 	public void executeCommands() {
