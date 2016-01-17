@@ -9,9 +9,9 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="org.fxapps.controllers.ExecutionResultController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.controllers.ExecutionResultController">
   <children>
-    <VBox id="VBox" alignment="CENTER" layoutX="0.0" layoutY="1.0" prefHeight="393.0" spacing="10.0">
+    <VBox id="VBox" alignment="CENTER" layoutX="0.0" layoutY="1.0" prefHeight="480.0" prefWidth="640.0" spacing="10.0">
       <children>
         <Label prefWidth="600.0" styleClass="titleLabel" text="Execution results" />
         <HBox alignment="BOTTOM_LEFT" prefHeight="20.0" prefWidth="600.0">
@@ -31,10 +31,10 @@
             </Label>
           </children>
         </HBox>
-        <HBox id="HBox" alignment="CENTER" prefHeight="233.0" prefWidth="600.0" spacing="15.0">
+        <HBox id="HBox" alignment="CENTER" prefHeight="339.0" prefWidth="640.0" spacing="15.0">
           <children>
-            <TextArea fx:id="txtRequest" editable="false" prefHeight="215.0" prefWidth="280.0" wrapText="true" />
-            <TextArea fx:id="txtResponse" editable="false" prefHeight="215.0" prefWidth="280.0" wrapText="true" />
+            <TextArea fx:id="txtRequest" editable="false" prefHeight="339.0" prefWidth="303.0" wrapText="true" />
+            <TextArea fx:id="txtResponse" editable="false" prefHeight="339.0" prefWidth="296.0" wrapText="true" />
           </children>
         </HBox>
         <Button alignment="CENTER" mnemonicParsing="false" onAction="#goBack" prefHeight="40.0" prefWidth="113.0" styleClass="defaultButton, danger" text="←" />

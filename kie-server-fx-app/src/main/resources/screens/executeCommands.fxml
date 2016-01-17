@@ -10,16 +10,16 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="org.fxapps.controllers.ExecuteCommandsController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.controllers.ExecuteCommandsController">
   <children>
-    <VBox id="VBox" alignment="CENTER" layoutX="7.0" layoutY="0.0" prefHeight="400.0" prefWidth="593.0" spacing="5.0">
+    <VBox id="VBox" alignment="CENTER" layoutX="-4.0" layoutY="0.0" prefHeight="480.0" prefWidth="648.0" spacing="5.0">
       <children>
         <Label id="lblServerInfo" fx:id="lblContainerId" alignment="CENTER" contentDisplay="LEFT" prefHeight="28.0" prefWidth="582.0" styleClass="titleLabel" text="kie-server-testing" textAlignment="CENTER" textFill="#0021cc">
           <font>
             <Font name="System Bold" size="25.0" />
           </font>
         </Label>
-        <HBox id="HBox" alignment="CENTER" prefHeight="300.0" prefWidth="593.0" spacing="5.0">
+        <HBox id="HBox" alignment="CENTER" prefHeight="381.0" prefWidth="648.0" spacing="5.0">
           <children>
             <StackPane id="StackPane" minWidth="220.0" prefWidth="150.0">
               <children>
@@ -54,12 +54,22 @@
               </HBox.margin>
             </Button>
             <Button id="removeCommand" fx:id="btnRemove" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#removeCommand" prefHeight="25.0" prefWidth="35.0" styleClass="defaultButton, danger" text="-" />
-            <Button id="removeCommand" fx:id="btnUp" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moveUp" prefHeight="25.0" prefWidth="35.0" styleClass="null, plus" text="↑">
+            <Button id="removeCommand" fx:id="btnUp" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moveUp" prefHeight="25.0" prefWidth="35.0" text="↑">
               <font>
                 <Font name="System Bold" size="12.0" fx:id="x1" />
               </font>
+                     <styleClass>
+                        <String fx:value="null" />
+                        <String fx:value="plus" />
+                        <String fx:value="defaultButton" />
+                     </styleClass>
             </Button>
-            <Button id="removeCommand" fx:id="btnDown" font="$x1" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moveDown" prefHeight="25.0" prefWidth="35.0" styleClass="null, plus" text="↓" />
+            <Button id="removeCommand" fx:id="btnDown" font="$x1" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moveDown" prefHeight="25.0" prefWidth="35.0" text="↓">
+                     <styleClass>
+                        <String fx:value="null" />
+                        <String fx:value="defaultButton" />
+                        <String fx:value="plus" />
+                     </styleClass></Button>
             <Separator orientation="VERTICAL" prefHeight="35.0" prefWidth="46.0" />
             <Button minHeight="-Infinity" minWidth="70.0" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="67.0" styleClass="defaultButton, danger" text="Cancel">
               <HBox.margin>

@@ -9,12 +9,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="org.fxapps.controllers.DetailsController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.controllers.DetailsController">
   <children>
-    <VBox id="VBox" alignment="CENTER" layoutX="0.0" layoutY="0.0" prefHeight="400.0" prefWidth="600.0" spacing="5.0">
+    <VBox id="VBox" alignment="CENTER" layoutX="0.0" layoutY="0.0" prefHeight="480.0" prefWidth="640.0" spacing="5.0">
       <children>
         <Label fx:id="lblTitle" prefWidth="600.0" styleClass="titleLabel" text="Object Details" />
-        <TextArea id="txtDetail" fx:id="txtDetails" editable="false" prefHeight="300.0" prefWidth="600.0" wrapText="true" />
+        <TextArea id="txtDetail" fx:id="txtDetails" editable="false" prefHeight="371.0" prefWidth="622.0" wrapText="true" />
         <HBox id="HBox" alignment="CENTER" spacing="5.0">
           <children>
             <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#goBack" prefHeight="31.0" prefWidth="39.0" styleClass="defaultButton, danger" text="←">
