@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.controllers.SendSignalController">
+   <children>
+      <VBox layoutX="-4.0" prefHeight="480.0" prefWidth="640.0" spacing="10.0">
+         <children>
+            <Label fx:id="lblTitle" prefHeight="25.0" prefWidth="647.0" styleClass="titleLabel" text="Send Signal" />
+            <TextArea fx:id="txtContent" prefHeight="377.0" prefWidth="640.0" promptText="Enter here the signal content to the send to the server" />
+            <HBox alignment="BOTTOM_CENTER" prefHeight="46.0" prefWidth="640.0" spacing="20.0">
+               <children>
+                  <Button maxWidth="-Infinity" minWidth="57.0" mnemonicParsing="false" onAction="#goBack" prefHeight="35.0" prefWidth="57.0" text="←">
+                     <styleClass>
+                        <String fx:value="defaultButton" />
+                        <String fx:value="danger" />
+                     </styleClass>
+                     <HBox.margin>
+                        <Insets left="10.0" right="280.0" />
+                     </HBox.margin>
+                  </Button>
+                  <ComboBox fx:id="cmbSignal" maxWidth="-Infinity" minWidth="130.0" prefHeight="35.0" prefWidth="160.0" promptText="Signal" />
+                  <Button fx:id="btnSend" maxWidth="-Infinity" minWidth="100.0" mnemonicParsing="false" onAction="#sendSignal" prefHeight="35.0" text="Send Signal">
+                     <styleClass>
+                        <String fx:value="defaultButton" />
+                        <String fx:value="plus" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

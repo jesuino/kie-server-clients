@@ -64,17 +64,12 @@ public class ProcessInstancesController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		container = (KieContainerResource) Navigation.get().data()
-				.get(Param.CONTAINER);
+		container = (KieContainerResource) Navigation.get().data().get(Param.CONTAINER);
 		service = KieServerClientManager.getInstance();
-		proc = (ProcessDefinition) Navigation.get().data()
-				.get(Param.PROCESS_DEFINITION);
-		lblTitle.setText("Process " + proc.getName() + " v" + proc.getVersion()
-				+ " Instances");
-		tblInstances.getSelectionModel().setSelectionMode(
-				SelectionMode.MULTIPLE);
-		AppUtils.disableIfNotSelected(tblInstances.getSelectionModel(),
-				btnAbort, btnSignal, btnVariables, btnDetails);
+		proc = (ProcessDefinition) Navigation.get().data().get(Param.PROCESS_DEFINITION);
+		lblTitle.setText("Process " + proc.getName() + " v" + proc.getVersion() + " Instances");
+		tblInstances.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		AppUtils.disableIfNotSelected(tblInstances.getSelectionModel(), btnAbort, btnSignal, btnVariables, btnDetails);
 		configureColumns();
 		fillData();
 	}
@@ -83,37 +78,12 @@ public class ProcessInstancesController implements Initializable {
 		Navigation.get().goTo(Screen.PROCESSES_DEFINITIONS);
 	}
 
-	private void fillData() {
-		doAsyncWork(() -> service.findProcessInstancesByProcessId(proc.getId(),
-				null, 0, 100), tblInstances.getItems()::setAll,
-				AppUtils::showExceptionDialog);
-
-	}
-
-	private void configureColumns() {
-		clId.setCellValueFactory(new PropertyValueFactory<>("id"));
-		clProcId.setCellValueFactory(new PropertyValueFactory<>("processId"));
-		clProcName
-				.setCellValueFactory(new PropertyValueFactory<>("processName"));
-		clVersion.setCellValueFactory(new PropertyValueFactory<>(
-				"processVersion"));
-		clState.setCellValueFactory(new PropertyValueFactory<>("state"));
-		clStarted.setCellValueFactory(new PropertyValueFactory<>("date"));
-		clInitiator
-				.setCellValueFactory(new PropertyValueFactory<>("initiator"));
-	}
-
 	public void abort() {
-		List<ProcessInstance> selected = tblInstances.getSelectionModel()
-				.getSelectedItems();
 
-		String selectedStr = selected.stream().map(p -> p.getId().toString())
-				.collect(Collectors.joining(", "));
-		List<Long> ids = selected.stream().map(ProcessInstance::getId)
-				.collect(Collectors.toList());
+		String selectedStr = getSelectedAsString();
+		List<Long> ids = getSelectedIds();
 		boolean okay = AppUtils
-				.askIfOk("Are you sure you want to abort the following process instances ID?: "
-						+ selectedStr);
+				.askIfOk("Are you sure you want to abort the following process instances ID?: " + selectedStr);
 		if (okay) {
 			service.abortProcessInstances(container.getContainerId(), ids);
 		}
@@ -121,7 +91,9 @@ public class ProcessInstancesController implements Initializable {
 	}
 
 	public void signal() {
-
+		List<Long> ids = getSelectedIds();
+		Navigation.get().data().put(Param.PROCESS_INSTANCES, ids);
+		Navigation.get().goTo(Screen.SEND_SIGNAL);
 	}
 
 	public void variables() {
@@ -133,9 +105,33 @@ public class ProcessInstancesController implements Initializable {
 	}
 
 	public void details() {
-		List<ProcessInstance> pi = tblInstances.getSelectionModel()
-				.getSelectedItems();
+		List<ProcessInstance> pi = tblInstances.getSelectionModel().getSelectedItems();
 		Navigation.get().data().put(Param.DETAILS, pi);
 		Navigation.get().goTo(Screen.DETAILS);
+	}
+
+	private List<Long> getSelectedIds() {
+		List<ProcessInstance> selected = tblInstances.getSelectionModel().getSelectedItems();
+		return selected.stream().map(ProcessInstance::getId).collect(Collectors.toList());
+	}
+
+	private String getSelectedAsString() {
+		List<ProcessInstance> selected = tblInstances.getSelectionModel().getSelectedItems();
+		return selected.stream().map(p -> p.getId().toString()).collect(Collectors.joining(", "));
+	}
+
+	private void fillData() {
+		doAsyncWork(() -> service.findProcessInstancesByProcessId(proc.getId(), null, 0, 100),
+				tblInstances.getItems()::setAll, AppUtils::showExceptionDialog);
+	}
+
+	private void configureColumns() {
+		clId.setCellValueFactory(new PropertyValueFactory<>("id"));
+		clProcId.setCellValueFactory(new PropertyValueFactory<>("processId"));
+		clProcName.setCellValueFactory(new PropertyValueFactory<>("processName"));
+		clVersion.setCellValueFactory(new PropertyValueFactory<>("processVersion"));
+		clState.setCellValueFactory(new PropertyValueFactory<>("state"));
+		clStarted.setCellValueFactory(new PropertyValueFactory<>("date"));
+		clInitiator.setCellValueFactory(new PropertyValueFactory<>("initiator"));
 	}
 }

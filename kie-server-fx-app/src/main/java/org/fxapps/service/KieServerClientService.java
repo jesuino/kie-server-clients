@@ -74,4 +74,8 @@ public interface KieServerClientService {
 
 	public void abortProcessInstances(String containerId, List<Long> processInstanceIds);
 
+	public List<String> getAvailableSignals(String containerId, Long processInstanceId);
+	
+	public void signalProcessInstances(String containerId, List<Long> processInstanceId, String signalName, Object event);
+
 }

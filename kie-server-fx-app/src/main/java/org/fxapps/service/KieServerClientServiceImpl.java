@@ -162,4 +162,15 @@ class KieServerClientServiceImpl implements KieServerClientService {
 		processesClient.abortProcessInstances(containerId, processInstanceIds);
 	}
 
+	@Override
+	public List<String> getAvailableSignals(String containerId, Long processInstanceId) {
+		return processesClient.getAvailableSignals(containerId, processInstanceId);
+	}
+
+	@Override
+	public void signalProcessInstances(String containerId, List<Long> processInstanceId, String signalName,
+			Object event) {
+		processesClient.signalProcessInstances(containerId, processInstanceId, signalName, event);
+	}
+
 }
