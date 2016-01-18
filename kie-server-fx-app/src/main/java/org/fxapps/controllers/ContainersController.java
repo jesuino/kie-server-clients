@@ -68,17 +68,14 @@ public class ContainersController implements Initializable {
 	}
 
 	public void disposeContainer() {
-		KieContainerResource container;
-		try {
-			container = tblContainers.getSelectionModel().getSelectedItem();
+		final KieContainerResource container = tblContainers.getSelectionModel().getSelectedItem();
+		AppUtils.doBlockingAsyncWork(() -> {
 			service.disposeContainer(container.getContainerId());
-			AppUtils.showSuccessDialog("Container "
-					+ container.getContainerId() + " disposed");
+			return null;
+		} , r -> {
+			AppUtils.showSuccessDialog("Container " + container.getContainerId() + " disposed");
 			updateData();
-		} catch (Exception e) {
-			AppUtils.showExceptionDialog("Error disposing container!", e);
-			e.printStackTrace();
-		}
+		} , AppUtils::showExceptionDialog);
 	}
 
 	public void fillServerInfo(KieServerInfo serverInfo) {
@@ -103,12 +100,9 @@ public class ContainersController implements Initializable {
 	}
 
 	private void configureTableColumns() {
-		clContainerId.setCellValueFactory(new PropertyValueFactory<>(
-				"containerId"));
-		clResolvedReleaseId.setCellValueFactory(new PropertyValueFactory<>(
-				"resolvedReleaseId"));
-		clStatus.setCellValueFactory(new PropertyValueFactory<>(
-				"status"));
+		clContainerId.setCellValueFactory(new PropertyValueFactory<>("containerId"));
+		clResolvedReleaseId.setCellValueFactory(new PropertyValueFactory<>("resolvedReleaseId"));
+		clStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 	}
 
 	private void updateData() {
@@ -121,8 +115,7 @@ public class ContainersController implements Initializable {
 		boolean runRules = service.canRunRules();
 		BooleanProperty runProcessProp = new SimpleBooleanProperty(runProcess);
 		BooleanProperty runRulesProp = new SimpleBooleanProperty(runRules);
-		BooleanBinding selectedItem = tblContainers.getSelectionModel()
-				.selectedItemProperty().isNull();
+		BooleanBinding selectedItem = tblContainers.getSelectionModel().selectedItemProperty().isNull();
 		btnProcesses.disableProperty().bind(selectedItem);
 		btnDispose.disableProperty().bind(selectedItem.and(runRulesProp));
 		btnCommands.disableProperty().bind(selectedItem.and(runProcessProp));
@@ -133,11 +126,10 @@ public class ContainersController implements Initializable {
 	}
 
 	private void saveSelectedContainer() {
-		KieContainerResource container = tblContainers.getSelectionModel()
-				.getSelectedItem();
+		KieContainerResource container = tblContainers.getSelectionModel().getSelectedItem();
 		Navigation.get().data().put(Param.CONTAINER, container);
 	}
-	
+
 	public void details() {
 		Navigation.get().data().put(Param.DETAILS, tblContainers.getItems());
 		Navigation.get().goTo(Screen.DETAILS);

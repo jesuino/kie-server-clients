@@ -8,13 +8,14 @@
 	-fx-background-radius: 30;
 }
 
-}
 .plus {
 	-fx-text-fill: blue;
 }
 
 .danger {
 	-fx-text-fill: red;
+	-fx-pref-width: 60;
+	-fx-pref-heigh: 30;
 }
 
 .infoLabel {

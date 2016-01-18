@@ -104,7 +104,6 @@ public class FormatUtils {
 			IllegalArgumentException, InvocationTargetException {
 		Method m = c.getClass().getMethod(mName);
 		return String.valueOf(m.invoke(c));
-
 	}
 
 }

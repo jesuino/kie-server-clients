@@ -66,6 +66,7 @@ public class DetailsController implements Initializable {
 
 	public void selectText() {
 		txtDetails.selectAll();
+		txtDetails.requestFocus();
 	}
 
 	public void goBack() {

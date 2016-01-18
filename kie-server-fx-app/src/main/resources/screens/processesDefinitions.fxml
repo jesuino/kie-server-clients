@@ -22,9 +22,15 @@
         </TableView>
         <HBox id="HBox" alignment="CENTER" prefHeight="30.0" prefWidth="579.0" spacing="40.0">
           <children>
-            <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="150.0" styleClass="danger, defaultButton" text="Back" />
-            <Button fx:id="btnDefinitions" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openDefinitionsDetailsScreen" prefHeight="30.0" prefWidth="150.0" styleClass="defaultButton, plus" text="Definition Details" />
-            <Button fx:id="btnInstances" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openInstancesScreen" prefHeight="30.0" prefWidth="150.0" styleClass="defaultButton, plus" text="Manage Instances" />
+            <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goBack" prefHeight="35.0" prefWidth="58.0" styleClass="danger, defaultButton" text="←" />
+                  <Button minHeight="35.0" minWidth="0.0" mnemonicParsing="false" onAction="#details" prefHeight="30.0" prefWidth="120.0" text="Details">
+                     <styleClass>
+                        <String fx:value="defaultButton" />
+                        <String fx:value="plus" />
+                     </styleClass>
+                  </Button>
+            <Button fx:id="btnDefinitions" minHeight="35.0" minWidth="0.0" mnemonicParsing="false" onAction="#openDefinitionsDetailsScreen" prefHeight="30.0" prefWidth="120.0" styleClass="defaultButton, plus" text="Explore" />
+            <Button fx:id="btnInstances" minHeight="35.0" minWidth="0.0" mnemonicParsing="false" onAction="#openInstancesScreen" prefHeight="30.0" prefWidth="120.0" styleClass="defaultButton, plus" text="Instances" />
           </children>
         </HBox>
       </children>

@@ -64,30 +64,23 @@ public class ProcessDefinitionDetailsController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		container = (KieContainerResource) Navigation.get().data()
-				.get(Param.CONTAINER);
-		definition = (ProcessDefinition) Navigation.get().data()
-				.get(Param.PROCESS_DEFINITION);
+		container = (KieContainerResource) Navigation.get().data().get(Param.CONTAINER);
+		definition = (ProcessDefinition) Navigation.get().data().get(Param.PROCESS_DEFINITION);
 		service = KieServerClientManager.getInstance();
 		lblTitle.setText("Process " + definition.getName() + " details");
 		configureColumns();
 		performAsyncCalls();
-		AppUtils.disableIfNotSelected(tblUserTasks.getSelectionModel(),
-				btnViewTasksParams);
+		AppUtils.disableIfNotSelected(tblUserTasks.getSelectionModel(), btnViewTasksParams);
 	}
 
 	private void configureColumns() {
 		AppUtils.configureColumnsForPair(clVarName, clVarType);
 		AppUtils.configureColumnsForPair(clServiceName, clServiceType);
 		clTaskName.setCellValueFactory(new PropertyValueFactory<>("name"));
-		clTaskPriority.setCellValueFactory(new PropertyValueFactory<>(
-				"priority"));
-		clTaskComment
-				.setCellValueFactory(new PropertyValueFactory<>("comment"));
-		clTaskCreatedBy.setCellValueFactory(new PropertyValueFactory<>(
-				"createdBy"));
-		clTaskSkippable.setCellValueFactory(new PropertyValueFactory<>(
-				"skippable"));
+		clTaskPriority.setCellValueFactory(new PropertyValueFactory<>("priority"));
+		clTaskComment.setCellValueFactory(new PropertyValueFactory<>("comment"));
+		clTaskCreatedBy.setCellValueFactory(new PropertyValueFactory<>("createdBy"));
+		clTaskSkippable.setCellValueFactory(new PropertyValueFactory<>("skippable"));
 	}
 
 	public void goBack() {
@@ -95,43 +88,29 @@ public class ProcessDefinitionDetailsController implements Initializable {
 	}
 
 	public void viewTaskParameters() {
-		UserTaskDefinition def = tblUserTasks.getSelectionModel()
-				.getSelectedItem();
+		UserTaskDefinition def = tblUserTasks.getSelectionModel().getSelectedItem();
 		Navigation n = Navigation.get();
 		n.data().put(Param.USER_TASK_DEFINITION, def);
 		n.goTo(Screen.TASK_PARAMETERS);
 	}
 
 	private void performAsyncCalls() {
-		AppUtils.doAsyncWork(
-				() -> {
-					return service.getVariableDefinitions(
-							container.getContainerId(), definition.getId());
-				},
+		AppUtils.doAsyncWork(() -> service.getVariableDefinitions(container.getContainerId(), definition.getId()),
 				v -> {
-					List<Pair<String, String>> list = AppUtils
-							.convertMapToPair(v.getVariables());
+					List<Pair<String, String>> list = AppUtils.convertMapToPair(v.getVariables());
 					tblVariables.getItems().setAll(list);
 
-				}, AppUtils::showExceptionDialog);
+				} , AppUtils::showExceptionDialog);
 
-		AppUtils.doAsyncWork(
-				() -> {
-					return service.getServiceTaskDefinitions(
-							container.getContainerId(), definition.getId());
-				},
+		AppUtils.doAsyncWork(() -> service.getServiceTaskDefinitions(container.getContainerId(), definition.getId()),
 				t -> {
-					List<Pair<String, String>> list = AppUtils
-							.convertMapToPair(t.getServiceTasks());
+					List<Pair<String, String>> list = AppUtils.convertMapToPair(t.getServiceTasks());
 					tblServiceTasks.getItems().setAll(list);
-				}, AppUtils::showExceptionDialog);
-		AppUtils.doAsyncWork(
-				() -> {
-					return service.getUserTaskDefinitions(
-							container.getContainerId(), definition.getId());
-				}, t -> {
+				} , AppUtils::showExceptionDialog);
+		AppUtils.doAsyncWork(() -> service.getUserTaskDefinitions(container.getContainerId(), definition.getId()),
+				t -> {
 					tblUserTasks.getItems().setAll(t.getTasks());
-				}, AppUtils::showExceptionDialog);
+				} , AppUtils::showExceptionDialog);
 	}
 
 	public void details() {

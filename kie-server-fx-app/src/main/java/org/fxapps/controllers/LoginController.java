@@ -39,28 +39,32 @@ public class LoginController implements Initializable {
 	}
 
 	public void doLogin() {
-		String url = DEFAULT_SERVER_URL;
-		String usr = DEFAULT_USER;
-		String psw = DEFAULT_PASSWORD;
+		final String url;
+		final String usr;
+		final String psw;
 		if (!txtURL.getText().trim().isEmpty()) {
 			url = txtURL.getText();
+		} else {
+			url = DEFAULT_SERVER_URL;
 		}
 		if (!txtUsr.getText().trim().isEmpty()) {
 			usr = txtURL.getText();
+		} else {
+			usr = DEFAULT_USER;
 		}
 		if (!txtPsw.getText().trim().isEmpty()) {
 			psw = txtURL.getText();
+		} else {
+			psw = DEFAULT_PASSWORD;
 		}
-		try {
+		AppUtils.doBlockingAsyncWork(() -> {
 			KieServerClientManager.login(url, usr, psw);
+			return null;
+		} , r -> {
 			Navigation.get().data().put(Param.USER, usr);
 			Navigation.get().data().put(Param.PASSWORD, psw);
 			Navigation.get().goTo(Screen.CONTAINERS);
-		} catch (Exception e) {
-			logger.warning("Error connecting to the server: " + e.getMessage());
-			e.printStackTrace();
-			AppUtils.showExceptionDialog("Error when trying to login", e);
-		}
+		} , AppUtils::showExceptionDialog);
 	}
 
 	public void doExit() {

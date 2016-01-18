@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import java.util.*?>
@@ -12,13 +13,13 @@
     <VBox id="VBox" alignment="CENTER" layoutY="0.0" prefHeight="480.0" prefWidth="640.0" spacing="15.0">
       <children>
         <Label fx:id="lblTitle" prefWidth="609.0" styleClass="titleLabel" text="Process details" />
-        <TabPane prefHeight="301.0" prefWidth="575.0" rotateGraphic="false" side="LEFT" tabClosingPolicy="UNAVAILABLE">
+        <TabPane prefHeight="370.0" prefWidth="640.0" rotateGraphic="false" side="LEFT" style="-fx-background-color: DDDDFF; -fx-border-color: 000000;" tabClosingPolicy="UNAVAILABLE">
           <tabs>
             <Tab text="Variables">
               <content>
-                <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="316.0" prefWidth="539.0">
+                <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="363.0" prefWidth="607.0">
                   <children>
-                    <TableView fx:id="tblVariables" layoutX="119.0" layoutY="-2.0" prefHeight="279.0" prefWidth="302.0">
+                    <TableView fx:id="tblVariables" layoutX="153.0" prefHeight="370.0" prefWidth="302.0">
                       <columns>
                         <TableColumn fx:id="clVarName" maxWidth="5000.0" minWidth="10.0" prefWidth="148.0" text="Name" />
                         <TableColumn fx:id="clVarType" maxWidth="5000.0" minWidth="10.0" prefWidth="150.0" text="Type" />
@@ -34,7 +35,7 @@
                   <children>
                               <VBox layoutX="-2.0" spacing="10.0">
                                  <children>
-                          <TableView fx:id="tblUserTasks" prefHeight="263.0" prefWidth="609.0">
+                          <TableView fx:id="tblUserTasks" prefHeight="332.0" prefWidth="609.0">
                             <columns>
                               <TableColumn fx:id="clTaskName" maxWidth="5000.0" minWidth="10.0" prefWidth="173.0" text="Name" />
                               <TableColumn fx:id="clTaskPriority" maxWidth="5000.0" minWidth="10.0" prefWidth="78.0" text="Priority" />
@@ -59,7 +60,7 @@
               <content>
                 <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
-                    <TableView fx:id="tblServiceTasks" layoutX="102.0" layoutY="0.0" prefHeight="301.0" prefWidth="359.0">
+                    <TableView fx:id="tblServiceTasks" layoutX="102.0" layoutY="0.0" prefHeight="370.0" prefWidth="359.0">
                       <columns>
                         <TableColumn fx:id="clServiceName" maxWidth="5000.0" minWidth="10.0" prefWidth="179.0" text="Name" />
                         <TableColumn fx:id="clServiceType" maxWidth="5000.0" minWidth="10.0" prefWidth="142.0" text="Type" />
@@ -71,7 +72,15 @@
             </Tab>
           </tabs>
         </TabPane>
-        <Button id="btnBack" minWidth="-Infinity" mnemonicParsing="false" onAction="#goBack" prefHeight="30.000099999997474" prefWidth="104.0" styleClass="defaultButton, danger" text="Back" />
+            <HBox>
+               <children>
+              <Button id="btnBack" minWidth="-Infinity" mnemonicParsing="false" onAction="#goBack" prefHeight="31.0" prefWidth="49.0" styleClass="defaultButton, danger" text="←">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
       </children>
     </VBox>
   </children>

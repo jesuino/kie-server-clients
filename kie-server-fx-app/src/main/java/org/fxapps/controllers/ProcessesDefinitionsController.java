@@ -44,8 +44,7 @@ public class ProcessesDefinitionsController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		container = (KieContainerResource) Navigation.get().data()
-				.get(Param.CONTAINER);
+		container = (KieContainerResource) Navigation.get().data().get(Param.CONTAINER);
 		configureTableColumns();
 		updateInterface();
 		bindings();
@@ -74,24 +73,25 @@ public class ProcessesDefinitionsController implements Initializable {
 		Navigation.get().goTo(Screen.PROCESS_DEFINITION_DETAIL);
 	}
 
+	public void details() {
+		Navigation.get().data().put(Param.DETAILS, tblProcesses.getItems());
+		Navigation.get().goTo(Screen.DETAILS);
+	}
+
 	private void saveSelectedProcess() {
 		Navigation.get().data().put(Param.PROCESS_DEFINITION, tblProcesses.getSelectionModel().getSelectedItem());
 	}
 
 	private void updateTable() {
-		processes = KieServerClientManager.getInstance()
-				.getProcessesDefinitions(container.getContainerId());
+		processes = KieServerClientManager.getInstance().getProcessesDefinitions(container.getContainerId());
 		tblProcesses.getItems().setAll(processes);
 	}
 
 	private void updateInterface() {
-		lblTitle.setText("\"" + container.getContainerId()
-				+ "\" Processes Definitions");
+		lblTitle.setText("\"" + container.getContainerId() + "\" Processes Definitions");
 	}
 
 	private void bindings() {
 		AppUtils.disableIfNotSelected(tblProcesses.getSelectionModel(), btnDefinitions, btnInstances);
-		
 	}
-
 }
