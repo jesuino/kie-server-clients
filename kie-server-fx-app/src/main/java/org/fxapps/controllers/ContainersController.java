@@ -134,4 +134,8 @@ public class ContainersController implements Initializable {
 		Navigation.get().data().put(Param.DETAILS, tblContainers.getItems());
 		Navigation.get().goTo(Screen.DETAILS);
 	}
+	
+	public void importContainers() {
+		
+	}
 }

@@ -25,10 +25,8 @@ public class AppUtils {
 	}
 
 	@SuppressWarnings("rawtypes")
-	public static void disableIfNotSelected(SelectionModel selectionModel,
-			Node... nodes) {
-		BooleanBinding selected = selectionModel.selectedItemProperty()
-				.isNull();
+	public static void disableIfNotSelected(SelectionModel selectionModel, Node... nodes) {
+		BooleanBinding selected = selectionModel.selectedItemProperty().isNull();
 		for (Node node : nodes) {
 			node.disableProperty().bind(selected);
 		}
@@ -79,10 +77,8 @@ public class AppUtils {
 		dialog.showAndWait();
 	}
 
-	public static List<Pair<String, String>> convertMapToPair(
-			Map<String, String> m) {
-		return m.entrySet().stream()
-				.map(e -> new Pair<String, String>(e.getKey(), e.getValue()))
+	public static List<Pair<String, String>> convertMapToPair(Map<String, String> m) {
+		return m.entrySet().stream().map(e -> new Pair<String, String>(e.getKey(), e.getValue()))
 				.collect(Collectors.toList());
 	}
 
@@ -94,8 +90,8 @@ public class AppUtils {
 	 * @param success
 	 * @param error
 	 */
-	public static <T extends Object> void doAsyncWork(Supplier<T> action,
-			Consumer<T> success, Consumer<Throwable> error) {
+	public static <T extends Object> void doAsyncWork(Supplier<T> action, Consumer<T> success,
+			Consumer<Throwable> error) {
 		Task<T> tarefaCargaPg = new Task<T>() {
 			@Override
 			protected T call() throws Exception {
@@ -116,7 +112,7 @@ public class AppUtils {
 		t.setDaemon(true);
 		t.start();
 	}
-	
+
 	/**
 	 * 
 	 * Perform an async call and show a progress indicator
@@ -125,8 +121,8 @@ public class AppUtils {
 	 * @param success
 	 * @param error
 	 */
-	public static <T extends Object> void doBlockingAsyncWork(Supplier<T> action,
-			Consumer<T> success, Consumer<Throwable> error) {
+	public static <T extends Object> void doBlockingAsyncWork(Supplier<T> action, Consumer<T> success,
+			Consumer<Throwable> error) {
 		Navigation n = Navigation.get();
 		Task<T> tarefaCargaPg = new Task<T>() {
 			@Override
@@ -151,11 +147,19 @@ public class AppUtils {
 		t.start();
 	}
 
-	public static void configureColumnsForPair(
-			TableColumn<String, String> clKey,
-			TableColumn<String, String> clValue) {
+	public static void configureColumnsForPair(TableColumn<String, String> clKey, TableColumn<String, String> clValue) {
 		clKey.setCellValueFactory(new PropertyValueFactory<>("key"));
 		clValue.setCellValueFactory(new PropertyValueFactory<>("value"));
 	}
 
+	public static <T extends Object> List<TableColumn<T, String>> generateTableColumns(Class<T> cl,
+			List<String> ignore) {
+		List<String> fields = FormatUtils.filter(cl, ignore);
+		return fields.stream().map(f -> {
+			TableColumn<T, String> c = new TableColumn<>();
+			c.setCellValueFactory(new PropertyValueFactory<>(f));
+			c.setText(f.substring(0, 0).toUpperCase() + f.substring(1));
+			return c;
+		}).collect(Collectors.toList());
+	}
 }

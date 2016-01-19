@@ -74,7 +74,7 @@ public class FormatUtils {
 		return headerStr + CSV.substring(1, CSV.length());
 	}
 
-	private static <T> List<String> filter(T c, List<String> ignore) {
+	public static <T> List<String> filter(T c, List<String> ignore) {
 		return Stream.of(c.getClass().getDeclaredFields()).map(Field::getName)
 				.filter(f -> !ignore.contains(f)).collect(toList());
 	}

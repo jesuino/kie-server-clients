@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+
+<AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="1.0" layoutY="1.0" prefHeight="480.0" prefWidth="640.0" spacing="10.0">
+         <children>
+            <Label prefHeight="25.0" prefWidth="680.0" styleClass="titleLabel" text="Importing containers" />
+            <HBox spacing="25.0">
+               <children>
+                  <TextField prefHeight="26.0" prefWidth="548.0" promptText="Enter the JSON file path to import" />
+                  <Button mnemonicParsing="false" text="import">
+                     <styleClass>
+                        <String fx:value="defaultButton" />
+                        <String fx:value="plus" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
+            <TableView prefHeight="363.0" prefWidth="640.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="C1" />
+                <TableColumn prefWidth="75.0" text="C2" />
+              </columns>
+            </TableView>
+            <Button mnemonicParsing="false" text="&lt;">
+               <styleClass>
+                  <String fx:value="defaultButton" />
+                  <String fx:value="danger" />
+               </styleClass>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
