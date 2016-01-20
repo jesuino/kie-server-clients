@@ -31,6 +31,12 @@
                   </Button>
             <Button fx:id="btnDefinitions" minHeight="35.0" minWidth="0.0" mnemonicParsing="false" onAction="#openDefinitionsDetailsScreen" prefHeight="30.0" prefWidth="120.0" styleClass="defaultButton, plus" text="Explore" />
             <Button fx:id="btnInstances" minHeight="35.0" minWidth="0.0" mnemonicParsing="false" onAction="#openInstancesScreen" prefHeight="30.0" prefWidth="120.0" styleClass="defaultButton, plus" text="Instances" />
+                  <Button fx:id="btnStart" mnemonicParsing="false" onAction="#start" prefHeight="35.0" prefWidth="136.0" text="New Instance">
+                     <styleClass>
+                        <String fx:value="defaultButton" />
+                        <String fx:value="plus" />
+                     </styleClass>
+                  </Button>
           </children>
         </HBox>
       </children>

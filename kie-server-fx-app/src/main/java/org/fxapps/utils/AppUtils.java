@@ -45,7 +45,7 @@ public class AppUtils {
 		}
 		dialog.showAndWait();
 	}
-
+	
 	public static void showExceptionDialog(Throwable e) {
 		showExceptionDialog("Error when sending request", e);
 	}

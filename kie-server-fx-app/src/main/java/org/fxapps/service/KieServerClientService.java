@@ -78,4 +78,6 @@ public interface KieServerClientService {
 	
 	public void signalProcessInstances(String containerId, List<Long> processInstanceId, String signalName, Object event);
 
+	public Long startProcess(String containerId, String processId);
+
 }

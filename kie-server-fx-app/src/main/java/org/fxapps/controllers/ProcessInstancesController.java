@@ -77,13 +77,17 @@ public class ProcessInstancesController implements Initializable {
 	}
 
 	public void abort() {
-
 		String selectedStr = getSelectedAsString();
 		List<Long> ids = getSelectedIds();
 		boolean okay = AppUtils
 				.askIfOk("Are you sure you want to abort the following process instances ID?: " + selectedStr);
 		if (okay) {
-			service.abortProcessInstances(container.getContainerId(), ids);
+			AppUtils.doBlockingAsyncWork(() -> {
+				service.abortProcessInstances(container.getContainerId(), ids);
+				return null;
+			} , n -> {
+				fillData();
+			} , AppUtils::showExceptionDialog);
 		}
 
 	}
@@ -92,14 +96,6 @@ public class ProcessInstancesController implements Initializable {
 		List<Long> ids = getSelectedIds();
 		Navigation.get().data().put(Param.PROCESS_INSTANCES, ids);
 		Navigation.get().goTo(Screen.SEND_SIGNAL);
-	}
-
-	public void variables() {
-
-	}
-
-	public void userTasks() {
-
 	}
 
 	public void details() {

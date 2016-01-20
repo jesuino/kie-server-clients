@@ -80,10 +80,14 @@ public class ProcessesDefinitionsController implements Initializable {
 		Navigation.get().data().put(Param.DETAILS, tblProcesses.getItems());
 		Navigation.get().goTo(Screen.DETAILS);
 	}
-	
+
 	public void start() {
 		KieServerClientService service = KieServerClientManager.getInstance();
-		
+		ProcessDefinition processDefinition = tblProcesses.getSelectionModel().getSelectedItem();
+		AppUtils.doBlockingAsyncWork(() -> service.startProcess(container.getContainerId(), processDefinition.getId()),
+				piid -> {
+					AppUtils.showSuccessDialog("Process Instance created with ID " + piid);
+				} , AppUtils::showExceptionDialog);
 	}
 
 	private void saveSelectedProcess() {
