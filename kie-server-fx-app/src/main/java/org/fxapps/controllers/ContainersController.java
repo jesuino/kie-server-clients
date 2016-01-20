@@ -135,23 +135,25 @@ public class ContainersController implements Initializable {
 		KieContainerResource container = tblContainers.getSelectionModel().getSelectedItem();
 		Navigation.get().data().put(Param.CONTAINER, container);
 	}
-	
+
 	public void importContainers() {
 		Navigation.get().goTo(Screen.IMPORT_CONTAINERS);
 	}
-	
+
 	public void export() {
 		FileChooser saveFileChooser = new FileChooser();
 		saveFileChooser.setTitle("Export Containers");
 		File f = saveFileChooser.showSaveDialog(null);
-		KieContainerResourceList list = new KieContainerResourceList(tblContainers.getItems());
-		String containers = service.getMarshaller().marshall(list);
-		try {
-			Files.write(Paths.get(f.getAbsolutePath()), containers.getBytes());
-			AppUtils.showSuccessDialog("Exported with success!");
-		} catch (IOException e) {
-			AppUtils.showErrorDialog("Failed to save file " + f.getAbsolutePath());
-			e.printStackTrace();
+		if (f != null) {
+			KieContainerResourceList list = new KieContainerResourceList(tblContainers.getItems());
+			String containers = service.getMarshaller().marshall(list);
+			try {
+				Files.write(Paths.get(f.getAbsolutePath()), containers.getBytes());
+				AppUtils.showSuccessDialog("Exported with success!");
+			} catch (IOException e) {
+				AppUtils.showErrorDialog("Failed to save file " + f.getAbsolutePath());
+				e.printStackTrace();
+			}
 		}
 	}
 }

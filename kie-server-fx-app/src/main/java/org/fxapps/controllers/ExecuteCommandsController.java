@@ -7,18 +7,6 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-import javafx.beans.Observable;
-import javafx.beans.binding.BooleanBinding;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-
 import org.drools.core.command.impl.GenericCommand;
 import org.drools.core.command.runtime.BatchExecutionCommandImpl;
 import org.fxapps.navigation.Navigation;
@@ -33,6 +21,18 @@ import org.kie.api.command.KieCommands;
 import org.kie.server.api.model.KieContainerResource;
 import org.kie.server.api.model.ServiceResponse;
 
+import javafx.beans.Observable;
+import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
+
 /**
  * 
  * A first implementation of what could be the Command Builder Screen, more user
@@ -44,16 +44,19 @@ import org.kie.server.api.model.ServiceResponse;
 public class ExecuteCommandsController implements Initializable {
 
 	private static final String QUERY = "Query";
-
-	private static final String DELETE_OBJECT = "Delete Object";
-
+	// Caused by: org.codehaus.jackson.map.JsonMappingException: Could not
+	// resolve type id 'DeleteObjectCommand' into a subtype of [simple type,
+	// class org.drools.core.command.impl.GenericCommand<java.lang.Object>]
+	// private static final String DELETE_OBJECT = "Delete Object";
 	private static final String GET_GLOBAL = "Get Global";
-
 	private static final String AGENDA_GROUP_SET_FOCUS = "Agenda Group Set Focus";
-
 	private static final String FIRE_ALL_RULES = "Fire All Rules";
-
 	private static final String INSERT_OBJECT = "Insert Object";
+	// Caused by: org.codehaus.jackson.map.JsonMappingException: No serializer
+	// found for class org.drools.core.command.runtime.rule.GetFactHandleCommand
+	// private static final String GET_FACT_HANDLE = "Get Fact Handle";
+	private static final String GET_OBJECTS = "Get Objects";
+	private static final String SET_GLOBAL = "Set Global";
 
 	@FXML
 	ComboBox<String> cmbCommands;
@@ -106,8 +109,7 @@ public class ExecuteCommandsController implements Initializable {
 		container = (KieContainerResource) data.get(Param.CONTAINER);
 		cmdFactory = KieServices.Factory.get().getCommands();
 		service = KieServerClientManager.getInstance();
-		batchCmd = (BatchExecutionCommandImpl) cmdFactory
-				.newBatchExecution(new ArrayList<>());
+		batchCmd = (BatchExecutionCommandImpl) cmdFactory.newBatchExecution(new ArrayList<>());
 		initializeInterface();
 		doBindings();
 		if (data.containsKey(Param.REQUEST)) {
@@ -118,7 +120,7 @@ public class ExecuteCommandsController implements Initializable {
 		}
 		previousTextProperty.set(txtCommand.getText());
 	}
-	
+
 	public void goBack() {
 		Navigation.get().goTo(Screen.CONTAINERS);
 	}
@@ -173,28 +175,29 @@ public class ExecuteCommandsController implements Initializable {
 
 	private void updateText() {
 		batchCmd.getCommands().clear();
-		lstCommands.getItems().stream().map(c -> (GenericCommand<?>) c)
-				.forEach(batchCmd.getCommands()::add);
+		lstCommands.getItems().stream().map(c -> (GenericCommand<?>) c).forEach(batchCmd.getCommands()::add);
 		txtCommand.setText(service.getMarshaller().marshall(batchCmd));
 	}
 
 	private Optional<Command<?>> cmdFromString(String selectedCommand) {
 		Command<?> cmd;
 		switch (selectedCommand) {
+		case AGENDA_GROUP_SET_FOCUS:
+			cmd = cmdFactory.newAgendaGroupSetFocus(null);
+			break;
+		case GET_OBJECTS:
+			cmd = cmdFactory.newGetObjects();
+			break;
+		case GET_GLOBAL:
+			cmd = cmdFactory.newGetGlobal(null);
+			break;
+		case SET_GLOBAL:
+			cmd = cmdFactory.newSetGlobal("global name", "global factory");
 		case INSERT_OBJECT:
 			cmd = cmdFactory.newInsert("testing", null);
 			break;
 		case FIRE_ALL_RULES:
 			cmd = cmdFactory.newFireAllRules();
-			break;
-		case AGENDA_GROUP_SET_FOCUS:
-			cmd = cmdFactory.newAgendaGroupSetFocus(null);
-			break;
-		case GET_GLOBAL:
-			cmd = cmdFactory.newGetGlobal(null);
-			break;
-		case DELETE_OBJECT:
-			cmd = cmdFactory.newDeleteObject(null, null);
 			break;
 		case QUERY:
 			cmd = cmdFactory.newQuery(null, null);
@@ -209,8 +212,7 @@ public class ExecuteCommandsController implements Initializable {
 	private boolean validateCommandsString() {
 		boolean validated = false;
 		try {
-			batchCmd = service.getMarshaller().unmarshall(txtCommand.getText(),
-					BatchExecutionCommandImpl.class);
+			batchCmd = service.getMarshaller().unmarshall(txtCommand.getText(), BatchExecutionCommandImpl.class);
 			validated = true;
 			txtCommand.setStyle("-fx-text-fill: blue;");
 		} catch (Exception e) {
@@ -222,8 +224,7 @@ public class ExecuteCommandsController implements Initializable {
 	}
 
 	private void initializeInterface() {
-		lblContainerId.setText("Send commands to container "
-				+ container.getContainerId());
+		lblContainerId.setText("Send commands to container " + container.getContainerId());
 		previousTextProperty = new SimpleStringProperty();
 		lstCommands.setCellFactory(f -> {
 			return new ListCell<Command<?>>() {
@@ -239,21 +240,18 @@ public class ExecuteCommandsController implements Initializable {
 		});
 		// Adding only a few commands by now - TODO: improve this and add all
 		// commands
-		cmbCommands.getItems().setAll(INSERT_OBJECT, FIRE_ALL_RULES,
-				AGENDA_GROUP_SET_FOCUS, GET_GLOBAL, DELETE_OBJECT, QUERY);
+		cmbCommands.getItems().setAll(QUERY, GET_GLOBAL, AGENDA_GROUP_SET_FOCUS, FIRE_ALL_RULES, INSERT_OBJECT,
+				GET_OBJECTS, SET_GLOBAL);
 	}
 
 	private void doBindings() {
-		BooleanBinding comboSelected = cmbCommands.getSelectionModel()
-				.selectedItemProperty().isNull();
-		BooleanBinding listSelected = lstCommands.getSelectionModel()
-				.selectedItemProperty().isNull();
+		BooleanBinding comboSelected = cmbCommands.getSelectionModel().selectedItemProperty().isNull();
+		BooleanBinding listSelected = lstCommands.getSelectionModel().selectedItemProperty().isNull();
 		btnAdd.disableProperty().bind(comboSelected);
 		btnRemove.disableProperty().bind(listSelected);
 		btnDown.disableProperty().bind(listSelected);
 		btnUp.disableProperty().bind(listSelected);
-		BooleanBinding saved = previousTextProperty.isEqualTo(txtCommand
-				.textProperty());
+		BooleanBinding saved = previousTextProperty.isEqualTo(txtCommand.textProperty());
 		btnSave.disableProperty().bind(saved);
 		btnExecute.setDisable(true);
 		lstCommands.getItems().addListener((Observable o) -> {

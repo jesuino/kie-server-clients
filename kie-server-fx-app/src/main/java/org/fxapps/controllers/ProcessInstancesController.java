@@ -89,7 +89,6 @@ public class ProcessInstancesController implements Initializable {
 				fillData();
 			} , AppUtils::showExceptionDialog);
 		}
-
 	}
 
 	public void signal() {
