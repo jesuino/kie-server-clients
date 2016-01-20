@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.control.*?>
@@ -7,16 +8,20 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-
-<AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.controllers.ImportController">
    <children>
       <VBox layoutX="1.0" layoutY="1.0" prefHeight="480.0" prefWidth="640.0" spacing="10.0">
          <children>
-            <Label prefHeight="25.0" prefWidth="680.0" styleClass="titleLabel" text="Importing containers" />
+            <Label prefHeight="25.0" prefWidth="680.0" styleClass="titleLabel" text="Import containers" />
             <HBox spacing="25.0">
                <children>
-                  <TextField prefHeight="26.0" prefWidth="548.0" promptText="Enter the JSON file path to import" />
-                  <Button mnemonicParsing="false" text="import">
+                  <TextField fx:id="txtFile" editable="false" prefHeight="26.0" prefWidth="375.0" promptText="File not selected..." />
+                  <Button mnemonicParsing="false" onAction="#selectFile" prefHeight="26.0" prefWidth="101.0" text="Select File">
+                     <font>
+                        <Font name="System Bold Italic" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnImport" mnemonicParsing="false" onAction="#importContainers" text="import">
                      <styleClass>
                         <String fx:value="defaultButton" />
                         <String fx:value="plus" />
@@ -24,18 +29,36 @@
                   </Button>
                </children>
             </HBox>
-            <TableView prefHeight="363.0" prefWidth="640.0">
+            <Label styleClass="infoLabel" text="Containers Import Response">
+               <font>
+                  <Font name="System Bold Italic" size="10.0" />
+               </font>
+            </Label>
+            <TableView fx:id="tblResponse" prefHeight="336.0" prefWidth="640.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="clType" prefWidth="145.0" text="Response Type" />
+                <TableColumn fx:id="clMessage" minWidth="5.0" prefWidth="494.0" text="Message" />
               </columns>
             </TableView>
-            <Button mnemonicParsing="false" text="&lt;">
-               <styleClass>
-                  <String fx:value="defaultButton" />
-                  <String fx:value="danger" />
-               </styleClass>
-            </Button>
+            <HBox>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#goBack" text="←">
+                     <styleClass>
+                        <String fx:value="defaultButton" />
+                        <String fx:value="danger" />
+                     </styleClass>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#details" text="Details">
+                     <HBox.margin>
+                        <Insets left="500.0" />
+                     </HBox.margin>
+                     <styleClass>
+                        <String fx:value="defaultButton" />
+                        <String fx:value="plus" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>

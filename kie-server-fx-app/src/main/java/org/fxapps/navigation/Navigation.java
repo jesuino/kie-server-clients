@@ -14,11 +14,13 @@ import javafx.util.Duration;
 
 public class Navigation {
 
+	private static final int DEFAULT_H = 480;
+
+	private static final int DEFAULT_W = 640;
+
 	private static final int TRANSITION_DURATION = 100;
 
 	final Screen INITIAL_SCREEN = Screen.LOGIN;
-	final int WIDTH = 640;
-	final int HEIGHT = 480;
 
 	/**
 	 * Used to transfer data between screens
@@ -31,8 +33,6 @@ public class Navigation {
 	private Screen currentScreen;
 
 	private Scene scene;
-
-	private Parent oldParent;
 
 	private Navigation(Scene scene) {
 		super();
@@ -75,7 +75,7 @@ public class Navigation {
 		if (INSTANCE == null) {
 			try {
 				Parent root = FXMLLoader.load(Screen.LOGIN.getURL());
-				Scene scene = new Scene(root);
+				Scene scene = new Scene(root, DEFAULT_W, DEFAULT_H);
 				INSTANCE = new Navigation(scene);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -85,16 +85,12 @@ public class Navigation {
 		return INSTANCE;
 	}
 
-	public void showProgressIndicator() {
-		oldParent = scene.getRoot();
-		oldParent.setDisable(true);
-		StackPane newParent = new StackPane(oldParent, new ProgressIndicator());
-		scene.setRoot(newParent);
+	public void blockScreen() {
+		scene.getRoot().setDisable(true);
 	}
 	
-	public void hideProgressIndicator() {
-		oldParent.setDisable(false);
-		scene.setRoot(oldParent);
+	public void unblockScreen() {
+		scene.getRoot().setDisable(false);
 	}
 
 	public Scene getScene() {

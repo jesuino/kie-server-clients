@@ -10,7 +10,7 @@ public enum Screen {
 			"processesDefinitions.fxml"), PROCESS_DEFINITION_DETAIL(
 			"processDefinitionDetails.fxml"), TASK_PARAMETERS(
 			"taskParameters.fxml"), PROCESS_INSTANCES("processInstances.fxml"), DETAILS(
-			"details.fxml"), SEND_SIGNAL("sendSignal.fxml");
+			"details.fxml"), SEND_SIGNAL("sendSignal.fxml"), IMPORT_CONTAINERS("importContainers.fxml");
 
 	private String path;
 

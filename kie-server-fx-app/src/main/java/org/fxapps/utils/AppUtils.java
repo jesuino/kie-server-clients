@@ -127,18 +127,19 @@ public class AppUtils {
 		Task<T> tarefaCargaPg = new Task<T>() {
 			@Override
 			protected T call() throws Exception {
+				n.blockScreen();
 				return action.get();
 			}
 
 			@Override
 			protected void succeeded() {
-				n.showProgressIndicator();
+				n.unblockScreen();
 				success.accept(getValue());
 			}
 
 			@Override
 			protected void failed() {
-				n.hideProgressIndicator();
+				n.unblockScreen();
 				error.accept(getException());
 			}
 		};

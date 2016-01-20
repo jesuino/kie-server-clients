@@ -13,7 +13,7 @@
     <VBox id="VBox" alignment="CENTER" layoutY="0.0" prefHeight="480.0" prefWidth="640.0" spacing="15.0">
       <children>
         <Label fx:id="lblTitle" prefWidth="609.0" styleClass="titleLabel" text="Process details" />
-        <TabPane prefHeight="370.0" prefWidth="640.0" rotateGraphic="false" side="LEFT" style="-fx-background-color: DDDDFF; -fx-border-color: 000000;" tabClosingPolicy="UNAVAILABLE">
+        <TabPane prefHeight="370.0" prefWidth="640.0" rotateGraphic="false" side="LEFT" style="-fx-background-color: #DDDDFF; -fx-border-color: #000000;" tabClosingPolicy="UNAVAILABLE">
           <tabs>
             <Tab text="Variables">
               <content>

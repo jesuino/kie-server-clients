@@ -4,6 +4,15 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import org.fxapps.navigation.Navigation;
+import org.fxapps.navigation.Param;
+import org.fxapps.navigation.Screen;
+import org.fxapps.service.KieServerClientManager;
+import org.fxapps.service.KieServerClientService;
+import org.fxapps.utils.AppUtils;
+import org.kie.server.api.model.KieContainerResource;
+import org.kie.server.api.model.definition.ProcessDefinition;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -12,20 +21,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import org.fxapps.navigation.Navigation;
-import org.fxapps.navigation.Param;
-import org.fxapps.navigation.Screen;
-import org.fxapps.service.KieServerClientManager;
-import org.fxapps.utils.AppUtils;
-import org.kie.server.api.model.KieContainerResource;
-import org.kie.server.api.model.definition.ProcessDefinition;
-
 public class ProcessesDefinitionsController implements Initializable {
 
 	@FXML
 	Button btnDefinitions;
 	@FXML
 	Button btnInstances;
+	@FXML
+	Button btnStart;
 	@FXML
 	Label lblTitle;
 	@FXML
@@ -77,6 +80,11 @@ public class ProcessesDefinitionsController implements Initializable {
 		Navigation.get().data().put(Param.DETAILS, tblProcesses.getItems());
 		Navigation.get().goTo(Screen.DETAILS);
 	}
+	
+	public void start() {
+		KieServerClientService service = KieServerClientManager.getInstance();
+		
+	}
 
 	private void saveSelectedProcess() {
 		Navigation.get().data().put(Param.PROCESS_DEFINITION, tblProcesses.getSelectionModel().getSelectedItem());
@@ -92,6 +100,6 @@ public class ProcessesDefinitionsController implements Initializable {
 	}
 
 	private void bindings() {
-		AppUtils.disableIfNotSelected(tblProcesses.getSelectionModel(), btnDefinitions, btnInstances);
+		AppUtils.disableIfNotSelected(tblProcesses.getSelectionModel(), btnDefinitions, btnInstances, btnStart);
 	}
 }

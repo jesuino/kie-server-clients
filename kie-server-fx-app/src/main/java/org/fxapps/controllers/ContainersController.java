@@ -1,6 +1,10 @@
 package org.fxapps.controllers;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -14,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
 
 import org.fxapps.navigation.Navigation;
 import org.fxapps.navigation.Param;
@@ -22,6 +27,7 @@ import org.fxapps.service.KieServerClientManager;
 import org.fxapps.service.KieServerClientService;
 import org.fxapps.utils.AppUtils;
 import org.kie.server.api.model.KieContainerResource;
+import org.kie.server.api.model.KieContainerResourceList;
 import org.kie.server.api.model.KieServerInfo;
 
 public class ContainersController implements Initializable {
@@ -129,13 +135,23 @@ public class ContainersController implements Initializable {
 		KieContainerResource container = tblContainers.getSelectionModel().getSelectedItem();
 		Navigation.get().data().put(Param.CONTAINER, container);
 	}
-
-	public void details() {
-		Navigation.get().data().put(Param.DETAILS, tblContainers.getItems());
-		Navigation.get().goTo(Screen.DETAILS);
-	}
 	
 	public void importContainers() {
-		
+		Navigation.get().goTo(Screen.IMPORT_CONTAINERS);
+	}
+	
+	public void export() {
+		FileChooser saveFileChooser = new FileChooser();
+		saveFileChooser.setTitle("Export Containers");
+		File f = saveFileChooser.showSaveDialog(null);
+		KieContainerResourceList list = new KieContainerResourceList(tblContainers.getItems());
+		String containers = service.getMarshaller().marshall(list);
+		try {
+			Files.write(Paths.get(f.getAbsolutePath()), containers.getBytes());
+			AppUtils.showSuccessDialog("Exported with success!");
+		} catch (IOException e) {
+			AppUtils.showErrorDialog("Failed to save file " + f.getAbsolutePath());
+			e.printStackTrace();
+		}
 	}
 }

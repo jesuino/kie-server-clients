@@ -54,8 +54,6 @@ public class ProcessInstancesController implements Initializable {
 	@FXML
 	Button btnSignal;
 	@FXML
-	Button btnVariables;
-	@FXML
 	Button btnDetails;
 
 	private KieServerClientService service;
@@ -69,7 +67,7 @@ public class ProcessInstancesController implements Initializable {
 		proc = (ProcessDefinition) Navigation.get().data().get(Param.PROCESS_DEFINITION);
 		lblTitle.setText("Process " + proc.getName() + " v" + proc.getVersion() + " Instances");
 		tblInstances.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		AppUtils.disableIfNotSelected(tblInstances.getSelectionModel(), btnAbort, btnSignal, btnVariables, btnDetails);
+		AppUtils.disableIfNotSelected(tblInstances.getSelectionModel(), btnAbort, btnSignal, btnDetails);
 		configureColumns();
 		fillData();
 	}
