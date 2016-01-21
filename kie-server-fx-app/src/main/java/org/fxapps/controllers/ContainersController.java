@@ -29,6 +29,7 @@ import org.fxapps.utils.AppUtils;
 import org.kie.server.api.model.KieContainerResource;
 import org.kie.server.api.model.KieContainerResourceList;
 import org.kie.server.api.model.KieServerInfo;
+import org.kie.server.api.model.ServiceResponse.ResponseType;
 
 public class ContainersController implements Initializable {
 
@@ -76,10 +77,14 @@ public class ContainersController implements Initializable {
 	public void disposeContainer() {
 		final KieContainerResource container = tblContainers.getSelectionModel().getSelectedItem();
 		AppUtils.doBlockingAsyncWork(() -> {
-			service.disposeContainer(container.getContainerId());
-			return null;
+			return service.disposeContainer(container.getContainerId());
+			
 		} , r -> {
-			AppUtils.showSuccessDialog("Container " + container.getContainerId() + " disposed");
+			if(r.getType() == ResponseType.SUCCESS) {
+				AppUtils.showSuccessDialog("Container " + container.getContainerId() + " disposed");
+			} else {
+				AppUtils.showErrorDialog("Error disposing container", r.getMsg());
+			}
 			updateData();
 		} , AppUtils::showExceptionDialog);
 	}

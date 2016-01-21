@@ -51,7 +51,7 @@
         </GridPane>
         <HBox id="HBox" alignment="CENTER" spacing="150.0">
           <children>
-            <Button cancelButton="true" defaultButton="false" mnemonicParsing="false" onAction="#doExit" prefHeight="34.0" prefWidth="141.0" styleClass="danger, defaultButton" text="EXIT" textFill="RED" />
+            <Button cancelButton="true" defaultButton="false" minWidth="141.0" mnemonicParsing="false" onAction="#doExit" prefHeight="34.0" prefWidth="141.0" styleClass="danger, defaultButton" text="EXIT" textFill="RED" />
             <Button defaultButton="true" mnemonicParsing="false" onAction="#doLogin" prefHeight="34.0" prefWidth="141.0" styleClass="plus, defaultButton" text="LOGIN" textFill="#0021cc" />
           </children>
         </HBox>

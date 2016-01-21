@@ -189,7 +189,7 @@ public class ExecuteCommandsController implements Initializable {
 			cmd = cmdFactory.newGetObjects();
 			break;
 		case GET_GLOBAL:
-			cmd = cmdFactory.newGetGlobal(null);
+			cmd = cmdFactory.newGetGlobal("global ");
 			break;
 		case SET_GLOBAL:
 			cmd = cmdFactory.newSetGlobal("global name", "global factory");

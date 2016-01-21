@@ -70,9 +70,14 @@ public class AppUtils {
 	}
 
 	public static void showErrorDialog(String content) {
+		showErrorDialog("Error...", content);
+	}
+	
+	public static void showErrorDialog(String title, String content) {
 		Alert dialog = new Alert(Alert.AlertType.ERROR);
-		dialog.setTitle("Error...");
+		dialog.setTitle(title);
 		dialog.setHeaderText(null);
+		dialog.setResizable(true);
 		dialog.setContentText(content);
 		dialog.showAndWait();
 	}

@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.fxapps</groupId>
 	<artifactId>kie-server-fx-app</artifactId>
-	<version>1.0</version>
+	<version>1.0-ALPHA1</version>
 	<name>Kie Server JavaFX Client App</name>
 	<description>A client application for Kie Server built using JavaFX and Kie Server Java Client API</description>
 	<properties>

@@ -10,7 +10,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.controllers.ExecuteCommandsController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.controllers.ExecuteCommandsController">
   <children>
     <VBox id="VBox" alignment="CENTER" layoutX="-4.0" layoutY="0.0" prefHeight="480.0" prefWidth="648.0" spacing="5.0">
       <children>
@@ -59,7 +59,7 @@
                 <Insets />
               </HBox.margin>
             </Button>
-            <Button id="removeCommand" fx:id="btnRemove" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#removeCommand" prefHeight="25.0" prefWidth="35.0" styleClass="defaultButton, danger" text="-" />
+            <Button id="removeCommand" fx:id="btnRemove" maxWidth="35.0" minHeight="-Infinity" minWidth="20.0" mnemonicParsing="false" onAction="#removeCommand" prefHeight="25.0" prefWidth="35.0" styleClass="defaultButton, danger" text="-" />
             <Button id="removeCommand" fx:id="btnUp" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moveUp" prefHeight="25.0" prefWidth="35.0" text="↑">
               <font>
                 <Font name="System Bold" size="12.0" fx:id="x1" />
