@@ -12,6 +12,7 @@ import org.kie.server.api.model.definition.ServiceTasksDefinition;
 import org.kie.server.api.model.definition.UserTaskDefinitionList;
 import org.kie.server.api.model.definition.VariablesDefinition;
 import org.kie.server.api.model.instance.ProcessInstance;
+import org.kie.server.api.model.instance.TaskSummary;
 
 /**
  * The contract of a kie server client. It is also a factory of implementations,
@@ -79,5 +80,39 @@ public interface KieServerClientService {
 	public void signalProcessInstances(String containerId, List<Long> processInstanceId, String signalName, Object event);
 
 	public Long startProcess(String containerId, String processId);
+
+	public List<TaskSummary> findTasksByProcessInstanceId(Long id);
+	
+	// TASK OPERATIONS
+    void activateTask(String containerId, Long taskId, String userId);
+
+    void claimTask(String containerId, Long taskId, String userId);
+
+    // no parameters at the moment, it will be done once we can load forms in our app
+    void completeTask(String containerId, Long taskId, String userId);
+
+    void delegateTask(String containerId, Long taskId, String userId, String targetUserId);
+
+    void exitTask(String containerId, Long taskId, String userId);
+    
+    // no parameters at the moment, it will be done once we can load forms in our app
+    void failTask(String containerId, Long taskId, String userId);
+
+    void forwardTask(String containerId, Long taskId, String userId, String targetEntityId);
+
+    void releaseTask(String containerId, Long taskId, String userId);
+
+    void resumeTask(String containerId, Long taskId, String userId);
+
+    void skipTask(String containerId, Long taskId, String userId);
+
+    void startTask(String containerId, Long taskId, String userId);
+
+    void stopTask(String containerId, Long taskId, String userId);
+
+    void suspendTask(String containerId, Long taskId, String userId);
+
+    void nominateTask(String containerId, Long taskId, String userId, List<String> potentialOwners);
+
 
 }

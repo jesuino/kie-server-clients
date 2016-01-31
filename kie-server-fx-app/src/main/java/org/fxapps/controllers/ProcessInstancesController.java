@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
@@ -26,6 +27,7 @@ import org.fxapps.utils.AppUtils;
 import org.kie.server.api.model.KieContainerResource;
 import org.kie.server.api.model.definition.ProcessDefinition;
 import org.kie.server.api.model.instance.ProcessInstance;
+import org.kie.server.api.model.instance.TaskSummary;
 
 public class ProcessInstancesController implements Initializable {
 
@@ -55,6 +57,8 @@ public class ProcessInstancesController implements Initializable {
 	Button btnSignal;
 	@FXML
 	Button btnDetails;
+	@FXML
+	Button btnUserTasks;
 
 	private KieServerClientService service;
 	private ProcessDefinition proc;
@@ -67,7 +71,7 @@ public class ProcessInstancesController implements Initializable {
 		proc = (ProcessDefinition) Navigation.get().data().get(Param.PROCESS_DEFINITION);
 		lblTitle.setText("Process " + proc.getName() + " v" + proc.getVersion() + " Instances");
 		tblInstances.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		AppUtils.disableIfNotSelected(tblInstances.getSelectionModel(), btnAbort, btnSignal, btnDetails);
+		AppUtils.disableIfNotSelected(tblInstances.getSelectionModel(), btnAbort, btnSignal, btnDetails, btnUserTasks);
 		configureColumns();
 		fillData();
 	}
@@ -126,5 +130,14 @@ public class ProcessInstancesController implements Initializable {
 		clState.setCellValueFactory(new PropertyValueFactory<>("state"));
 		clStarted.setCellValueFactory(new PropertyValueFactory<>("date"));
 		clInitiator.setCellValueFactory(new PropertyValueFactory<>("initiator"));
+	}
+
+	public void showTasks() {
+		ProcessInstance pi = tblInstances.getSelectionModel().getSelectedItem();
+		Supplier<List<TaskSummary>> updateTasks = () -> service.findTasksByProcessInstanceId(pi.getId());	
+		Navigation.get().data().put(Param.UPDATE_USER_TASKS_ACTION, updateTasks);
+		
+		Navigation.get().data().put(Param.CALLER_SCREEN, Screen.PROCESS_INSTANCES);
+		Navigation.get().goTo(Screen.USER_TASK_LIST);
 	}
 }

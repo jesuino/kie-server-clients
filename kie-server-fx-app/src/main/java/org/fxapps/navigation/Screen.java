@@ -4,13 +4,19 @@ import java.net.URL;
 
 public enum Screen {
 
-	LOGIN("login.fxml"), CONTAINERS("containers.fxml"), NEW_CONTAINER(
-			"newContainer.fxml"), COMMANDS("executeCommands.fxml"), EXECUTION_RESULTS(
-			"executionResults.fxml"), PROCESSES_DEFINITIONS(
-			"processesDefinitions.fxml"), PROCESS_DEFINITION_DETAIL(
-			"processDefinitionDetails.fxml"), TASK_PARAMETERS(
-			"taskParameters.fxml"), PROCESS_INSTANCES("processInstances.fxml"), DETAILS(
-			"details.fxml"), SEND_SIGNAL("sendSignal.fxml"), IMPORT_CONTAINERS("importContainers.fxml");
+	LOGIN("login.fxml"), 
+	CONTAINERS("containers.fxml"), 
+	NEW_CONTAINER("newContainer.fxml"), 
+	COMMANDS("executeCommands.fxml"), 
+	EXECUTION_RESULTS("executionResults.fxml"), 
+	PROCESSES_DEFINITIONS("processesDefinitions.fxml"), 
+	PROCESS_DEFINITION_DETAIL("processDefinitionDetails.fxml"), 
+	TASK_PARAMETERS("taskParameters.fxml"), 
+	PROCESS_INSTANCES("processInstances.fxml"), 
+	DETAILS("details.fxml"), 
+	SEND_SIGNAL("sendSignal.fxml"), 
+	IMPORT_CONTAINERS("importContainers.fxml"), 
+	USER_TASK_LIST("userTasksList.fxml");
 
 	private String path;
 

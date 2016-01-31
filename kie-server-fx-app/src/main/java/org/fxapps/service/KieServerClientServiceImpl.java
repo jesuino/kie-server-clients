@@ -1,5 +1,6 @@
 package org.fxapps.service;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.drools.core.command.runtime.BatchExecutionCommandImpl;
@@ -15,12 +16,14 @@ import org.kie.server.api.model.definition.ServiceTasksDefinition;
 import org.kie.server.api.model.definition.UserTaskDefinitionList;
 import org.kie.server.api.model.definition.VariablesDefinition;
 import org.kie.server.api.model.instance.ProcessInstance;
+import org.kie.server.api.model.instance.TaskSummary;
 import org.kie.server.client.KieServicesClient;
 import org.kie.server.client.KieServicesConfiguration;
 import org.kie.server.client.KieServicesFactory;
 import org.kie.server.client.ProcessServicesClient;
 import org.kie.server.client.QueryServicesClient;
 import org.kie.server.client.RuleServicesClient;
+import org.kie.server.client.UserTaskServicesClient;
 
 /**
  * 
@@ -41,6 +44,7 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	private ProcessServicesClient processesClient;
 	private QueryServicesClient queryClient;
 	private Marshaller marshaller;
+	private UserTaskServicesClient userTasksClient;
 
 	/**
 	 * The default constructor has default access
@@ -58,6 +62,7 @@ class KieServerClientServiceImpl implements KieServerClientService {
 		for (String capability : kieServerInfo.getCapabilities()) {
 			if ("BPM".equals(capability)) {
 				processesClient = client.getServicesClient(ProcessServicesClient.class);
+				userTasksClient = client.getServicesClient(UserTaskServicesClient.class);
 			}
 			if ("BRM".equals(capability)) {
 				rulesClient = client.getServicesClient(RuleServicesClient.class);
@@ -164,4 +169,82 @@ class KieServerClientServiceImpl implements KieServerClientService {
 		return processesClient.startProcess(containerId, processId);
 	}
 
+	@Override
+	public List<TaskSummary> findTasksByProcessInstanceId(Long id) {
+		return userTasksClient.findTasksByStatusByProcessInstanceId(id, Collections.emptyList(), 0, 1000);
+	}
+
+	@Override
+	public void activateTask(String containerId, Long taskId, String userId) {
+		userTasksClient.activateTask(containerId, taskId, userId);
+	}
+
+	@Override
+	public void claimTask(String containerId, Long taskId, String userId) {
+		userTasksClient.claimTask(containerId, taskId, userId);
+
+	}
+
+	@Override
+	public void completeTask(String containerId, Long taskId, String userId) {
+		// complete will be done by the task form in future, no parameters are supported at the moment
+		userTasksClient.completeTask(containerId, taskId, userId, null);
+	}
+
+	@Override
+	public void delegateTask(String containerId, Long taskId, String userId, String targetUserId) {
+		userTasksClient.delegateTask(containerId, taskId, userId, targetUserId);
+	}
+
+	@Override
+	public void exitTask(String containerId, Long taskId, String userId) {
+		userTasksClient.exitTask(containerId, taskId, userId);
+	}
+
+	@Override
+	public void failTask(String containerId, Long taskId, String userId) {
+		userTasksClient.failTask(containerId, taskId, userId, null);
+	}
+
+	@Override
+	public void forwardTask(String containerId, Long taskId, String userId, String targetEntityId) {
+		userTasksClient.forwardTask(containerId, taskId, userId, targetEntityId);
+	}
+
+	@Override
+	public void releaseTask(String containerId, Long taskId, String userId) {
+		userTasksClient.releaseTask(containerId, taskId, userId);
+	}
+
+	@Override
+	public void resumeTask(String containerId, Long taskId, String userId) {
+		userTasksClient.resumeTask(containerId, taskId, userId);
+	}
+
+	@Override
+	public void skipTask(String containerId, Long taskId, String userId) {
+		userTasksClient.skipTask(containerId, taskId, userId);
+
+	}
+
+	@Override
+	public void startTask(String containerId, Long taskId, String userId) {
+		userTasksClient.startTask(containerId, taskId, userId);
+	}
+
+	@Override
+	public void stopTask(String containerId, Long taskId, String userId) {
+		userTasksClient.stopTask(containerId, taskId, userId);
+	}
+
+	@Override
+	public void suspendTask(String containerId, Long taskId, String userId) {
+		userTasksClient.suspendTask(containerId, taskId, userId);
+	}
+
+	@Override
+	public void nominateTask(String containerId, Long taskId, String userId, List<String> potentialOwners) {
+		userTasksClient.nominateTask(containerId, taskId, userId, potentialOwners);
+	}
+	
 }
