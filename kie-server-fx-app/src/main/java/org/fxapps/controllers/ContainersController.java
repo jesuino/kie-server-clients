@@ -7,6 +7,19 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Supplier;
+
+import org.fxapps.navigation.Navigation;
+import org.fxapps.navigation.Param;
+import org.fxapps.navigation.Screen;
+import org.fxapps.service.KieServerClientManager;
+import org.fxapps.service.KieServerClientService;
+import org.fxapps.utils.AppUtils;
+import org.kie.server.api.model.KieContainerResource;
+import org.kie.server.api.model.KieContainerResourceList;
+import org.kie.server.api.model.KieServerInfo;
+import org.kie.server.api.model.ServiceResponse.ResponseType;
+import org.kie.server.api.model.instance.TaskSummary;
 
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
@@ -19,17 +32,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
-
-import org.fxapps.navigation.Navigation;
-import org.fxapps.navigation.Param;
-import org.fxapps.navigation.Screen;
-import org.fxapps.service.KieServerClientManager;
-import org.fxapps.service.KieServerClientService;
-import org.fxapps.utils.AppUtils;
-import org.kie.server.api.model.KieContainerResource;
-import org.kie.server.api.model.KieContainerResourceList;
-import org.kie.server.api.model.KieServerInfo;
-import org.kie.server.api.model.ServiceResponse.ResponseType;
 
 public class ContainersController implements Initializable {
 
@@ -47,6 +49,9 @@ public class ContainersController implements Initializable {
 
 	@FXML
 	Label lblInfo;
+	
+	@FXML
+	Button btnTasks;
 
 	@FXML
 	TableView<KieContainerResource> tblContainers;
@@ -128,6 +133,7 @@ public class ContainersController implements Initializable {
 		BooleanProperty runRulesProp = new SimpleBooleanProperty(runRules);
 		BooleanBinding selectedItem = tblContainers.getSelectionModel().selectedItemProperty().isNull();
 		btnProcesses.disableProperty().bind(selectedItem);
+		btnTasks.disableProperty().bind(selectedItem);
 		btnDispose.disableProperty().bind(selectedItem.and(runRulesProp));
 		btnCommands.disableProperty().bind(selectedItem.and(runProcessProp));
 	}
@@ -160,5 +166,14 @@ public class ContainersController implements Initializable {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public void loadTasks() {
+		saveSelectedContainer();
+		String user = (String) Navigation.get().data().get(Param.USER);
+		Supplier<List<TaskSummary>> updateTasks = () -> service.findTasks(user);	
+		Navigation.get().data().put(Param.UPDATE_USER_TASKS_ACTION, updateTasks);
+		Navigation.get().data().put(Param.CALLER_SCREEN, Screen. CONTAINERS);
+		Navigation.get().goTo(Screen.USER_TASK_LIST);
 	}
 }

@@ -114,5 +114,7 @@ public interface KieServerClientService {
 
     void nominateTask(String containerId, Long taskId, String userId, List<String> potentialOwners);
 
+	List<TaskSummary> findTasks(String user);
+
 
 }

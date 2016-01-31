@@ -246,5 +246,10 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	public void nominateTask(String containerId, Long taskId, String userId, List<String> potentialOwners) {
 		userTasksClient.nominateTask(containerId, taskId, userId, potentialOwners);
 	}
+
+	@Override
+	public List<TaskSummary> findTasks(String user) {
+		return userTasksClient.findTasks(user, 0, 1000);
+	}
 	
 }
