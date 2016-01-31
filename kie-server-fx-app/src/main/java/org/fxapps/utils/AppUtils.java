@@ -2,6 +2,7 @@ package org.fxapps.utils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -16,6 +17,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.SelectionModel;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Pair;
 
@@ -167,5 +169,14 @@ public class AppUtils {
 			c.setText(f.substring(0, 0).toUpperCase() + f.substring(1));
 			return c;
 		}).collect(Collectors.toList());
+	}
+
+	public static Optional<String> askInputFromUser(String title, String msg) {
+		// TODO Auto-generated method stub
+		TextInputDialog dialog = new TextInputDialog();
+		dialog.setTitle(title);
+		dialog.setHeaderText(null);
+		dialog.setContentText(msg);
+		return dialog.showAndWait();
 	}
 }

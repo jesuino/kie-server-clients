@@ -109,7 +109,11 @@ public class UserTasksListController implements Initializable {
 	}
 
 	public void delegate() {
-		//	TODO
+		AppUtils.askInputFromUser("Delegate Task", "Enter the user to delegate the task: ")
+		.filter(usr -> !usr.isEmpty())
+		.ifPresent(usr -> {
+			doTaskOperation(n -> service.delegateTask(containerId, taskId, userId, usr));
+		});	
 	}
 
 	public void exit() {
@@ -121,7 +125,11 @@ public class UserTasksListController implements Initializable {
 	}
 
 	public void forward() {
-		// TODO
+		AppUtils.askInputFromUser("Forward Task", "Enter the entity to forward the task: ")
+		.filter(usr -> !usr.isEmpty())
+		.ifPresent(usr -> {
+			doTaskOperation(n -> service.forwardTask(containerId, taskId, userId, usr));
+		});	
 	}
 
 	public void release() {
@@ -149,7 +157,7 @@ public class UserTasksListController implements Initializable {
 	}
 
 	public void nominate() {
-		// TODO
+		AppUtils.showErrorDialog("Not supported at the moment...");
 	}
 	
 	private void doTaskOperation(Consumer<Void> function) {
