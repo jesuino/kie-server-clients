@@ -54,6 +54,9 @@ public class ContainersController implements Initializable {
 	Button btnTasks;
 
 	@FXML
+	Button btnJobs;
+	
+	@FXML
 	TableView<KieContainerResource> tblContainers;
 	@FXML
 	TableColumn<KieContainerResource, String> clContainerId;
@@ -134,6 +137,7 @@ public class ContainersController implements Initializable {
 		BooleanBinding selectedItem = tblContainers.getSelectionModel().selectedItemProperty().isNull();
 		btnProcesses.disableProperty().bind(selectedItem);
 		btnTasks.disableProperty().bind(selectedItem);
+		btnJobs.disableProperty().bind(selectedItem);
 		btnDispose.disableProperty().bind(selectedItem.and(runRulesProp));
 		btnCommands.disableProperty().bind(selectedItem.and(runProcessProp));
 	}
@@ -175,5 +179,10 @@ public class ContainersController implements Initializable {
 		Navigation.get().data().put(Param.UPDATE_USER_TASKS_ACTION, updateTasks);
 		Navigation.get().data().put(Param.CALLER_SCREEN, Screen. CONTAINERS);
 		Navigation.get().goTo(Screen.USER_TASK_LIST);
+	}
+	
+	public void jobs() {
+		saveSelectedContainer();
+		Navigation.get().goTo(Screen.JOBS);
 	}
 }

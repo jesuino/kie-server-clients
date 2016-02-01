@@ -16,7 +16,9 @@ public enum Screen {
 	DETAILS("details.fxml"), 
 	SEND_SIGNAL("sendSignal.fxml"), 
 	IMPORT_CONTAINERS("importContainers.fxml"), 
-	USER_TASK_LIST("userTasksList.fxml");
+	USER_TASK_LIST("userTasksList.fxml"), 
+	JOBS("jobs.fxml"), 
+	JOB_REQUEST("jobRequest.fxml");
 
 	private String path;
 

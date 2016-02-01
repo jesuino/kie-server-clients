@@ -42,7 +42,7 @@
                         <String fx:value="plus" />
                      </styleClass>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="56.0" text="Jobs">
+                  <Button fx:id="btnJobs" mnemonicParsing="false" onAction="#jobs" prefHeight="34.0" prefWidth="56.0" text="Jobs">
                      <styleClass>
                         <String fx:value="defaultButton" />
                         <String fx:value="plus" />

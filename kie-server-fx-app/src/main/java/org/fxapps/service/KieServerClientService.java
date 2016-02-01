@@ -11,7 +11,9 @@ import org.kie.server.api.model.definition.ProcessDefinition;
 import org.kie.server.api.model.definition.ServiceTasksDefinition;
 import org.kie.server.api.model.definition.UserTaskDefinitionList;
 import org.kie.server.api.model.definition.VariablesDefinition;
+import org.kie.server.api.model.instance.JobRequestInstance;
 import org.kie.server.api.model.instance.ProcessInstance;
+import org.kie.server.api.model.instance.RequestInfoInstance;
 import org.kie.server.api.model.instance.TaskSummary;
 
 /**
@@ -115,6 +117,12 @@ public interface KieServerClientService {
     void nominateTask(String containerId, Long taskId, String userId, List<String> potentialOwners);
 
 	List<TaskSummary> findTasks(String user);
+
+	public List<RequestInfoInstance> getAllJobsRequest();
+
+	public Long scheduleRequest(JobRequestInstance request);
+
+	public Long scheduleRequest(String containerId, JobRequestInstance request);
 
 
 }

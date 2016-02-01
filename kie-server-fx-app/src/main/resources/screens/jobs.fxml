@@ -11,25 +11,24 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.controllers.JobsController">
    <children>
       <VBox layoutX="3.0" layoutY="4.0" prefHeight="480.0" prefWidth="634.0" spacing="10.0">
          <children>
             <Label prefHeight="25.0" prefWidth="651.0" styleClass="titleLabel" text="Jobs Management" />
-            <TableView prefHeight="393.0" prefWidth="634.0">
+            <TableView fx:id="tblJobs" prefHeight="393.0" prefWidth="634.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="ID" />
-                <TableColumn prefWidth="67.0" text="Status" />
-                  <TableColumn prefWidth="130.0" text="Business Key" />
-                  <TableColumn prefWidth="125.0" text="Message" />
-                  <TableColumn prefWidth="69.0" text="Retries" />
-                  <TableColumn prefWidth="166.0" text="Command" />
+                <TableColumn fx:id="clId" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="clStatus" prefWidth="67.0" text="Status" />
+                  <TableColumn fx:id="clBusinessKey" prefWidth="130.0" text="Business Key" />
+                  <TableColumn fx:id="clMessage" prefWidth="125.0" text="Message" />
+                  <TableColumn fx:id="clRetries" prefWidth="69.0" text="Retries" />
+                  <TableColumn fx:id="clCommand" prefWidth="166.0" text="Command" />
               </columns>
             </TableView>
             <HBox spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" text="&lt;">
+                  <Button mnemonicParsing="false" onAction="#back" text="&lt;">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>
@@ -38,32 +37,32 @@
                         <String fx:value="danger" />
                      </styleClass>
                   </Button>
-                  <Button minWidth="70.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="73.0" text="Cancel">
+                  <Button fx:id="btnCancel" minWidth="70.0" mnemonicParsing="false" onAction="#cancel" prefHeight="26.0" prefWidth="73.0" text="Cancel">
                      <styleClass>
                         <String fx:value="defaultButton" />
                         <String fx:value="danger" />
                      </styleClass>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="74.0" text="Details">
+                  <Button fx:id="btnSchedule" mnemonicParsing="false" onAction="#schedule" prefHeight="26.0" prefWidth="82.0" text="Schedule">
                      <styleClass>
                         <String fx:value="defaultButton" />
                         <String fx:value="plus" />
                      </styleClass>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" text="Schedule">
+                  <Button fx:id="btnRequeue" mnemonicParsing="false" onAction="#requeue" prefHeight="26.0" prefWidth="87.0" text="Requeue">
                      <styleClass>
                         <String fx:value="defaultButton" />
                         <String fx:value="plus" />
                      </styleClass>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="87.0" text="Requeue">
+                  <Button mnemonicParsing="false" onAction="#details" prefHeight="26.0" prefWidth="74.0" text="Details">
                      <styleClass>
                         <String fx:value="defaultButton" />
                         <String fx:value="plus" />
                      </styleClass>
                   </Button>
                   <Label contentDisplay="CENTER" prefHeight="25.0" prefWidth="42.0" text="Status" />
-                  <ComboBox prefHeight="26.0" prefWidth="136.0" />
+                  <ComboBox fx:id="cmbStatus" prefHeight="26.0" prefWidth="136.0" />
                </children>
             </HBox>
          </children>

@@ -15,8 +15,11 @@ import org.kie.server.api.model.definition.ProcessDefinition;
 import org.kie.server.api.model.definition.ServiceTasksDefinition;
 import org.kie.server.api.model.definition.UserTaskDefinitionList;
 import org.kie.server.api.model.definition.VariablesDefinition;
+import org.kie.server.api.model.instance.JobRequestInstance;
 import org.kie.server.api.model.instance.ProcessInstance;
+import org.kie.server.api.model.instance.RequestInfoInstance;
 import org.kie.server.api.model.instance.TaskSummary;
+import org.kie.server.client.JobServicesClient;
 import org.kie.server.client.KieServicesClient;
 import org.kie.server.client.KieServicesConfiguration;
 import org.kie.server.client.KieServicesFactory;
@@ -45,6 +48,7 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	private QueryServicesClient queryClient;
 	private Marshaller marshaller;
 	private UserTaskServicesClient userTasksClient;
+	private JobServicesClient jobClient;
 
 	/**
 	 * The default constructor has default access
@@ -68,6 +72,7 @@ class KieServerClientServiceImpl implements KieServerClientService {
 				rulesClient = client.getServicesClient(RuleServicesClient.class);
 			}
 		}
+		jobClient = client.getServicesClient(JobServicesClient.class);
 		queryClient = client.getServicesClient(QueryServicesClient.class);
 		marshaller = MarshallerFactory.getMarshaller(FORMAT, getClass().getClassLoader());
 	}
@@ -250,6 +255,21 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	@Override
 	public List<TaskSummary> findTasks(String user) {
 		return userTasksClient.findTasks(user, 0, 1000);
+	}
+
+	@Override
+	public List<RequestInfoInstance> getAllJobsRequest() {	
+		return jobClient.getRequestsByStatus(Collections.emptyList(), 0, 1000);
+	}
+
+	@Override
+	public Long scheduleRequest(JobRequestInstance request) {
+		return jobClient.scheduleRequest(request);
+	}
+
+	@Override
+	public Long scheduleRequest(String containerId, JobRequestInstance request) {
+		return jobClient.scheduleRequest(containerId, request);
 	}
 	
 }
