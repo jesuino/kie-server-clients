@@ -3,6 +3,7 @@
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
@@ -22,19 +23,20 @@
             <Label prefHeight="25.0" prefWidth="640.0" styleClass="titleLabel" text="New Job Request" />
             <GridPane alignment="CENTER" hgap="40.0" prefHeight="405.0" prefWidth="640.0" VBox.vgrow="NEVER">
               <columnConstraints>
-                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="376.0" minWidth="10.0" prefWidth="143.0" />
-                <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="527.0" minWidth="0.0" prefWidth="457.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="376.0" minWidth="10.0" prefWidth="175.0" />
+                <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="527.0" minWidth="0.0" prefWidth="425.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="172.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="179.0" minHeight="10.0" prefHeight="179.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <Label styleClass="infoLabel" text="Schedule Date" />
-                  <Label styleClass="infoLabel" text="Command" GridPane.rowIndex="1" />
-                  <Label styleClass="infoLabel" text="Data" GridPane.rowIndex="2" />
-                  <TextField fx:id="txtCommand" prefHeight="26.0" prefWidth="333.0" promptText="The command class FQN" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label styleClass="infoLabel" text="Command" GridPane.rowIndex="2" />
+                  <Label styleClass="infoLabel" text="Data" GridPane.rowIndex="3" />
+                  <TextField fx:id="txtCommand" prefHeight="26.0" prefWidth="333.0" promptText="The command class FQN" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <HBox spacing="20.0" GridPane.columnIndex="1">
                      <children>
                         <DatePicker fx:id="dtScheduleDate" prefHeight="26.0" prefWidth="269.0" promptText="schedule date" />
@@ -42,8 +44,13 @@
                         <Spinner fx:id="spMinutes" />
                         <Spinner fx:id="spSeconds" />
                      </children>
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
                   </HBox>
-                  <TextArea fx:id="txtData" prefHeight="179.0" prefWidth="336.0" promptText="ONLY STRING SUPPORTED AT THE MOMENT. enter a map in format key=data" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextArea fx:id="txtData" prefHeight="179.0" prefWidth="336.0" promptText="ONLY STRING SUPPORTED AT THE MOMENT. enter a map in format key=data" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label prefHeight="19.0" prefWidth="212.0" styleClass="infoLabel" text="AvailableCommands" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="cmbCommands" onAction="#selectCommand" prefHeight="26.0" prefWidth="332.0" promptText="Pick an available Command" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <HBox alignment="CENTER" prefHeight="164.0" prefWidth="640.0" spacing="10.0">

@@ -275,5 +275,9 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	public Long scheduleRequest(String containerId, JobRequestInstance request) {
 		return jobClient.scheduleRequest(containerId, request);
 	}
+	
+	public void cancelRequest(long requestId) {
+		jobClient.cancelRequest(requestId);
+	}
 
 }

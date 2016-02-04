@@ -54,7 +54,6 @@ public class JobsController implements Initializable {
 	public void back() {
 		Navigation.get().goTo(Screen.CONTAINERS);
 	}
-	
 
 	private void updateData() {
 		AppUtils.doBlockingAsyncWork(() -> service.getAllJobsRequest(), tblJobs.getItems()::setAll,
@@ -71,7 +70,14 @@ public class JobsController implements Initializable {
 	}
 
 	public void cancel() {
-
+		long jobId = tblJobs.getSelectionModel().getSelectedItem().getId();
+		AppUtils.doBlockingAsyncWork(() -> {
+			service.cancelRequest(jobId);
+			return null;
+		} , n -> {
+			AppUtils.showSuccessDialog("Job request " + jobId + " cancelled with success.");
+			updateData();
+		} , AppUtils::showExceptionDialog);
 	}
 
 	public void schedule() {
