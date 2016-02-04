@@ -1,5 +1,6 @@
 package org.fxapps.service;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -40,6 +41,8 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	// TODO: Add UIServiceClient methods once it is available
 
 	private static final MarshallingFormat FORMAT = MarshallingFormat.JSON;
+	private List<String> JOB_STATUS = Arrays.asList("QUEUED", "DONE", "CANCELLED", "ERROR", "RETRYING", "RUNNING");;
+
 	static KieServerClientServiceImpl INSTANCE;
 	private KieServicesClient client;
 	private KieServerInfo kieServerInfo;
@@ -192,7 +195,8 @@ class KieServerClientServiceImpl implements KieServerClientService {
 
 	@Override
 	public void completeTask(String containerId, Long taskId, String userId) {
-		// complete will be done by the task form in future, no parameters are supported at the moment
+		// complete will be done by the task form in future, no parameters are
+		// supported at the moment
 		userTasksClient.completeTask(containerId, taskId, userId, null);
 	}
 
@@ -259,7 +263,7 @@ class KieServerClientServiceImpl implements KieServerClientService {
 
 	@Override
 	public List<RequestInfoInstance> getAllJobsRequest() {	
-		return jobClient.getRequestsByStatus(Collections.emptyList(), 0, 1000);
+		return jobClient.getRequestsByStatus(JOB_STATUS, 0, 1000);
 	}
 
 	@Override
@@ -271,5 +275,5 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	public Long scheduleRequest(String containerId, JobRequestInstance request) {
 		return jobClient.scheduleRequest(containerId, request);
 	}
-	
+
 }

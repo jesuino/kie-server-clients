@@ -1,5 +1,8 @@
 package org.fxapps.controllers;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import org.fxapps.navigation.Navigation;
 import org.fxapps.navigation.Param;
 import org.fxapps.navigation.Screen;
@@ -9,13 +12,14 @@ import org.fxapps.utils.AppUtils;
 import org.kie.server.api.model.instance.RequestInfoInstance;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class JobsController {
+public class JobsController implements Initializable {
 	@FXML
 	private TableView<RequestInfoInstance> tblJobs;
 	@FXML
@@ -40,12 +44,17 @@ public class JobsController {
 	private ComboBox<String> cmbStatus;
 	private KieServerClientService service;
 
-	public void back() {
-		Navigation.get().goTo(Screen.CONTAINERS);
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
 		service = KieServerClientManager.getInstance();
 		configureColumns();
 		updateData();
 	}
+
+	public void back() {
+		Navigation.get().goTo(Screen.CONTAINERS);
+	}
+	
 
 	private void updateData() {
 		AppUtils.doBlockingAsyncWork(() -> service.getAllJobsRequest(), tblJobs.getItems()::setAll,
