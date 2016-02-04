@@ -69,9 +69,7 @@ public class JobRequestController implements Initializable {
 		BooleanBinding dtNull = dtScheduleDate.valueProperty().isNull();
 		BooleanBinding cmdNull = txtCommand.textProperty().isNull();
 		BooleanBinding cmdEmptyOrNull = txtCommand.textProperty().isEmpty().or(cmdNull);
-		BooleanBinding dataNull = txtData.textProperty().isNull();
-		BooleanBinding dataEmptyOrNull = txtData.textProperty().isEmpty().or(dataNull);
-		btnSend.disableProperty().bind(dtNull.or(cmdEmptyOrNull).or(dataEmptyOrNull));
+		btnSend.disableProperty().bind(dtNull.or(cmdEmptyOrNull));
 	}
 
 	public void back() {
