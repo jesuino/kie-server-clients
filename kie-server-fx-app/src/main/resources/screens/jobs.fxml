@@ -3,7 +3,6 @@
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -18,19 +17,19 @@
             <Label prefHeight="25.0" prefWidth="651.0" styleClass="titleLabel" text="Jobs Management" />
             <TableView fx:id="tblJobs" prefHeight="393.0" prefWidth="634.0">
               <columns>
-                <TableColumn fx:id="clId" prefWidth="75.0" text="ID" />
-                <TableColumn fx:id="clStatus" prefWidth="67.0" text="Status" />
-                  <TableColumn fx:id="clBusinessKey" prefWidth="130.0" text="Business Key" />
-                  <TableColumn fx:id="clMessage" prefWidth="125.0" text="Message" />
-                  <TableColumn fx:id="clRetries" prefWidth="69.0" text="Retries" />
-                  <TableColumn fx:id="clCommand" prefWidth="166.0" text="Command" />
+                <TableColumn fx:id="clId" prefWidth="32.0" text="ID" />
+                <TableColumn fx:id="clStatus" prefWidth="110.0" text="Status" />
+                  <TableColumn fx:id="clBusinessKey" prefWidth="115.0" text="Business Key" />
+                  <TableColumn fx:id="clMessage" prefWidth="140.0" text="Message" />
+                  <TableColumn fx:id="clRetries" prefWidth="61.0" text="Retries" />
+                  <TableColumn fx:id="clCommand" prefWidth="174.0" text="Command" />
               </columns>
             </TableView>
             <HBox spacing="10.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#back" text="&lt;">
                      <HBox.margin>
-                        <Insets right="20.0" />
+                        <Insets right="220.0" />
                      </HBox.margin>
                      <styleClass>
                         <String fx:value="defaultButton" />
@@ -61,8 +60,6 @@
                         <String fx:value="plus" />
                      </styleClass>
                   </Button>
-                  <Label contentDisplay="CENTER" prefHeight="25.0" prefWidth="42.0" text="Status" />
-                  <ComboBox fx:id="cmbStatus" prefHeight="26.0" prefWidth="136.0" />
                </children>
             </HBox>
          </children>
