@@ -14,7 +14,6 @@ import org.kie.server.api.model.instance.RequestInfoInstance;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -38,10 +37,8 @@ public class JobsController implements Initializable {
 	private Button btnCancel;
 	@FXML
 	private Button btnSchedule;
-	@FXML
-	private Button btnRequeue;
-	@FXML
-	private ComboBox<String> cmbStatus;
+
+	
 	private KieServerClientService service;
 
 	@Override
@@ -49,6 +46,7 @@ public class JobsController implements Initializable {
 		service = KieServerClientManager.getInstance();
 		configureColumns();
 		updateData();
+		AppUtils.disableIfNotSelected(tblJobs.getSelectionModel(), btnCancel);
 	}
 
 	public void back() {
@@ -62,7 +60,7 @@ public class JobsController implements Initializable {
 
 	private void configureColumns() {
 		clBusinessKey.setCellValueFactory(new PropertyValueFactory<>("businessKey"));
-		clCommand.setCellValueFactory(new PropertyValueFactory<>("command"));
+		clCommand.setCellValueFactory(new PropertyValueFactory<>("commandName"));
 		clId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		clMessage.setCellValueFactory(new PropertyValueFactory<>("message"));
 		clRetries.setCellValueFactory(new PropertyValueFactory<>("retries"));
@@ -84,8 +82,8 @@ public class JobsController implements Initializable {
 		Navigation.get().goTo(Screen.JOB_REQUEST);
 	}
 
-	public void requeue() {
-
+	public void update() {
+		updateData();
 	}
 
 	public void details() {

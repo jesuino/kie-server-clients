@@ -125,6 +125,8 @@ public interface KieServerClientService {
 	public Long scheduleRequest(String containerId, JobRequestInstance request);
 	
 	public void cancelRequest(long requestId);
+	
+	public void requeueRequest(long requestId);
 
 
 }

@@ -29,7 +29,7 @@
                <children>
                   <Button mnemonicParsing="false" onAction="#back" text="&lt;">
                      <HBox.margin>
-                        <Insets right="220.0" />
+                        <Insets right="140.0" />
                      </HBox.margin>
                      <styleClass>
                         <String fx:value="defaultButton" />
@@ -42,13 +42,13 @@
                         <String fx:value="danger" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="btnSchedule" mnemonicParsing="false" onAction="#schedule" prefHeight="26.0" prefWidth="82.0" text="Schedule">
+                  <Button fx:id="btnSchedule" mnemonicParsing="false" onAction="#schedule" prefHeight="26.0" prefWidth="143.0" text="New Job Request ">
                      <styleClass>
                         <String fx:value="defaultButton" />
                         <String fx:value="plus" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="btnRequeue" mnemonicParsing="false" onAction="#requeue" prefHeight="26.0" prefWidth="87.0" text="Requeue">
+                  <Button mnemonicParsing="false" onAction="#update" prefHeight="26.0" prefWidth="105.0" text="Update Data">
                      <styleClass>
                         <String fx:value="defaultButton" />
                         <String fx:value="plus" />

@@ -279,5 +279,8 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	public void cancelRequest(long requestId) {
 		jobClient.cancelRequest(requestId);
 	}
-
+	
+	public void requeueRequest(long requestId) {
+		jobClient.requeueRequest(requestId);
+	}
 }
