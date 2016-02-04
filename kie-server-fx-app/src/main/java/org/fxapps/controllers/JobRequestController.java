@@ -10,12 +10,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.fxapps.navigation.Navigation;
-import org.fxapps.navigation.Param;
 import org.fxapps.navigation.Screen;
 import org.fxapps.service.KieServerClientManager;
 import org.fxapps.service.KieServerClientService;
 import org.fxapps.utils.AppUtils;
-import org.kie.server.api.model.KieContainerResource;
 import org.kie.server.api.model.instance.JobRequestInstance;
 
 import javafx.beans.binding.BooleanBinding;
@@ -45,13 +43,10 @@ public class JobRequestController implements Initializable {
 	@FXML
 	private Button btnSend;
 	private KieServerClientService service;
-	private String containerId;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		service = KieServerClientManager.getInstance();
-		KieContainerResource container = (KieContainerResource) Navigation.get().data().get(Param.CONTAINER);
-		containerId = container.getContainerId();
 		configureSpinners();
 		bindings();
 	}
@@ -90,7 +85,7 @@ public class JobRequestController implements Initializable {
 		request.setCommand(txtCommand.getText());
 		request.setData(data);
 		request.setScheduledDate(date);
-		AppUtils.doBlockingAsyncWork(() -> service.scheduleRequest(containerId, request), l -> {
+		AppUtils.doBlockingAsyncWork(() -> service.scheduleRequest(request), l -> {
 			AppUtils.showSuccessDialog("Job Request accepted with response: " + l);
 			back();
 		} , AppUtils::showExceptionDialog);

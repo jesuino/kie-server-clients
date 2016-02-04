@@ -137,7 +137,6 @@ public class ContainersController implements Initializable {
 		BooleanBinding selectedItem = tblContainers.getSelectionModel().selectedItemProperty().isNull();
 		btnProcesses.disableProperty().bind(selectedItem);
 		btnTasks.disableProperty().bind(selectedItem);
-		btnJobs.disableProperty().bind(selectedItem);
 		btnDispose.disableProperty().bind(selectedItem.and(runRulesProp));
 		btnCommands.disableProperty().bind(selectedItem.and(runProcessProp));
 	}
@@ -182,7 +181,6 @@ public class ContainersController implements Initializable {
 	}
 	
 	public void jobs() {
-		saveSelectedContainer();
 		Navigation.get().goTo(Screen.JOBS);
 	}
 }
