@@ -3,6 +3,7 @@ package org.fxapps.service;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.drools.core.command.runtime.BatchExecutionCommandImpl;
 import org.kie.server.api.marshalling.Marshaller;
@@ -177,6 +178,11 @@ class KieServerClientServiceImpl implements KieServerClientService {
 		return processesClient.startProcess(containerId, processId);
 	}
 
+	@Override
+	public Long startProcess(String containerId, String processId, Map<String, Object> variables) {
+		return processesClient.startProcess(containerId, processId, variables);
+	}	
+	
 	@Override
 	public List<TaskSummary> findTasksByProcessInstanceId(Long id) {
 		return userTasksClient.findTasksByStatusByProcessInstanceId(id, Collections.emptyList(), 0, 1000);

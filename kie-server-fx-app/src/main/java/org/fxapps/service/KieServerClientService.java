@@ -1,6 +1,7 @@
 package org.fxapps.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.drools.core.command.runtime.BatchExecutionCommandImpl;
 import org.kie.server.api.marshalling.Marshaller;
@@ -127,6 +128,8 @@ public interface KieServerClientService {
 	public void cancelRequest(long requestId);
 	
 	public void requeueRequest(long requestId);
+
+	Long startProcess(String containerId, String processId, Map<String, Object> variables);
 
 
 }
