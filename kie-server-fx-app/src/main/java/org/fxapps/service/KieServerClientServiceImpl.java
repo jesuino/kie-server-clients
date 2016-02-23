@@ -71,13 +71,13 @@ class KieServerClientServiceImpl implements KieServerClientService {
 			if ("BPM".equals(capability)) {
 				processesClient = client.getServicesClient(ProcessServicesClient.class);
 				userTasksClient = client.getServicesClient(UserTaskServicesClient.class);
+				queryClient = client.getServicesClient(QueryServicesClient.class);
+				jobClient = client.getServicesClient(JobServicesClient.class);
 			}
 			if ("BRM".equals(capability)) {
 				rulesClient = client.getServicesClient(RuleServicesClient.class);
 			}
 		}
-		jobClient = client.getServicesClient(JobServicesClient.class);
-		queryClient = client.getServicesClient(QueryServicesClient.class);
 		marshaller = MarshallerFactory.getMarshaller(FORMAT, getClass().getClassLoader());
 	}
 
