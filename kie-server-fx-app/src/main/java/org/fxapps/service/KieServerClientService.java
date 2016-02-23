@@ -17,6 +17,9 @@ import org.kie.server.api.model.instance.ProcessInstance;
 import org.kie.server.api.model.instance.RequestInfoInstance;
 import org.kie.server.api.model.instance.TaskSummary;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 /**
  * The contract of a kie server client. It is also a factory of implementations,
  * hiding everything from our app
@@ -26,9 +29,20 @@ import org.kie.server.api.model.instance.TaskSummary;
  */
 public interface KieServerClientService {
 
+	final BooleanProperty supportsBPM = new SimpleBooleanProperty(false);
+	final BooleanProperty supportsBRM = new SimpleBooleanProperty(false);
+	
 	enum Type {
 		API;
 	};
+	
+	default public BooleanProperty getSupportsBPM() {
+		return supportsBPM;
+	}
+	
+	default public BooleanProperty getSupportsBRM() {
+		return supportsBRM;
+	}
 
 	public void login(String url, String username, String password);
 
@@ -57,10 +71,6 @@ public interface KieServerClientService {
 
 	public ServiceResponse<String>  executeCommand(String containerId,
 			BatchExecutionCommandImpl batchCmd);
-	
-	public boolean canRunRules();
-	
-	public boolean canRunProcess();
 	
 	public List<ProcessDefinition> getProcessesDefinitions(String containerId);
 

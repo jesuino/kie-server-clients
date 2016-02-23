@@ -22,8 +22,6 @@ import org.kie.server.api.model.ServiceResponse.ResponseType;
 import org.kie.server.api.model.instance.TaskSummary;
 
 import javafx.beans.binding.BooleanBinding;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -130,15 +128,13 @@ public class ContainersController implements Initializable {
 	}
 
 	private void configureBindings() {
-		boolean runProcess = service.canRunProcess();
-		boolean runRules = service.canRunRules();
-		BooleanProperty runProcessProp = new SimpleBooleanProperty(runProcess);
-		BooleanProperty runRulesProp = new SimpleBooleanProperty(runRules);
+		BooleanBinding noBPM = service.getSupportsBPM().not();
+		BooleanBinding noBRM = service.getSupportsBRM().not();
 		BooleanBinding selectedItem = tblContainers.getSelectionModel().selectedItemProperty().isNull();
-		btnProcesses.disableProperty().bind(selectedItem);
-		btnTasks.disableProperty().bind(selectedItem);
-		btnDispose.disableProperty().bind(selectedItem.and(runRulesProp));
-		btnCommands.disableProperty().bind(selectedItem.and(runProcessProp));
+		btnProcesses.disableProperty().bind(selectedItem.or(noBPM));
+		btnTasks.disableProperty().bind(selectedItem.or(noBPM));
+		btnJobs.disableProperty().bind(noBPM);
+		btnCommands.disableProperty().bind(selectedItem.or(noBRM));
 	}
 
 	private void fillContainers(List<KieContainerResource> listContainers) {

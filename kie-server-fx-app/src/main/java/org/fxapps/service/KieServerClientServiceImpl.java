@@ -53,7 +53,7 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	private Marshaller marshaller;
 	private UserTaskServicesClient userTasksClient;
 	private JobServicesClient jobClient;
-
+	
 	/**
 	 * The default constructor has default access
 	 */
@@ -73,9 +73,11 @@ class KieServerClientServiceImpl implements KieServerClientService {
 				userTasksClient = client.getServicesClient(UserTaskServicesClient.class);
 				queryClient = client.getServicesClient(QueryServicesClient.class);
 				jobClient = client.getServicesClient(JobServicesClient.class);
+				supportsBPM.set(true);
 			}
 			if ("BRM".equals(capability)) {
 				rulesClient = client.getServicesClient(RuleServicesClient.class);
+				supportsBRM.set(true);
 			}
 		}
 		marshaller = MarshallerFactory.getMarshaller(FORMAT, getClass().getClassLoader());
@@ -108,16 +110,6 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	@Override
 	public ServiceResponse<String> executeCommand(String containerId, BatchExecutionCommandImpl batchCmd) {
 		return rulesClient.executeCommands(containerId, batchCmd);
-	}
-
-	@Override
-	public boolean canRunRules() {
-		return rulesClient != null;
-	}
-
-	@Override
-	public boolean canRunProcess() {
-		return processesClient != null;
 	}
 
 	@Override

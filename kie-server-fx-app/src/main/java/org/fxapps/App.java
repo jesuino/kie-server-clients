@@ -19,5 +19,4 @@ public class App extends Application {
 		stage.setTitle("KIE Server Management Client");
 		stage.show();
 	}
-
 }
