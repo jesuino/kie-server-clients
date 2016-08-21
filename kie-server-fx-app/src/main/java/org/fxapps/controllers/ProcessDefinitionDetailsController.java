@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.web.WebView;
 import javafx.util.Pair;
 
 import org.fxapps.navigation.Navigation;
@@ -57,6 +58,12 @@ public class ProcessDefinitionDetailsController implements Initializable {
 
 	@FXML
 	Button btnViewTasksParams;
+	
+	@FXML
+	WebView processSVGViewer;
+	
+	@FXML
+	Label lblSVGNotAvailable;
 
 	private ProcessDefinition definition;
 	private KieServerClientService service;
@@ -70,7 +77,20 @@ public class ProcessDefinitionDetailsController implements Initializable {
 		lblTitle.setText("Process " + definition.getName() + " details");
 		configureColumns();
 		performAsyncCalls();
+		loadProcessImage();
 		AppUtils.disableIfNotSelected(tblUserTasks.getSelectionModel(), btnViewTasksParams);
+	}
+
+	private void loadProcessImage() {
+		String svg = service.getProcessImage(container.getContainerId(), definition.getId());
+		System.out.println(">>SVG: " + svg);
+		if(svg != null && !svg.trim().isEmpty()) {
+			lblSVGNotAvailable.setVisible(false);
+			processSVGViewer.getEngine().loadContent(svg);
+		} else {
+			lblSVGNotAvailable.setVisible(true);
+			processSVGViewer.setVisible(false);
+		}
 	}
 
 	private void configureColumns() {

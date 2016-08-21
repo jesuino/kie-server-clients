@@ -29,6 +29,7 @@ import org.kie.server.client.KieServicesFactory;
 import org.kie.server.client.ProcessServicesClient;
 import org.kie.server.client.QueryServicesClient;
 import org.kie.server.client.RuleServicesClient;
+import org.kie.server.client.UIServicesClient;
 import org.kie.server.client.UserTaskServicesClient;
 
 /**
@@ -55,6 +56,7 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	private Marshaller marshaller;
 	private UserTaskServicesClient userTasksClient;
 	private JobServicesClient jobClient;
+	private UIServicesClient uiClient;
 
 	/**
 	 * The default constructor has default access
@@ -85,6 +87,7 @@ class KieServerClientServiceImpl implements KieServerClientService {
 				queryClient = client
 						.getServicesClient(QueryServicesClient.class);
 				jobClient = client.getServicesClient(JobServicesClient.class);
+				uiClient = client.getServicesClient(UIServicesClient.class);
 				supportsBPM.set(true);
 			}
 			if ("BRM".equals(capability)) {
@@ -308,11 +311,18 @@ class KieServerClientServiceImpl implements KieServerClientService {
 		return jobClient.scheduleRequest(containerId, request);
 	}
 
+	@Override
 	public void cancelRequest(long requestId) {
 		jobClient.cancelRequest(requestId);
 	}
 
+	@Override
 	public void requeueRequest(long requestId) {
 		jobClient.requeueRequest(requestId);
+	}
+	
+	@Override
+	public String getProcessImage(String containerId, String processDefinitionId) {
+		return uiClient.getProcessImage(containerId, processDefinitionId);
 	}
 }

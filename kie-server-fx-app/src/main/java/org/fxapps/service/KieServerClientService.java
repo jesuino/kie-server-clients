@@ -140,7 +140,9 @@ public interface KieServerClientService {
 	
 	public void requeueRequest(long requestId);
 
-	Long startProcess(String containerId, String processId, Map<String, Object> variables);
+	public Long startProcess(String containerId, String processId, Map<String, Object> variables);
+
+	public String getProcessImage(String containerId, String processDefinitionId);
 
 
 }
