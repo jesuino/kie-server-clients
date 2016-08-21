@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.drools.core.command.runtime.BatchExecutionCommandImpl;
+import org.kie.api.runtime.ExecutionResults;
 import org.kie.server.api.marshalling.Marshaller;
 import org.kie.server.api.marshalling.MarshallerFactory;
 import org.kie.server.api.marshalling.MarshallingFormat;
@@ -42,7 +43,8 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	// TODO: Add UIServiceClient methods once it is available
 
 	private static final MarshallingFormat FORMAT = MarshallingFormat.JSON;
-	private List<String> JOB_STATUS = Arrays.asList("QUEUED", "DONE", "CANCELLED", "ERROR", "RETRYING", "RUNNING");;
+	private List<String> JOB_STATUS = Arrays.asList("QUEUED", "DONE",
+			"CANCELLED", "ERROR", "RETRYING", "RUNNING");;
 
 	static KieServerClientServiceImpl INSTANCE;
 	private KieServicesClient client;
@@ -53,7 +55,7 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	private Marshaller marshaller;
 	private UserTaskServicesClient userTasksClient;
 	private JobServicesClient jobClient;
-	
+
 	/**
 	 * The default constructor has default access
 	 */
@@ -63,24 +65,36 @@ class KieServerClientServiceImpl implements KieServerClientService {
 
 	@Override
 	public void login(String url, String usr, String psw) {
-		KieServicesConfiguration configuration = KieServicesFactory.newRestConfiguration(url, usr, psw);
+		KieServicesConfiguration configuration = KieServicesFactory
+				.newRestConfiguration(url, usr, psw);
 		configuration.setMarshallingFormat(FORMAT);
+		configuration
+				.setCredentialsProvider(new org.kie.server.client.credentials.EnteredCredentialsProvider(
+						usr, psw) {
+
+				});
 		client = KieServicesFactory.newKieServicesClient(configuration);
+		System.out.println(configuration.getExtraJaxbClasses());
 		kieServerInfo = client.getServerInfo().getResult();
 		for (String capability : kieServerInfo.getCapabilities()) {
 			if ("BPM".equals(capability)) {
-				processesClient = client.getServicesClient(ProcessServicesClient.class);
-				userTasksClient = client.getServicesClient(UserTaskServicesClient.class);
-				queryClient = client.getServicesClient(QueryServicesClient.class);
+				processesClient = client
+						.getServicesClient(ProcessServicesClient.class);
+				userTasksClient = client
+						.getServicesClient(UserTaskServicesClient.class);
+				queryClient = client
+						.getServicesClient(QueryServicesClient.class);
 				jobClient = client.getServicesClient(JobServicesClient.class);
 				supportsBPM.set(true);
 			}
 			if ("BRM".equals(capability)) {
-				rulesClient = client.getServicesClient(RuleServicesClient.class);
+				rulesClient = client
+						.getServicesClient(RuleServicesClient.class);
 				supportsBRM.set(true);
 			}
 		}
-		marshaller = MarshallerFactory.getMarshaller(FORMAT, getClass().getClassLoader());
+		marshaller = MarshallerFactory.getMarshaller(FORMAT, getClass()
+				.getClassLoader());
 	}
 
 	@Override
@@ -99,8 +113,8 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	}
 
 	@Override
-	public ServiceResponse<KieContainerResource> createContainer(String id, String groupId, String artifactId,
-			String version) {
+	public ServiceResponse<KieContainerResource> createContainer(String id,
+			String groupId, String artifactId, String version) {
 		ReleaseId releaseId = new ReleaseId(groupId, artifactId, version);
 		KieContainerResource container = new KieContainerResource(releaseId);
 		container.setContainerId(id);
@@ -108,8 +122,9 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	}
 
 	@Override
-	public ServiceResponse<String> executeCommand(String containerId, BatchExecutionCommandImpl batchCmd) {
-		return rulesClient.executeCommands(containerId, batchCmd);
+	public ServiceResponse<ExecutionResults> executeCommand(String containerId,
+			BatchExecutionCommandImpl batchCmd) {
+		return rulesClient.executeCommandsWithResults(containerId, batchCmd);
 	}
 
 	@Override
@@ -123,46 +138,58 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	}
 
 	@Override
-	public String getProcessForm(String containerId, String processId, String language) {
+	public String getProcessForm(String containerId, String processId,
+			String language) {
 		// TODO: it will be only available in jBPM 6.4
 		return null;
 	}
 
 	@Override
-	public VariablesDefinition getVariableDefinitions(String containerId, String processId) {
-		return processesClient.getProcessVariableDefinitions(containerId, processId);
+	public VariablesDefinition getVariableDefinitions(String containerId,
+			String processId) {
+		return processesClient.getProcessVariableDefinitions(containerId,
+				processId);
 	}
 
 	@Override
-	public UserTaskDefinitionList getUserTaskDefinitions(String containerId, String processId) {
+	public UserTaskDefinitionList getUserTaskDefinitions(String containerId,
+			String processId) {
 		return processesClient.getUserTaskDefinitions(containerId, processId);
 	}
 
 	@Override
-	public ServiceTasksDefinition getServiceTaskDefinitions(String containerId, String processId) {
-		return processesClient.getServiceTaskDefinitions(containerId, processId);
+	public ServiceTasksDefinition getServiceTaskDefinitions(String containerId,
+			String processId) {
+		return processesClient
+				.getServiceTaskDefinitions(containerId, processId);
 	}
 
 	@Override
-	public List<ProcessInstance> findProcessInstancesByProcessId(String processId, List<Integer> status, Integer page,
+	public List<ProcessInstance> findProcessInstancesByProcessId(
+			String processId, List<Integer> status, Integer page,
 			Integer pageSize) {
-		return queryClient.findProcessInstancesByProcessId(processId, status, page, pageSize);
+		return queryClient.findProcessInstancesByProcessId(processId, status,
+				page, pageSize);
 	}
 
 	@Override
-	public void abortProcessInstances(String containerId, List<Long> processInstanceIds) {
+	public void abortProcessInstances(String containerId,
+			List<Long> processInstanceIds) {
 		processesClient.abortProcessInstances(containerId, processInstanceIds);
 	}
 
 	@Override
-	public List<String> getAvailableSignals(String containerId, Long processInstanceId) {
-		return processesClient.getAvailableSignals(containerId, processInstanceId);
+	public List<String> getAvailableSignals(String containerId,
+			Long processInstanceId) {
+		return processesClient.getAvailableSignals(containerId,
+				processInstanceId);
 	}
 
 	@Override
-	public void signalProcessInstances(String containerId, List<Long> processInstanceId, String signalName,
-			Object event) {
-		processesClient.signalProcessInstances(containerId, processInstanceId, signalName, event);
+	public void signalProcessInstances(String containerId,
+			List<Long> processInstanceId, String signalName, Object event) {
+		processesClient.signalProcessInstances(containerId, processInstanceId,
+				signalName, event);
 	}
 
 	@Override
@@ -171,13 +198,15 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	}
 
 	@Override
-	public Long startProcess(String containerId, String processId, Map<String, Object> variables) {
+	public Long startProcess(String containerId, String processId,
+			Map<String, Object> variables) {
 		return processesClient.startProcess(containerId, processId, variables);
-	}	
-	
+	}
+
 	@Override
 	public List<TaskSummary> findTasksByProcessInstanceId(Long id) {
-		return userTasksClient.findTasksByStatusByProcessInstanceId(id, Collections.emptyList(), 0, 1000);
+		return userTasksClient.findTasksByStatusByProcessInstanceId(id,
+				Collections.emptyList(), 0, 1000);
 	}
 
 	@Override
@@ -199,7 +228,8 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	}
 
 	@Override
-	public void delegateTask(String containerId, Long taskId, String userId, String targetUserId) {
+	public void delegateTask(String containerId, Long taskId, String userId,
+			String targetUserId) {
 		userTasksClient.delegateTask(containerId, taskId, userId, targetUserId);
 	}
 
@@ -214,8 +244,10 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	}
 
 	@Override
-	public void forwardTask(String containerId, Long taskId, String userId, String targetEntityId) {
-		userTasksClient.forwardTask(containerId, taskId, userId, targetEntityId);
+	public void forwardTask(String containerId, Long taskId, String userId,
+			String targetEntityId) {
+		userTasksClient
+				.forwardTask(containerId, taskId, userId, targetEntityId);
 	}
 
 	@Override
@@ -250,8 +282,10 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	}
 
 	@Override
-	public void nominateTask(String containerId, Long taskId, String userId, List<String> potentialOwners) {
-		userTasksClient.nominateTask(containerId, taskId, userId, potentialOwners);
+	public void nominateTask(String containerId, Long taskId, String userId,
+			List<String> potentialOwners) {
+		userTasksClient.nominateTask(containerId, taskId, userId,
+				potentialOwners);
 	}
 
 	@Override
@@ -260,7 +294,7 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	}
 
 	@Override
-	public List<RequestInfoInstance> getAllJobsRequest() {	
+	public List<RequestInfoInstance> getAllJobsRequest() {
 		return jobClient.getRequestsByStatus(JOB_STATUS, 0, 1000);
 	}
 
@@ -273,11 +307,11 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	public Long scheduleRequest(String containerId, JobRequestInstance request) {
 		return jobClient.scheduleRequest(containerId, request);
 	}
-	
+
 	public void cancelRequest(long requestId) {
 		jobClient.cancelRequest(requestId);
 	}
-	
+
 	public void requeueRequest(long requestId) {
 		jobClient.requeueRequest(requestId);
 	}

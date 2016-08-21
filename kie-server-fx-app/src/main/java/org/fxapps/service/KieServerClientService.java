@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.drools.core.command.runtime.BatchExecutionCommandImpl;
+import org.kie.api.runtime.ExecutionResults;
 import org.kie.server.api.marshalling.Marshaller;
 import org.kie.server.api.model.KieContainerResource;
 import org.kie.server.api.model.KieServerInfo;
@@ -69,7 +70,7 @@ public interface KieServerClientService {
 		return service;
 	}
 
-	public ServiceResponse<String>  executeCommand(String containerId,
+	public ServiceResponse<ExecutionResults>  executeCommand(String containerId,
 			BatchExecutionCommandImpl batchCmd);
 	
 	public List<ProcessDefinition> getProcessesDefinitions(String containerId);

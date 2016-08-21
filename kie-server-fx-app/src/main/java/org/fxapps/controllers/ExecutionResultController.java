@@ -10,6 +10,7 @@ import javafx.scene.control.TextArea;
 
 import org.fxapps.navigation.Navigation;
 import org.fxapps.navigation.Param;
+import org.kie.api.executor.ExecutionResults;
 import org.kie.server.api.model.ServiceResponse;
 import org.kie.server.api.model.ServiceResponse.ResponseType;
 
@@ -25,7 +26,7 @@ public class ExecutionResultController implements Initializable {
 	@SuppressWarnings("unchecked")
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		Map<Param, Object> data = Navigation.get().data();
-		ServiceResponse<String> resp = (ServiceResponse<String>) data
+		ServiceResponse<ExecutionResults> resp = (ServiceResponse<ExecutionResults>) data
 				.get(Param.RESPONSE);
 		String req = data.get(Param.REQUEST).toString();
 		if (resp.getType() == ResponseType.FAILURE) {
@@ -33,7 +34,8 @@ public class ExecutionResultController implements Initializable {
 		} else {
 			txtResponse.setStyle("-fx-text-fill: blue");
 		}
-		txtResponse.setText(resp.getResult());
+		// TODO: Change this to a better text representation
+		txtResponse.setText(resp.getResult().toString());
 		txtRequest.setText(req);
 	}
 

@@ -7,20 +7,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-import org.drools.core.command.impl.GenericCommand;
-import org.drools.core.command.runtime.BatchExecutionCommandImpl;
-import org.fxapps.navigation.Navigation;
-import org.fxapps.navigation.Param;
-import org.fxapps.navigation.Screen;
-import org.fxapps.service.KieServerClientManager;
-import org.fxapps.service.KieServerClientService;
-import org.fxapps.utils.AppUtils;
-import org.kie.api.KieServices;
-import org.kie.api.command.Command;
-import org.kie.api.command.KieCommands;
-import org.kie.server.api.model.KieContainerResource;
-import org.kie.server.api.model.ServiceResponse;
-
+import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleStringProperty;
@@ -32,6 +19,21 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+
+import org.drools.core.command.impl.GenericCommand;
+import org.drools.core.command.runtime.BatchExecutionCommandImpl;
+import org.fxapps.navigation.Navigation;
+import org.fxapps.navigation.Param;
+import org.fxapps.navigation.Screen;
+import org.fxapps.service.KieServerClientManager;
+import org.fxapps.service.KieServerClientService;
+import org.fxapps.utils.AppUtils;
+import org.kie.api.KieServices;
+import org.kie.api.command.Command;
+import org.kie.api.command.KieCommands;
+import org.kie.api.runtime.ExecutionResults;
+import org.kie.server.api.model.KieContainerResource;
+import org.kie.server.api.model.ServiceResponse;
 
 /**
  * 
@@ -129,7 +131,7 @@ public class ExecuteCommandsController implements Initializable {
 		if (validateCommandsString()) {
 			Map<Param, Object> data = Navigation.get().data();
 			String id = container.getContainerId();
-			ServiceResponse<String> resp = service.executeCommand(id, batchCmd);
+			ServiceResponse<ExecutionResults> resp = service.executeCommand(id, batchCmd);
 			data.put(Param.REQUEST, txtCommand.getText());
 			data.put(Param.RESPONSE, resp);
 			Navigation.get().goTo(Screen.EXECUTION_RESULTS);
@@ -183,7 +185,7 @@ public class ExecuteCommandsController implements Initializable {
 		Command<?> cmd;
 		switch (selectedCommand) {
 		case AGENDA_GROUP_SET_FOCUS:
-			cmd = cmdFactory.newAgendaGroupSetFocus(null);
+			cmd = cmdFactory.newAgendaGroupSetFocus("group");
 			break;
 		case GET_OBJECTS:
 			cmd = cmdFactory.newGetObjects();
@@ -192,9 +194,10 @@ public class ExecuteCommandsController implements Initializable {
 			cmd = cmdFactory.newGetGlobal("global ");
 			break;
 		case SET_GLOBAL:
-			cmd = cmdFactory.newSetGlobal("global name", "global factory");
+			cmd = cmdFactory.newSetGlobal("global name", new Object());
+			break;
 		case INSERT_OBJECT:
-			cmd = cmdFactory.newInsert("testing", null);
+			cmd = cmdFactory.newInsert(new Object());
 			break;
 		case FIRE_ALL_RULES:
 			cmd = cmdFactory.newFireAllRules();
@@ -254,10 +257,12 @@ public class ExecuteCommandsController implements Initializable {
 		BooleanBinding saved = previousTextProperty.isEqualTo(txtCommand.textProperty());
 		btnSave.disableProperty().bind(saved);
 		btnExecute.setDisable(true);
-		lstCommands.getItems().addListener((Observable o) -> {
-			boolean empty = lstCommands.getItems().isEmpty();
-			lblListEmpty.setVisible(empty);
-			btnExecute.setDisable(empty);
+		lstCommands.getItems().addListener(new InvalidationListener() {
+			public void invalidated(Observable arg0) {
+					boolean empty = lstCommands.getItems().isEmpty();
+					lblListEmpty.setVisible(empty);
+					btnExecute.setDisable(empty);
+			}
 		});
 	}
 

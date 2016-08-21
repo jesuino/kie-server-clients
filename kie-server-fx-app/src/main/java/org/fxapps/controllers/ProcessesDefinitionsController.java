@@ -1,8 +1,18 @@
 package org.fxapps.controllers;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import org.fxapps.navigation.Navigation;
 import org.fxapps.navigation.Param;
@@ -12,14 +22,6 @@ import org.fxapps.service.KieServerClientService;
 import org.fxapps.utils.AppUtils;
 import org.kie.server.api.model.KieContainerResource;
 import org.kie.server.api.model.definition.ProcessDefinition;
-
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ProcessesDefinitionsController implements Initializable {
 
@@ -84,7 +86,8 @@ public class ProcessesDefinitionsController implements Initializable {
 	public void start() {
 		KieServerClientService service = KieServerClientManager.getInstance();
 		ProcessDefinition processDefinition = tblProcesses.getSelectionModel().getSelectedItem();
-		AppUtils.doBlockingAsyncWork(() -> service.startProcess(container.getContainerId(), processDefinition.getId()),
+		Map<String, Object> param = new HashMap<String, Object>();
+		AppUtils.doBlockingAsyncWork(() -> service.startProcess(container.getContainerId(), processDefinition.getId(), param),
 				piid -> {
 					AppUtils.showSuccessDialog("Process Instance created with ID " + piid);
 				} , AppUtils::showExceptionDialog);
