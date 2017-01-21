@@ -131,6 +131,7 @@ public class ContainersController implements Initializable {
 		BooleanBinding noBPM = service.getSupportsBPM().not();
 		BooleanBinding noBRM = service.getSupportsBRM().not();
 		BooleanBinding selectedItem = tblContainers.getSelectionModel().selectedItemProperty().isNull();
+		btnDispose.disableProperty().bind(selectedItem);
 		btnProcesses.disableProperty().bind(selectedItem.or(noBPM));
 		btnTasks.disableProperty().bind(selectedItem.or(noBPM));
 		btnJobs.disableProperty().bind(noBPM);

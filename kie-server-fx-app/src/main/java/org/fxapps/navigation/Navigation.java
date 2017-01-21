@@ -12,9 +12,9 @@ import javafx.util.Duration;
 
 public class Navigation {
 
-	private static final int DEFAULT_H = 480;
+	private static final int DEFAULT_H = 600;
 
-	private static final int DEFAULT_W = 640;
+	private static final int DEFAULT_W = 800;
 
 	private static final int TRANSITION_DURATION = 100;
 

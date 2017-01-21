@@ -13,18 +13,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.controllers.ProcessDefinitionDetailsController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.controllers.ProcessDefinitionDetailsController">
   <children>
-    <VBox id="VBox" alignment="CENTER" layoutY="0.0" prefHeight="480.0" prefWidth="640.0" spacing="15.0">
+    <VBox id="VBox" alignment="CENTER" layoutY="0.0" prefHeight="600.0" prefWidth="800.0" spacing="15.0">
       <children>
         <Label fx:id="lblTitle" prefWidth="609.0" styleClass="titleLabel" text="Process details" />
-        <TabPane prefHeight="370.0" prefWidth="640.0" rotateGraphic="false" side="LEFT" style="-fx-background-color: #DDDDFF; -fx-border-color: #000000;" tabClosingPolicy="UNAVAILABLE">
+        <TabPane prefHeight="488.0" prefWidth="800.0" rotateGraphic="false" side="LEFT" style="-fx-background-color: #DDDDFF; -fx-border-color: #000000;" tabClosingPolicy="UNAVAILABLE">
           <tabs>
                   <Tab text="Diagram">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <WebView fx:id="processSVGViewer" prefHeight="370.0" prefWidth="609.0" />
+                              <WebView fx:id="processSVGViewer" prefHeight="488.0" prefWidth="762.0" />
                               <Label fx:id="lblSVGNotAvailable" layoutX="24.0" layoutY="168.0" text="SVG not available. Please generate a SVG for the process and re-create the container" />
                            </children>
                         </AnchorPane>
@@ -34,10 +34,10 @@
               <content>
                 <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="363.0" prefWidth="607.0">
                   <children>
-                    <TableView fx:id="tblVariables" layoutX="153.0" prefHeight="370.0" prefWidth="302.0">
+                    <TableView fx:id="tblVariables" layoutX="-7.0" prefHeight="488.0" prefWidth="769.0">
                       <columns>
-                        <TableColumn fx:id="clVarName" maxWidth="5000.0" minWidth="10.0" prefWidth="148.0" text="Name" />
-                        <TableColumn fx:id="clVarType" maxWidth="5000.0" minWidth="10.0" prefWidth="150.0" text="Type" />
+                        <TableColumn fx:id="clVarName" maxWidth="5000.0" minWidth="10.0" prefWidth="273.0" text="Name" />
+                        <TableColumn fx:id="clVarType" maxWidth="5000.0" minWidth="10.0" prefWidth="491.0" text="Type" />
                       </columns>
                     </TableView>
                   </children>
@@ -48,9 +48,9 @@
               <content>
                 <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
-                              <VBox layoutX="-2.0" spacing="10.0">
+                              <VBox layoutX="-2.0" prefHeight="488.0" prefWidth="771.0" spacing="10.0">
                                  <children>
-                          <TableView fx:id="tblUserTasks" prefHeight="332.0" prefWidth="609.0">
+                          <TableView fx:id="tblUserTasks" prefHeight="442.0" prefWidth="771.0">
                             <columns>
                               <TableColumn fx:id="clTaskName" maxWidth="5000.0" minWidth="10.0" prefWidth="173.0" text="Name" />
                               <TableColumn fx:id="clTaskPriority" maxWidth="5000.0" minWidth="10.0" prefWidth="78.0" text="Priority" />
@@ -75,10 +75,10 @@
               <content>
                 <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
-                    <TableView fx:id="tblServiceTasks" layoutX="102.0" layoutY="0.0" prefHeight="370.0" prefWidth="359.0">
+                    <TableView fx:id="tblServiceTasks" layoutX="4.0" layoutY="0.0" prefHeight="488.0" prefWidth="763.0">
                       <columns>
-                        <TableColumn fx:id="clServiceName" maxWidth="5000.0" minWidth="10.0" prefWidth="179.0" text="Name" />
-                        <TableColumn fx:id="clServiceType" maxWidth="5000.0" minWidth="10.0" prefWidth="142.0" text="Type" />
+                        <TableColumn fx:id="clServiceName" maxWidth="5000.0" minWidth="10.0" prefWidth="271.0" text="Name" />
+                        <TableColumn fx:id="clServiceType" maxWidth="5000.0" minWidth="4.0" prefWidth="487.0" text="Type" />
                       </columns>
                     </TableView>
                   </children>

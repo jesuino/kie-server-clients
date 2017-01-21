@@ -14,8 +14,9 @@
 
 .danger {
 	-fx-text-fill: red;
-	-fx-pref-width: 60;
-	-fx-pref-heigh: 30;
+	-fx-padding: 0, 0, 10px, 0;
+	-fx-pref-width: 45px;
+	-fx-pref-height: 40px;
 }
 
 .infoLabel {

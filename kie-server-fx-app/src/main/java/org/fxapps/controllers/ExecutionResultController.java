@@ -35,7 +35,7 @@ public class ExecutionResultController implements Initializable {
 			txtResponse.setStyle("-fx-text-fill: blue");
 		}
 		// TODO: Change this to a better text representation
-		txtResponse.setText(resp.getResult().toString());
+//		txtResponse.setText(resp.getResult());
 		txtRequest.setText(req);
 	}
 

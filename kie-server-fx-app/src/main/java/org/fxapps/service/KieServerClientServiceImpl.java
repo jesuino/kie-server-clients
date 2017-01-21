@@ -43,7 +43,7 @@ class KieServerClientServiceImpl implements KieServerClientService {
 
 	// TODO: Add UIServiceClient methods once it is available
 
-	private static final MarshallingFormat FORMAT = MarshallingFormat.JSON;
+	private static final MarshallingFormat FORMAT = MarshallingFormat.JAXB;
 	private List<String> JOB_STATUS = Arrays.asList("QUEUED", "DONE",
 			"CANCELLED", "ERROR", "RETRYING", "RUNNING");;
 

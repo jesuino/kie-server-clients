@@ -12,21 +12,21 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.controllers.UserTasksListController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.controllers.UserTasksListController">
    <children>
-      <VBox layoutX="-4.0" layoutY="-2.0" prefHeight="480.0" prefWidth="640.0" spacing="10.0">
+      <VBox layoutX="-4.0" layoutY="-2.0" prefHeight="600.0" prefWidth="800.0" spacing="10.0">
          <children>
-            <Label prefHeight="16.0" prefWidth="657.0" styleClass="titleLabel" text="Tasks List" />
-            <TableView fx:id="tblTaskSummary" prefHeight="396.0" prefWidth="640.0">
+            <Label prefHeight="44.0" prefWidth="800.0" styleClass="titleLabel" text="Tasks List" />
+            <TableView fx:id="tblTaskSummary" prefHeight="512.0" prefWidth="800.0">
               <columns>
                 <TableColumn fx:id="clId" prefWidth="37.0" text="ID" />
-                <TableColumn fx:id="clName" prefWidth="62.0" text="Name" />
-                  <TableColumn fx:id="clStatus" prefWidth="67.0" text="Status" />
-                  <TableColumn fx:id="clPriority" prefWidth="78.0" text="Priority" />
-                  <TableColumn fx:id="clCreatedBy" prefWidth="90.0" text="Created By" />
-                  <TableColumn fx:id="clSubject" prefWidth="75.0" text="Subject" />
-                  <TableColumn fx:id="clProcessId" prefWidth="113.0" text="P. Instance ID" />
-                  <TableColumn fx:id="clCreatedOn" prefWidth="117.0" text="Created On" />
+                <TableColumn fx:id="clName" prefWidth="149.0" text="Name" />
+                  <TableColumn fx:id="clStatus" text="Status" />
+                  <TableColumn fx:id="clPriority" prefWidth="67.0" text="Priority" />
+                  <TableColumn fx:id="clCreatedBy" prefWidth="95.0" text="Created By" />
+                  <TableColumn fx:id="clSubject" prefWidth="95.0" text="Subject" />
+                  <TableColumn fx:id="clProcessId" prefWidth="170.0" text="P. Instance ID" />
+                  <TableColumn fx:id="clCreatedOn" prefWidth="106.0" text="Created On" />
               </columns>
                <contextMenu>
                   <ContextMenu fx:id="mnTask">
@@ -51,13 +51,13 @@
             </TableView>
             <HBox spacing="10.0">
                <children>
-                  <Button minHeight="30.0" mnemonicParsing="false" onAction="#back" text="&lt;">
+                  <Button minHeight="30.0" mnemonicParsing="false" onAction="#back" text="←">
                      <styleClass>
                         <String fx:value="defaultButton" />
                         <String fx:value="danger" />
                      </styleClass>
                      <HBox.margin>
-                        <Insets left="10.0" right="480.0" />
+                        <Insets left="10.0" />
                      </HBox.margin>
                   </Button>
                   <Button minHeight="30.0" mnemonicParsing="false" onAction="#details" text="Details">
@@ -65,6 +65,9 @@
                         <String fx:value="defaultButton" />
                         <String fx:value="plus" />
                      </styleClass>
+                     <HBox.margin>
+                        <Insets left="670.0" />
+                     </HBox.margin>
                   </Button>
                </children>
             </HBox>

@@ -35,6 +35,7 @@ import org.kie.api.runtime.ExecutionResults;
 import org.kie.server.api.model.KieContainerResource;
 import org.kie.server.api.model.ServiceResponse;
 
+
 /**
  * 
  * A first implementation of what could be the Command Builder Screen, more user
@@ -197,7 +198,7 @@ public class ExecuteCommandsController implements Initializable {
 			cmd = cmdFactory.newSetGlobal("global name", new Object());
 			break;
 		case INSERT_OBJECT:
-			cmd = cmdFactory.newInsert(new Object());
+			cmd = cmdFactory.newInsert("Testing");
 			break;
 		case FIRE_ALL_RULES:
 			cmd = cmdFactory.newFireAllRules();
