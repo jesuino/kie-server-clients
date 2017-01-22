@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -35,41 +36,25 @@
                 <Font size="14.0" fx:id="x2" />
               </font>
             </Button>
-            <Button fx:id="btnCommands" cancelButton="false" defaultButton="false" font="$x2" minHeight="30.0" minWidth="80.0" mnemonicParsing="false" onAction="#executeCommands" prefHeight="40.0" prefWidth="100.0" style="" styleClass="defaultButton, plus" text="Commands">
+                  <MenuButton fx:id="mnExplore" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="Explore">
+                    <items>
+                      <MenuItem fx:id="mnProcesses" mnemonicParsing="false" onAction="#openProcesses" text="Processes" />
+                      <MenuItem fx:id="mnCommands" mnemonicParsing="false" onAction="#executeCommands" text="Commands" />
+                        <MenuItem fx:id="mnUserTasks" mnemonicParsing="false" onAction="#loadTasks" text="User Tasks" />
+                        <MenuItem fx:id="mnJobs" mnemonicParsing="false" onAction="#jobs" text="Jobs" />
+                    </items>
                      <HBox.margin>
-                        <Insets left="70.0" />
-                     </HBox.margin></Button>
-            <Button fx:id="btnProcesses" cancelButton="false" defaultButton="false" font="$x2" minHeight="30.0" minWidth="80.0" mnemonicParsing="false" onAction="#openProcesses" prefHeight="40.0" prefWidth="100.0" style="" styleClass="defaultButton, plus" text="Processes" />
-                  <Button fx:id="btnTasks" minWidth="80.0" mnemonicParsing="false" onAction="#loadTasks" prefHeight="40.0" prefWidth="80.0" text="Tasks">
-                     <styleClass>
-                        <String fx:value="defaultButton" />
-                        <String fx:value="plus" />
-                     </styleClass>
-                  </Button>
-                  <Button fx:id="btnJobs" minWidth="80.0" mnemonicParsing="false" onAction="#jobs" prefHeight="40.0" prefWidth="80.0" text="Jobs">
-                     <styleClass>
-                        <String fx:value="defaultButton" />
-                        <String fx:value="plus" />
-                     </styleClass>
-                  </Button>
-                  <Button minWidth="80.0" mnemonicParsing="false" onAction="#export" prefHeight="40.0" prefWidth="80.0" text="Export">
-                     <styleClass>
-                        <String fx:value="defaultButton" />
-                        <String fx:value="plus" />
-                     </styleClass>
-                  </Button>
-                  <Button minWidth="80.0" mnemonicParsing="false" onAction="#importContainers" prefHeight="40.0" prefWidth="80.0" text="Import">
-                     <styleClass>
-                        <String fx:value="defaultButton" />
-                        <String fx:value="plus" />
-                     </styleClass>
-                  </Button>
-            <Button fx:id="btnDispose" alignment="TOP_CENTER" cancelButton="true" contentDisplay="CENTER" defaultButton="false" minHeight="30.0" minWidth="0.0" mnemonicParsing="false" onAction="#disposeContainer" prefHeight="40.0" prefWidth="39.0" style="" styleClass="defaultButton" text="-" textAlignment="CENTER" textFill="#f80808" textOverrun="CENTER_WORD_ELLIPSIS">
-              <font>
-                <Font name="System Bold" size="20.0" fx:id="x3" />
-              </font>
-            </Button>
-            <Button id="btnAdd" alignment="CENTER" cancelButton="false" defaultButton="true" font="$x3" minHeight="30.0" minWidth="0.0" mnemonicParsing="false" onAction="#addNewContainer" prefHeight="40.0" prefWidth="46.0" style="" styleClass="defaultButton, plus" text="+" />
+                        <Insets left="480.0" />
+                     </HBox.margin>
+                  </MenuButton>
+                  <MenuButton mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="Containers">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#newContainer" text="Create new" />
+                        <MenuItem fx:id="mnDispose" mnemonicParsing="false" onAction="#disposeContainer" text="Dispose" />
+                      <MenuItem mnemonicParsing="false" onAction="#importContainers" text="Import" />
+                        <MenuItem mnemonicParsing="false" onAction="#export" text="Export" />
+                    </items>
+                  </MenuButton>
           </children>
         </HBox>
       </children>

@@ -26,6 +26,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -37,23 +38,25 @@ public class ContainersController implements Initializable {
 	Label lblServerInfo;
 
 	@FXML
-	Button btnCommands;
+	MenuItem mnCommands;
 
 	@FXML
-	Button btnProcesses;
+	MenuItem mnProcesses;
+	
+	@FXML
+	MenuItem mnUserTasks;
 
 	@FXML
-	Button btnDispose;
+	MenuItem mnJobs;
+
+	@FXML
+	MenuItem mnDispose;
 
 	@FXML
 	Label lblInfo;
-	
-	@FXML
-	Button btnTasks;
 
-	@FXML
-	Button btnJobs;
-	
+
+
 	@FXML
 	TableView<KieContainerResource> tblContainers;
 	@FXML
@@ -76,6 +79,15 @@ public class ContainersController implements Initializable {
 		updateData();
 	}
 
+
+	public void importContainers() {
+		Navigation.get().goTo(Screen.IMPORT_CONTAINERS);
+	}
+
+	public void newContainer() {
+		Navigation.get().goTo(Screen.NEW_CONTAINER);
+	}
+
 	public void doLogout() {
 		Navigation.get().goTo(Screen.LOGIN);
 	}
@@ -84,15 +96,15 @@ public class ContainersController implements Initializable {
 		final KieContainerResource container = tblContainers.getSelectionModel().getSelectedItem();
 		AppUtils.doBlockingAsyncWork(() -> {
 			return service.disposeContainer(container.getContainerId());
-			
-		} , r -> {
-			if(r.getType() == ResponseType.SUCCESS) {
+
+		}, r -> {
+			if (r.getType() == ResponseType.SUCCESS) {
 				AppUtils.showSuccessDialog("Container " + container.getContainerId() + " disposed");
 			} else {
 				AppUtils.showErrorDialog("Error disposing container", r.getMsg());
 			}
 			updateData();
-		} , AppUtils::showExceptionDialog);
+		}, AppUtils::showExceptionDialog);
 	}
 
 	public void fillServerInfo(KieServerInfo serverInfo) {
@@ -100,10 +112,6 @@ public class ContainersController implements Initializable {
 		String version = serverInfo.getVersion();
 		String infoStr = name + " v" + version;
 		lblServerInfo.setText(infoStr);
-	}
-
-	public void addNewContainer() {
-		Navigation.get().goTo(Screen.NEW_CONTAINER);
 	}
 
 	public void executeCommands() {
@@ -131,11 +139,11 @@ public class ContainersController implements Initializable {
 		BooleanBinding noBPM = service.getSupportsBPM().not();
 		BooleanBinding noBRM = service.getSupportsBRM().not();
 		BooleanBinding selectedItem = tblContainers.getSelectionModel().selectedItemProperty().isNull();
-		btnDispose.disableProperty().bind(selectedItem);
-		btnProcesses.disableProperty().bind(selectedItem.or(noBPM));
-		btnTasks.disableProperty().bind(selectedItem.or(noBPM));
-		btnJobs.disableProperty().bind(noBPM);
-		btnCommands.disableProperty().bind(selectedItem.or(noBRM));
+		mnDispose.disableProperty().bind(selectedItem);
+		mnProcesses.disableProperty().bind(selectedItem.or(noBPM));
+		mnUserTasks.disableProperty().bind(selectedItem.or(noBPM));
+		mnJobs.disableProperty().bind(noBPM);
+		mnCommands.disableProperty().bind(selectedItem.or(noBRM));
 	}
 
 	private void fillContainers(List<KieContainerResource> listContainers) {
@@ -145,10 +153,6 @@ public class ContainersController implements Initializable {
 	private void saveSelectedContainer() {
 		KieContainerResource container = tblContainers.getSelectionModel().getSelectedItem();
 		Navigation.get().data().put(Param.CONTAINER, container);
-	}
-
-	public void importContainers() {
-		Navigation.get().goTo(Screen.IMPORT_CONTAINERS);
 	}
 
 	public void export() {
@@ -167,16 +171,16 @@ public class ContainersController implements Initializable {
 			}
 		}
 	}
-	
+
 	public void loadTasks() {
 		saveSelectedContainer();
 		String user = (String) Navigation.get().data().get(Param.USER);
-		Supplier<List<TaskSummary>> updateTasks = () -> service.findTasks(user);	
+		Supplier<List<TaskSummary>> updateTasks = () -> service.findTasks(user);
 		Navigation.get().data().put(Param.UPDATE_USER_TASKS_ACTION, updateTasks);
-		Navigation.get().data().put(Param.CALLER_SCREEN, Screen. CONTAINERS);
+		Navigation.get().data().put(Param.CALLER_SCREEN, Screen.CONTAINERS);
 		Navigation.get().goTo(Screen.USER_TASK_LIST);
 	}
-	
+
 	public void jobs() {
 		Navigation.get().goTo(Screen.JOBS);
 	}
