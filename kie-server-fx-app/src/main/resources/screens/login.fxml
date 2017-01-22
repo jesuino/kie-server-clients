@@ -50,9 +50,9 @@
                      <padding>
                         <Insets left="20.0" />
                      </padding></Label>
-            <TextField fx:id="txtURL" prefHeight="35.0" prefWidth="242.0" text="http://localhost:8080/kie-server/services/rest/server" promptText="http://localhost:8080/kie-server/services/rest/server" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <TextField fx:id="txtURL" prefHeight="35.0" prefWidth="242.0" text="http://localhost:8180/kie-server/services/rest/server" promptText="http://localhost:8080/kie-server/services/rest/server" GridPane.columnIndex="1" GridPane.rowIndex="0" />
             <TextField id="txtUsername" fx:id="txtUsr" prefHeight="35.0" prefWidth="242.0" text="kieserver" promptText="kieserver" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <PasswordField id="txtPassword" fx:id="txtPsw" prefHeight="35.0" prefWidth="242.0" promptText="kieserver1!" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <PasswordField id="txtPassword" fx:id="txtPsw" prefHeight="35.0" prefWidth="242.0" text="kieserver1!" promptText="kieserver1!" GridPane.columnIndex="1" GridPane.rowIndex="2" />
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="172.0" minWidth="10.0" prefWidth="107.0" />

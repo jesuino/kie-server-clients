@@ -16,7 +16,7 @@ import org.fxapps.utils.AppUtils;
 
 public class LoginController implements Initializable {
 
-	final String DEFAULT_SERVER_URL = "http://localhost:8080/kie-server/services/rest/server";
+	final String DEFAULT_SERVER_URL = "http://localhost:8180/kie-server/services/rest/server";
 	final String DEFAULT_USER = "kieserver";
 	final String DEFAULT_PASSWORD = "kieserver1!";
 	Logger logger = Logger.getLogger(this.getClass().getName());
@@ -48,7 +48,7 @@ public class LoginController implements Initializable {
 			url = DEFAULT_SERVER_URL;
 		}
 		if (!txtUsr.getText().trim().isEmpty()) {
-			usr = txtURL.getText();
+			usr = txtUsr.getText();
 		} else {
 			usr = DEFAULT_USER;
 		}
