@@ -53,7 +53,7 @@ public class LoginController implements Initializable {
 			usr = DEFAULT_USER;
 		}
 		if (!txtPsw.getText().trim().isEmpty()) {
-			psw = txtURL.getText();
+			psw = txtPsw.getText();
 		} else {
 			psw = DEFAULT_PASSWORD;
 		}
