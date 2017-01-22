@@ -145,6 +145,10 @@ public interface KieServerClientService {
 	public String getProcessImage(String containerId, String processDefinitionId);
 	
 //	public String getProcessForm(String containerId, String processDefinitionId);
+	
+	public List<ProcessInstance> allProcessInstances(String containerId, int max);
+	
+	public List<TaskSummary> allUserTasks(int max);
 
 
 }

@@ -8,6 +8,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import org.fxapps.navigation.Navigation;
+import org.kie.api.runtime.process.WorkflowProcessInstance;
 
 import javafx.beans.binding.BooleanBinding;
 import javafx.concurrent.Task;
@@ -47,7 +48,7 @@ public class AppUtils {
 		}
 		dialog.showAndWait();
 	}
-	
+
 	public static void showExceptionDialog(Throwable e) {
 		showExceptionDialog("Error when sending request", e);
 	}
@@ -74,7 +75,7 @@ public class AppUtils {
 	public static void showErrorDialog(String content) {
 		showErrorDialog("Error...", content);
 	}
-	
+
 	public static void showErrorDialog(String title, String content) {
 		Alert dialog = new Alert(Alert.AlertType.ERROR);
 		dialog.setTitle(title);
@@ -178,5 +179,22 @@ public class AppUtils {
 		dialog.setHeaderText(null);
 		dialog.setContentText(msg);
 		return dialog.showAndWait();
+	}
+
+	public static String getStatusName(int status) {
+		switch (status) {
+		case WorkflowProcessInstance.STATE_ABORTED:
+			return "Aborted";
+		case WorkflowProcessInstance.STATE_ACTIVE:
+			return "Active";
+		case WorkflowProcessInstance.STATE_COMPLETED:
+			return "Completed";
+		case WorkflowProcessInstance.STATE_PENDING:
+			return "Pending";
+		case WorkflowProcessInstance.STATE_SUSPENDED:
+			return "Suspended";
+		default:
+			return "Unknown";
+		}
 	}
 }

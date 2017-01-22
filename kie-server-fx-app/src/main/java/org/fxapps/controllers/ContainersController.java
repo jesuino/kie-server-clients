@@ -50,11 +50,12 @@ public class ContainersController implements Initializable {
 
 	@FXML
 	MenuItem mnDispose;
+	
+	@FXML
+	MenuItem mnProcessTasksCharts;
 
 	@FXML
 	Label lblInfo;
-
-
 
 	@FXML
 	TableView<KieContainerResource> tblContainers;
@@ -139,6 +140,7 @@ public class ContainersController implements Initializable {
 		BooleanBinding noBRM = service.getSupportsBRM().not();
 		BooleanBinding selectedItem = tblContainers.getSelectionModel().selectedItemProperty().isNull();
 		mnDispose.disableProperty().bind(selectedItem);
+		mnProcessTasksCharts.disableProperty().bind(selectedItem);
 		mnProcesses.disableProperty().bind(selectedItem.or(noBPM));
 		mnUserTasks.disableProperty().bind(selectedItem.or(noBPM));
 		mnJobs.disableProperty().bind(noBPM);
@@ -182,5 +184,10 @@ public class ContainersController implements Initializable {
 
 	public void jobs() {
 		Navigation.get().goTo(Screen.JOBS);
+	}
+	
+	public void processTasksCharts() {
+		saveSelectedContainer();
+		Navigation.get().goTo(Screen.PROCESS_TASKS_CHARTS);
 	}
 }

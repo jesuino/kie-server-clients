@@ -44,8 +44,13 @@
                         <MenuItem fx:id="mnJobs" mnemonicParsing="false" onAction="#jobs" text="Jobs" />
                     </items>
                      <HBox.margin>
-                        <Insets left="480.0" />
+                        <Insets left="350.0" />
                      </HBox.margin>
+                  </MenuButton>
+                  <MenuButton mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="Visualize">
+                    <items>
+                      <MenuItem fx:id="mnProcessTasksCharts" mnemonicParsing="false" onAction="#processTasksCharts" text="Tasks and Process Instances" />
+                    </items>
                   </MenuButton>
                   <MenuButton mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="Containers">
                     <items>

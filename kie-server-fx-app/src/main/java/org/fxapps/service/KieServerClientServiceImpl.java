@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.drools.core.command.runtime.BatchExecutionCommandImpl;
 import org.kie.api.runtime.ExecutionResults;
+import org.kie.api.runtime.process.WorkflowProcessInstance;
 import org.kie.server.api.marshalling.Marshaller;
 import org.kie.server.api.marshalling.MarshallerFactory;
 import org.kie.server.api.marshalling.MarshallingFormat;
@@ -44,6 +45,15 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	// TODO: Add UIServiceClient methods once it is available
 
 	private static final MarshallingFormat FORMAT = MarshallingFormat.JAXB;
+	
+	List<Integer> PROCESS_INSTANCE_STATUS = Arrays.asList(
+			WorkflowProcessInstance.STATE_ABORTED,
+			WorkflowProcessInstance.STATE_ACTIVE,
+			WorkflowProcessInstance.STATE_COMPLETED,
+			WorkflowProcessInstance.STATE_PENDING,
+			WorkflowProcessInstance.STATE_SUSPENDED
+			);
+	
 	private List<String> JOB_STATUS = Arrays.asList("QUEUED", "DONE",
 			"CANCELLED", "ERROR", "RETRYING", "RUNNING");;
 
@@ -57,6 +67,7 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	private UserTaskServicesClient userTasksClient;
 	private JobServicesClient jobClient;
 	private UIServicesClient uiClient;
+	private String usr;
 
 	/**
 	 * The default constructor has default access
@@ -67,6 +78,7 @@ class KieServerClientServiceImpl implements KieServerClientService {
 
 	@Override
 	public void login(String url, String usr, String psw) {
+		this.usr = usr;
 		KieServicesConfiguration configuration = KieServicesFactory
 				.newRestConfiguration(url, usr, psw);
 		configuration.setMarshallingFormat(FORMAT);
@@ -324,5 +336,15 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	@Override
 	public String getProcessImage(String containerId, String processDefinitionId) {
 		return uiClient.getProcessImage(containerId, processDefinitionId);
+	}
+
+	@Override
+	public List<ProcessInstance> allProcessInstances(String containerId, int max) {
+		return queryClient.findProcessInstancesByContainerId(containerId, PROCESS_INSTANCE_STATUS, 0, max);
+	}
+
+	@Override
+	public List<TaskSummary> allUserTasks(int max) {
+		return userTasksClient.findTasks(usr, 0, max);
 	}
 }

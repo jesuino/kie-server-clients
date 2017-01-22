@@ -18,7 +18,8 @@ public enum Screen {
 	IMPORT_CONTAINERS("importContainers.fxml"), 
 	USER_TASK_LIST("userTasksList.fxml"), 
 	JOBS("jobs.fxml"), 
-	JOB_REQUEST("jobRequest.fxml");
+	JOB_REQUEST("jobRequest.fxml"),
+	PROCESS_TASKS_CHARTS("processTasksCharts.fxml");
 
 	private String path;
 
