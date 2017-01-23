@@ -18,6 +18,7 @@ public enum Screen {
 	IMPORT_CONTAINERS("importContainers.fxml"), 
 	USER_TASK_LIST("userTasksList.fxml"), 
 	JOBS("jobs.fxml"), 
+	SOLVERS("solvers.fxml"),
 	JOB_REQUEST("jobRequest.fxml"),
 	PROCESS_TASKS_CHARTS("processTasksCharts.fxml");
 

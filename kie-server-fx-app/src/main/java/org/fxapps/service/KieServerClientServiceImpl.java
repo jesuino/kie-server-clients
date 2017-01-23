@@ -30,6 +30,7 @@ import org.kie.server.client.KieServicesFactory;
 import org.kie.server.client.ProcessServicesClient;
 import org.kie.server.client.QueryServicesClient;
 import org.kie.server.client.RuleServicesClient;
+import org.kie.server.client.SolverServicesClient;
 import org.kie.server.client.UIServicesClient;
 import org.kie.server.client.UserTaskServicesClient;
 
@@ -52,7 +53,7 @@ class KieServerClientServiceImpl implements KieServerClientService {
 			WorkflowProcessInstance.STATE_COMPLETED,
 			WorkflowProcessInstance.STATE_PENDING,
 			WorkflowProcessInstance.STATE_SUSPENDED
-			);
+	);
 	
 	private List<String> JOB_STATUS = Arrays.asList("QUEUED", "DONE",
 			"CANCELLED", "ERROR", "RETRYING", "RUNNING");;
@@ -62,12 +63,14 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	private KieServerInfo kieServerInfo;
 	private RuleServicesClient rulesClient;
 	private ProcessServicesClient processesClient;
+	private SolverServicesClient solversClient;
 	private QueryServicesClient queryClient;
 	private Marshaller marshaller;
 	private UserTaskServicesClient userTasksClient;
 	private JobServicesClient jobClient;
 	private UIServicesClient uiClient;
 	private String usr;
+
 
 	/**
 	 * The default constructor has default access
@@ -88,9 +91,9 @@ class KieServerClientServiceImpl implements KieServerClientService {
 
 				});
 		client = KieServicesFactory.newKieServicesClient(configuration);
-		System.out.println(configuration.getExtraJaxbClasses());
 		kieServerInfo = client.getServerInfo().getResult();
 		for (String capability : kieServerInfo.getCapabilities()) {
+			System.out.println(capability);
 			if ("BPM".equals(capability)) {
 				processesClient = client
 						.getServicesClient(ProcessServicesClient.class);
@@ -106,6 +109,10 @@ class KieServerClientServiceImpl implements KieServerClientService {
 				rulesClient = client
 						.getServicesClient(RuleServicesClient.class);
 				supportsBRM.set(true);
+			}
+			if("BRP".equals(capability)) {
+				solversClient = client.getServicesClient(SolverServicesClient.class);
+				supportsSolvers.set(true);
 			}
 		}
 		marshaller = MarshallerFactory.getMarshaller(FORMAT, getClass()

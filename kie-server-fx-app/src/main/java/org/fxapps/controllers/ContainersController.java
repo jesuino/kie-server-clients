@@ -47,6 +47,9 @@ public class ContainersController implements Initializable {
 
 	@FXML
 	MenuItem mnJobs;
+	
+	@FXML 
+	MenuItem mnSolvers;
 
 	@FXML
 	MenuItem mnDispose;
@@ -138,11 +141,13 @@ public class ContainersController implements Initializable {
 	private void configureBindings() {
 		BooleanBinding noBPM = service.getSupportsBPM().not();
 		BooleanBinding noBRM = service.getSupportsBRM().not();
+		BooleanBinding noSolver = service.getSupportsSolver().not();
 		BooleanBinding selectedItem = tblContainers.getSelectionModel().selectedItemProperty().isNull();
 		mnDispose.disableProperty().bind(selectedItem);
 		mnProcessTasksCharts.disableProperty().bind(selectedItem);
 		mnProcesses.disableProperty().bind(selectedItem.or(noBPM));
 		mnUserTasks.disableProperty().bind(selectedItem.or(noBPM));
+		mnSolvers.disableProperty().bind(selectedItem.or(noSolver));
 		mnJobs.disableProperty().bind(noBPM);
 		mnCommands.disableProperty().bind(selectedItem.or(noBRM));
 	}
@@ -189,5 +194,9 @@ public class ContainersController implements Initializable {
 	public void processTasksCharts() {
 		saveSelectedContainer();
 		Navigation.get().goTo(Screen.PROCESS_TASKS_CHARTS);
+	}
+	
+	public void solvers() {
+		Navigation.get().goTo(Screen.SOLVERS);
 	}
 }

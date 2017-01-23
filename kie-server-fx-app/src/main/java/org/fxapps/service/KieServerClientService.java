@@ -32,6 +32,7 @@ public interface KieServerClientService {
 
 	final BooleanProperty supportsBPM = new SimpleBooleanProperty(false);
 	final BooleanProperty supportsBRM = new SimpleBooleanProperty(false);
+	final BooleanProperty supportsSolvers = new SimpleBooleanProperty(false);
 	
 	enum Type {
 		API;
@@ -43,6 +44,10 @@ public interface KieServerClientService {
 	
 	default public BooleanProperty getSupportsBRM() {
 		return supportsBRM;
+	}
+	
+	default public BooleanProperty getSupportsSolver() {
+		return supportsSolvers;	
 	}
 
 	public void login(String url, String username, String password);
@@ -149,6 +154,8 @@ public interface KieServerClientService {
 	public List<ProcessInstance> allProcessInstances(String containerId, int max);
 	
 	public List<TaskSummary> allUserTasks(int max);
+
+	
 
 
 }
