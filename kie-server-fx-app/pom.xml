@@ -11,7 +11,7 @@
 		<main.class>org.fxapps.App</main.class>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
-		<kie.api.version>6.4.0.Final</kie.api.version>
+		<kie.api.version>6.5.0.Final</kie.api.version>
 	</properties>
 	<dependencies>
 		<dependency>
