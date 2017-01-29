@@ -29,9 +29,16 @@ public class ProcessTasksChartsController implements Initializable {
 	@FXML
 	BarChart<String, Integer> chartPiByStatus;
 	@FXML
-	BarChart<String, Integer> chartPiByDate;
+	BarChart<String, Integer> chartPiByDate;	
 	@FXML
-	BarChart<String, Integer> chartTasksByStatus;
+	BarChart<String, Integer> chartPiByDefinition;
+	
+	@FXML
+	BarChart<String, Integer> chartTasksByStatus;	
+	@FXML
+	BarChart<String, Integer> chartTasksByDate;
+	@FXML
+	BarChart<String, Integer> chartTasksByProcessDef;
 	
 	private KieServerClientService service;
 	private String containerId;
@@ -60,7 +67,10 @@ public class ProcessTasksChartsController implements Initializable {
 		
 		Series<String, Integer>  piByStatusSeries = new Series<>();
 		Series<String, Integer>  piByDateSeries = new Series<>();
+		Series<String, Integer>  piByDefSeries = new Series<>();
 		Series<String, Integer>  taskByStatusSeries = new Series<>();
+		Series<String, Integer>  taskByDateSeries = new Series<>();
+		Series<String, Integer> taskByProcessDefSeries = new Series<>();
 
 		allProcessInstances.stream()
 			.collect(Collectors.groupingBy(ProcessInstance::getState))
@@ -72,14 +82,33 @@ public class ProcessTasksChartsController implements Initializable {
 		 	.forEach((k, v) -> piByDateSeries.getData().add(new Data<>(k, v.size()))
 		 );
 		
+		allProcessInstances.stream()
+	 		.collect(Collectors.groupingBy(ProcessInstance::getProcessId))
+	 		.forEach((k, v) -> piByDefSeries.getData().add(new Data<>(k, v.size()))
+	 	);
+		
+		
 		allUserTasks.stream()
 			.collect(Collectors.groupingBy(TaskSummary::getStatus))
 			.forEach((k, v) -> taskByStatusSeries.getData().add(new Data<>(k, v.size()))
 		 );
 		
+		allUserTasks.stream()
+			.collect(Collectors.groupingBy(t -> dateFormat.format(t.getCreatedOn())))
+			.forEach((k, v) -> taskByDateSeries.getData().add(new Data<>(k, v.size()))
+		);		
+		
+		allUserTasks.stream()
+		.collect(Collectors.groupingBy(TaskSummary::getProcessId))
+		.forEach((k, v) -> taskByProcessDefSeries.getData().add(new Data<>(k, v.size()))
+	);	
+		
 		chartPiByStatus.getData().add(piByStatusSeries);
 		chartPiByDate.getData().add(piByDateSeries);
+		chartPiByDefinition.getData().add(piByDefSeries);
 		chartTasksByStatus.getData().add(taskByStatusSeries);
+		chartTasksByDate.getData().add(taskByDateSeries);
+		chartTasksByProcessDef.getData().add(taskByProcessDefSeries);
 		
 	}
 
