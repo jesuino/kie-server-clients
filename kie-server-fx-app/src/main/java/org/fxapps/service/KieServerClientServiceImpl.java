@@ -92,6 +92,7 @@ class KieServerClientServiceImpl implements KieServerClientService {
 				});
 		client = KieServicesFactory.newKieServicesClient(configuration);
 		kieServerInfo = client.getServerInfo().getResult();
+		
 		for (String capability : kieServerInfo.getCapabilities()) {
 			System.out.println(capability);
 			if ("BPM".equals(capability)) {

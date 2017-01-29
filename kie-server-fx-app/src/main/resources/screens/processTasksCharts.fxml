@@ -28,7 +28,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <BarChart title="Process Instances by Creation Date">
+                  <BarChart fx:id="chartPiByDate" title="Process Instances by Creation Date">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>

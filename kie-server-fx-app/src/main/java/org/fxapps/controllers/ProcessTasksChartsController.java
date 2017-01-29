@@ -1,6 +1,7 @@
 package org.fxapps.controllers;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -25,12 +26,17 @@ public class ProcessTasksChartsController implements Initializable {
 	// TODO: add parameters to filter the number of process etc
 	
 	@FXML
-	BarChart<String, Long> chartPiByStatus;
+	BarChart<String, Integer> chartPiByStatus;
+	@FXML
+	BarChart<String, Integer> chartPiByDate;
 	
 	private KieServerClientService service;
 	private String containerId;
 
 	private List<ProcessInstance> allProcessInstances;
+	
+	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyy hh:mm a");
+	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -43,17 +49,22 @@ public class ProcessTasksChartsController implements Initializable {
 		
 		// TODO: do async
 		allProcessInstances = service.allProcessInstances(containerId, 100);
-		List<Integer> states = allProcessInstances.stream().map(pi -> pi.getState()).collect(Collectors.toList());
-		Series<String, Long>  piByStatusSeries = new Series<>();
+		Series<String, Integer>  piByStatusSeries = new Series<>();
+		Series<String, Integer>  piByDateSeries = new Series<>();
+
+		allProcessInstances.stream()
+			.collect(Collectors.groupingBy(ProcessInstance::getState))
+			.forEach((k, v) -> piByStatusSeries.getData().add(new Data<String, Integer>(AppUtils.getStatusName(k), v.size()))
+		);
 		
-		System.out.println(allProcessInstances.size());
-		for (Integer state : states) {
-			long total = allProcessInstances.stream().filter(pi -> pi.getState() == state).count();
-			String stateStr = AppUtils.getStatusName(state);
-			piByStatusSeries.getData().add(new Data<>(stateStr, total));
-		}
+		allProcessInstances.stream()
+		 	.collect(Collectors.groupingBy(pi -> dateFormat.format(pi.getDate())))
+		 	.forEach((k, v) -> piByDateSeries.getData().add(new Data<String, Integer>(k, v.size()))
+		 );
 		
 		chartPiByStatus.getData().add(piByStatusSeries);
+		chartPiByDate.getData().add(piByDateSeries);
+		
 	}
 
 	public void goBack() {
