@@ -3,6 +3,7 @@ package org.fxapps.controllers;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -67,53 +68,71 @@ public class ProcessTasksChartsController implements Initializable {
 		containerId = ((KieContainerResource)Navigation.get().data().get(Param.CONTAINER)).getContainerId();
 		
 		// TODO: do async
-		allProcessInstances = service.allProcessInstances(containerId, 100);
-		List<TaskSummary> allUserTasks = service.allUserTasks(100);
+		allProcessInstances = service.allProcessInstances(containerId, 1000);
+		List<TaskSummary> allUserTasks = service.allUserTasks(1000);
 		
-		Series<String, Integer>  piByStatusSeries = new Series<>();
-		Series<String, Integer>  piByDateSeries = new Series<>();
-		Series<String, Integer>  piByDefSeries = new Series<>();
-		Series<String, Integer>  taskByStatusSeries = new Series<>();
-		Series<String, Integer>  taskByDateSeries = new Series<>();
-		Series<String, Integer> taskByProcessDefSeries = new Series<>();
-
-		allProcessInstances.stream()
-			.collect(Collectors.groupingBy(ProcessInstance::getState))
-			.forEach((k, v) -> piByStatusSeries.getData().add(new Data<>(AppUtils.getStatusName(k), v.size()))
-		);
+//		Series<String, Integer>  taskByStatusSeries = new Series<>();
+//		Series<String, Integer>  taskByDateSeries = new Series<>();
+//		Series<String, Integer> taskByProcessDefSeries = new Series<>();
 		
-		allProcessInstances.stream()
-		 	.collect(Collectors.groupingBy(pi -> dateFormat.format(pi.getDate())))
-		 	.forEach((k, v) -> piByDateSeries.getData().add(new Data<>(k, v.size()))
-		 );
+		Map<String, List<ProcessInstance>> piGroupedByDef = allProcessInstances.stream()
+					.collect(Collectors.groupingBy(ProcessInstance::getProcessId));
 		
-		allProcessInstances.stream()
-	 		.collect(Collectors.groupingBy(ProcessInstance::getProcessId))
-	 		.forEach((k, v) -> piByDefSeries.getData().add(new Data<>(k, v.size()))
-	 	);
+		Map<String, List<TaskSummary>> tasksGroupedByDef = allUserTasks.stream()
+				.collect(Collectors.groupingBy(TaskSummary::getProcessId));
 		
+		piGroupedByDef.forEach((def, list) -> {
+			Series<String, Integer>  piByStatusSeries = new Series<>();
+			Series<String, Integer>  piByDateSeries = new Series<>();
+			Series<String, Integer>  piByDefSeries = new Series<>();
+			piByStatusSeries.setName(def);
+			piByDateSeries.setName(def);
+			piByDefSeries.setName(def);
+			list.stream()
+			 	.collect(Collectors.groupingBy(pi -> dateFormat.format(pi.getDate())))
+			 	.forEach((k, v) -> piByDateSeries.getData().add(new Data<>(k, v.size()))
+			 );
+			list.stream()
+				.collect(Collectors.groupingBy(ProcessInstance::getState))
+				.forEach((k, v) -> piByStatusSeries.getData().add(new Data<>(AppUtils.getStatusName(k), v.size()))
+			);
+			list.stream()
+				.collect(Collectors.groupingBy(ProcessInstance::getProcessId))
+				.forEach((k, v) -> piByDefSeries.getData().add(new Data<>(k, v.size()))
+			);
+			
+			chartPiByStatus.getData().add(piByStatusSeries);
+			chartPiByDate.getData().add(piByDateSeries);
+			chartPiByDefinition.getData().add(piByDefSeries);
+		});
 		
-		allUserTasks.stream()
-			.collect(Collectors.groupingBy(TaskSummary::getStatus))
-			.forEach((k, v) -> taskByStatusSeries.getData().add(new Data<>(k, v.size()))
-		 );
+		tasksGroupedByDef.forEach((def, list) -> {
+			Series<String, Integer>  taskByStatusSeries = new Series<>();
+			Series<String, Integer>  taskByDateSeries = new Series<>();
+			Series<String, Integer> taskByProcessDefSeries = new Series<>();
+			taskByStatusSeries.setName(def);
+			taskByDateSeries.setName(def);
+			taskByProcessDefSeries.setName(def);
+			list.stream()
+				.collect(Collectors.groupingBy(TaskSummary::getStatus))
+				.forEach((k, v) -> taskByStatusSeries.getData().add(new Data<>(k, v.size()))
+			);
 		
-		allUserTasks.stream()
-			.collect(Collectors.groupingBy(t -> dateFormat.format(t.getCreatedOn())))
-			.forEach((k, v) -> taskByDateSeries.getData().add(new Data<>(k, v.size()))
-		);		
+			list.stream()
+				.collect(Collectors.groupingBy(t -> dateFormat.format(t.getCreatedOn())))
+				.forEach((k, v) -> taskByDateSeries.getData().add(new Data<>(k, v.size()))
+			);		
 		
-		allUserTasks.stream()
-		.collect(Collectors.groupingBy(TaskSummary::getProcessId))
-		.forEach((k, v) -> taskByProcessDefSeries.getData().add(new Data<>(k, v.size()))
-	);	
-		
-		chartPiByStatus.getData().add(piByStatusSeries);
-		chartPiByDate.getData().add(piByDateSeries);
-		chartPiByDefinition.getData().add(piByDefSeries);
-		chartTasksByStatus.getData().add(taskByStatusSeries);
-		chartTasksByDate.getData().add(taskByDateSeries);
-		chartTasksByProcessDef.getData().add(taskByProcessDefSeries);
+			list.stream()
+				.collect(Collectors.groupingBy(TaskSummary::getProcessId))
+				.forEach((k, v) -> taskByProcessDefSeries.getData().add(new Data<>(k, v.size()))
+			);	
+			
+			chartTasksByStatus.getData().add(taskByStatusSeries);
+			chartTasksByDate.getData().add(taskByDateSeries);
+			chartTasksByProcessDef.getData().add(taskByProcessDefSeries);
+			
+		});
 		
 	}
 
@@ -138,7 +157,6 @@ public class ProcessTasksChartsController implements Initializable {
 		case "tasksByCreationDate":
 			chartTasksByDate.setVisible(true);
 			break;
-
 		case "tasksByStatus":
 			chartTasksByStatus.setVisible(true);
 			break;

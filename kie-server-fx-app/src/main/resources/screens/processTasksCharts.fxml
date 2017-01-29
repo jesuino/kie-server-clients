@@ -18,12 +18,12 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.controllers.ProcessTasksChartsController">
    <children>
-      <VBox layoutY="-3.0" prefHeight="600.0" prefWidth="800.0" spacing="20.0">
+      <VBox layoutY="-3.0" prefHeight="600.0" prefWidth="800.0" spacing="10.0">
          <children>
             <Label prefHeight="41.0" prefWidth="800.0" styleClass="titleLabel" text="Process Instances and User tasks" />
-            <StackPane fx:id="spCharts" prefHeight="478.0" prefWidth="800.0">
+            <StackPane fx:id="spCharts" prefHeight="524.0" prefWidth="800.0">
                <children>
-                  <BarChart fx:id="chartPiByDate" barGap="2.0" categoryGap="5.0" legendVisible="false" title="Process Instances by Creation Date" titleSide="BOTTOM" visible="false">
+                  <BarChart fx:id="chartPiByDate" barGap="2.0" categoryGap="5.0" title="Process Instances by Creation Date" titleSide="BOTTOM" visible="false">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
@@ -31,7 +31,7 @@
                       <NumberAxis side="LEFT" />
                     </yAxis>
                   </BarChart>
-                  <BarChart fx:id="chartPiByStatus" legendVisible="false" title="Process Instances by Status" titleSide="BOTTOM" visible="false">
+                  <BarChart fx:id="chartPiByStatus" title="Process Instances by Status" titleSide="BOTTOM" visible="false">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
@@ -47,7 +47,7 @@
                       <NumberAxis side="LEFT" />
                     </yAxis>
                   </BarChart>
-                  <BarChart fx:id="chartTasksByStatus" legendVisible="false" title="User Tasks by Status" titleSide="BOTTOM" visible="false">
+                  <BarChart fx:id="chartTasksByStatus" title="User Tasks by Status" titleSide="BOTTOM" visible="false">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
@@ -55,7 +55,7 @@
                       <NumberAxis side="LEFT" />
                     </yAxis>
                   </BarChart>
-                  <BarChart fx:id="chartTasksByProcessDef" legendVisible="false" title="Tasks by Process Definition" titleSide="BOTTOM" visible="false">
+                  <BarChart fx:id="chartTasksByProcessDef" title="Tasks by Process Definition" titleSide="BOTTOM" visible="false">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
@@ -63,7 +63,7 @@
                       <NumberAxis side="LEFT" />
                     </yAxis>
                   </BarChart>
-                  <BarChart fx:id="chartPiByDefinition" legendVisible="false" title="Process Instance by Definition" titleSide="BOTTOM" visible="false">
+                  <BarChart fx:id="chartPiByDefinition" title="Process Instance by Definition" titleSide="BOTTOM" visible="false">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
@@ -81,7 +81,7 @@
                         <String fx:value="defaultButton" />
                      </styleClass>
                   </Button>
-                  <MenuButton mnemonicParsing="false" prefHeight="32.0" prefWidth="152.0" text="Select Chart">
+                  <MenuButton mnemonicParsing="false" prefHeight="27.0" prefWidth="176.0" text="Select Chart">
                     <items>
                         <RadioMenuItem id="piByCreationDate" mnemonicParsing="false" onAction="#selectChart" text="Process Instances by Creation Date">
                            <toggleGroup>
@@ -96,7 +96,7 @@
                         <RadioMenuItem id="tasksByProcessDef" mnemonicParsing="false" onAction="#selectChart" text="User Tasks by Process Definition" toggleGroup="$chartSelect" />
                     </items>
                      <HBox.margin>
-                        <Insets left="610.0" />
+                        <Insets left="560.0" />
                      </HBox.margin>
                   </MenuButton>
                </children>
