@@ -28,7 +28,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <BarChart fx:id="chartPiByDate" title="Process Instances by Creation Date">
+                  <BarChart fx:id="chartPiByDate" barGap="2.0" categoryGap="5.0" legendVisible="false" title="Process Instances by Creation Date" titleSide="BOTTOM">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
@@ -36,7 +36,7 @@
                       <NumberAxis side="LEFT" />
                     </yAxis>
                   </BarChart>
-                  <BarChart fx:id="chartPiByStatus" title="Process Instances by Status" GridPane.columnIndex="1">
+                  <BarChart fx:id="chartPiByStatus" legendVisible="false" title="Process Instances by Status" titleSide="BOTTOM" GridPane.columnIndex="1">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
@@ -44,7 +44,7 @@
                       <NumberAxis side="LEFT" />
                     </yAxis>
                   </BarChart>
-                  <BarChart title="User Tasks by Status" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <BarChart fx:id="chartTasksByStatus" legendVisible="false" title="User Tasks by Status" titleSide="BOTTOM" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
@@ -52,7 +52,7 @@
                       <NumberAxis side="LEFT" />
                     </yAxis>
                   </BarChart>
-                  <BarChart prefWidth="399.0" title="User Tasks Completed by Date" GridPane.rowIndex="1">
+                  <BarChart prefWidth="399.0" title="User Tasks Completed by Date" titleSide="BOTTOM" GridPane.rowIndex="1">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
