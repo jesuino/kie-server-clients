@@ -41,9 +41,15 @@ public class ProcessTasksChartsController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		service = KieServerClientManager.getInstance();
+		configure();
 		loadData();
 	}
 	
+	private void configure() {
+		chartPiByStatus.setLegendVisible(false);
+		chartPiByDate.setLegendVisible(false);
+	}
+
 	private void loadData() {
 		containerId = ((KieContainerResource)Navigation.get().data().get(Param.CONTAINER)).getContainerId();
 		
