@@ -129,7 +129,7 @@ public class ProcessDefinitionDetailsController implements Initializable {
 				} , AppUtils::showExceptionDialog);
 		AppUtils.doAsyncWork(() -> service.getUserTaskDefinitions(container.getContainerId(), definition.getId()),
 				t -> {
-					if(t != null) tblUserTasks.getItems().setAll(t.getTasks());
+					if(t != null && t.getTasks() != null) tblUserTasks.getItems().setAll(t.getTasks());
 					else  tblUserTasks.getItems().clear();
 				} , AppUtils::showExceptionDialog);
 	}
