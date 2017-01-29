@@ -15,11 +15,14 @@ import org.kie.server.api.model.KieContainerResource;
 import org.kie.server.api.model.instance.ProcessInstance;
 import org.kie.server.api.model.instance.TaskSummary;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
+import javafx.scene.control.RadioMenuItem;
+import javafx.scene.layout.StackPane;
 
 public class ProcessTasksChartsController implements Initializable {
 	
@@ -32,13 +35,15 @@ public class ProcessTasksChartsController implements Initializable {
 	BarChart<String, Integer> chartPiByDate;	
 	@FXML
 	BarChart<String, Integer> chartPiByDefinition;
-	
 	@FXML
 	BarChart<String, Integer> chartTasksByStatus;	
 	@FXML
 	BarChart<String, Integer> chartTasksByDate;
 	@FXML
 	BarChart<String, Integer> chartTasksByProcessDef;
+	
+	@FXML
+	StackPane spCharts;
 	
 	private KieServerClientService service;
 	private String containerId;
@@ -114,6 +119,35 @@ public class ProcessTasksChartsController implements Initializable {
 
 	public void goBack() {
 		Navigation.get().goToPreviousScreen();
+	}
+	
+	@FXML
+	public void selectChart(ActionEvent e) {
+		String id = ((RadioMenuItem)e.getSource()).getId();
+		spCharts.getChildren().forEach(n -> n.setVisible(false));
+		switch (id) {
+		case "piByCreationDate":
+			chartPiByDate.setVisible(true);
+			break;
+		case "piByStatus":
+			chartPiByStatus.setVisible(true);
+			break;
+		case "piByDefinition":
+			chartPiByDefinition.setVisible(true);
+			break;
+		case "tasksByCreationDate":
+			chartTasksByDate.setVisible(true);
+			break;
+
+		case "tasksByStatus":
+			chartTasksByStatus.setVisible(true);
+			break;
+		case "tasksByProcessDef":
+			chartTasksByProcessDef.setVisible(true);
+			break;
+		default:
+			break;
+		}
 	}
 
 
