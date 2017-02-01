@@ -4,6 +4,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -16,15 +17,19 @@ import org.kie.server.api.model.KieContainerResource;
 import org.kie.server.api.model.instance.ProcessInstance;
 import org.kie.server.api.model.instance.TaskSummary;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.SequentialTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.Chart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
 
 public class ProcessTasksChartsController implements Initializable {
 	
@@ -131,9 +136,8 @@ public class ProcessTasksChartsController implements Initializable {
 		});
 		boolean hasVisibleChart = spCharts.getChildren().stream().filter(Node::isVisible).findFirst().isPresent();
 		if(!hasVisibleChart) {
-			chartPiByDate.setVisible(true);
+			animateChart(chartPiByDate);
 		}
-		
 	}
 
 	public void goBack() {
@@ -143,28 +147,47 @@ public class ProcessTasksChartsController implements Initializable {
 	@FXML
 	public void selectChart(ActionEvent e) {
 		String id = ((RadioMenuItem)e.getSource()).getId();
-		spCharts.getChildren().forEach(n -> n.setVisible(false));
 		switch (id) {
 		case "piByCreationDate":
-			chartPiByDate.setVisible(true);
+			animateChart(chartPiByDate);
 			break;
 		case "piByStatus":
-			chartPiByStatus.setVisible(true);
+			animateChart(chartPiByStatus);
 			break;
 		case "piByDefinition":
-			chartPiByDefinition.setVisible(true);
+			animateChart(chartPiByDefinition);
 			break;
 		case "tasksByCreationDate":
-			chartTasksByDate.setVisible(true);
+			animateChart(chartTasksByDate);
 			break;
 		case "tasksByStatus":
-			chartTasksByStatus.setVisible(true);
+			animateChart(chartTasksByStatus);
 			break;
 		case "tasksByProcessDef":
-			chartTasksByProcessDef.setVisible(true);
+			animateChart(chartTasksByProcessDef);
 			break;
 		default:
 			break;
 		}
+	}
+	
+	private void animateChart(Chart chart) {
+		Optional<Node> selectedChart = spCharts.getChildren().stream().filter(Node::isVisible).findFirst();
+		SequentialTransition transitions = new SequentialTransition();
+		FadeTransition show = new FadeTransition(Duration.millis(400), chart);
+		chart.setVisible(true);
+		chart.setOpacity(0);
+		show.setFromValue(0);
+		show.setToValue(1);
+		show.setOnFinished(e -> spCharts.getChildren().stream().filter(c -> c != chart).forEach(c -> c.setVisible(false)));
+		if(selectedChart.isPresent() && selectedChart.get() != chart) {
+			FadeTransition hide = new FadeTransition(Duration.millis(400));
+			hide.setNode(selectedChart.get());
+			hide.setFromValue(1);
+			hide.setToValue(0);
+			transitions.getChildren().add(hide);
+		}		
+		transitions.getChildren().add(show);
+		transitions.play();
 	}
 }
