@@ -19,6 +19,7 @@ import org.kie.server.api.model.instance.TaskSummary;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
@@ -128,7 +129,10 @@ public class ProcessTasksChartsController implements Initializable {
 			chartPiByDate.getData().add(piByDateSeries);
 			chartPiByDefinition.getData().add(piByDefSeries);
 		});
-		
+		boolean hasVisibleChart = spCharts.getChildren().stream().filter(Node::isVisible).findFirst().isPresent();
+		if(!hasVisibleChart) {
+			chartPiByDate.setVisible(true);
+		}
 		
 	}
 
@@ -163,5 +167,4 @@ public class ProcessTasksChartsController implements Initializable {
 			break;
 		}
 	}
-
 }
