@@ -45,7 +45,7 @@ class KieServerClientServiceImpl implements KieServerClientService {
 
 	// TODO: Add UIServiceClient methods once it is available
 
-	private static final MarshallingFormat FORMAT = MarshallingFormat.JAXB;
+	private static final MarshallingFormat FORMAT;
 	
 	List<Integer> PROCESS_INSTANCE_STATUS = Arrays.asList(
 			WorkflowProcessInstance.STATE_ABORTED,
@@ -71,6 +71,10 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	private UIServicesClient uiClient;
 	private String usr;
 
+	static {
+		String formatType = System.getProperty("kieserverfx.formatType", "json");
+		FORMAT = MarshallingFormat.fromType(formatType);
+	}
 
 	/**
 	 * The default constructor has default access
