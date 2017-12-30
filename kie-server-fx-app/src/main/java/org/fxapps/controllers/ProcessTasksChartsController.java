@@ -55,7 +55,6 @@ public class ProcessTasksChartsController implements Initializable {
 	private KieServerClientService service;
 	private String containerId;
 
-	
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyy\nhh:mm a");
 	
 
