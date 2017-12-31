@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.controllers.ExecutionResultController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.kieserverclient.controllers.ExecutionResultController">
   <children>
     <VBox id="VBox" alignment="CENTER" layoutY="1.0" prefHeight="559.0" prefWidth="800.0" spacing="10.0">
       <children>
@@ -43,6 +43,6 @@
   <Button alignment="CENTER" layoutX="5.0" layoutY="557.0" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="35.0" styleClass="defaultButton, danger" text="←" />
   </children>
   <stylesheets>
-    <URL value="@../style/main.css" />
+    <URL value="@/style/main.css" />
   </stylesheets>
 </AnchorPane>

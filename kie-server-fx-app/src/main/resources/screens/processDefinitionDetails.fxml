@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.controllers.ProcessDefinitionDetailsController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.kieserverclient.controllers.ProcessDefinitionDetailsController">
   <children>
     <VBox id="VBox" alignment="CENTER" layoutY="0.0" prefHeight="600.0" prefWidth="800.0" spacing="15.0">
       <children>
@@ -100,6 +100,6 @@
     </VBox>
   </children>
   <stylesheets>
-    <URL value="@../style/main.css" />
+    <URL value="@/style/main.css" />
   </stylesheets>
 </AnchorPane>

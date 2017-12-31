@@ -9,13 +9,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.controllers.TaskParamsController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.kieserverclient.controllers.TaskParamsController">
   <children>
     <VBox id="VBox" alignment="CENTER" layoutX="0.0" layoutY="0.0" prefHeight="567.0" prefWidth="800.0" spacing="10.0">
       <children>
         <Label id="lblTilte" fx:id="lblTitle" prefWidth="600.0" styleClass="titleLabel" text="task name">
           <stylesheets>
-            <URL value="@../style/main.css" />
+            <URL value="@/style/main.css" />
           </stylesheets>
         </Label>
         <HBox id="HBox" alignment="CENTER" minWidth="-Infinity" prefHeight="472.0" prefWidth="800.0" spacing="15.0">
@@ -39,6 +39,6 @@
   <Button layoutX="8.0" layoutY="550.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goBack" prefHeight="40.0" prefWidth="120.0" styleClass="defaultButton, danger" text="←" />
   </children>
   <stylesheets>
-    <URL value="@../style/main.css" />
+    <URL value="@/style/main.css" />
   </stylesheets>
 </AnchorPane>

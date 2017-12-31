@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.controllers.DetailsController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.kieserverclient.controllers.DetailsController">
   <children>
     <VBox id="VBox" alignment="CENTER" layoutX="0.0" layoutY="0.0" prefHeight="600.0" prefWidth="800.0" spacing="5.0" />
       <GridPane alignment="CENTER" hgap="10.0" prefHeight="594.0" prefWidth="800.0">
@@ -51,6 +51,6 @@
       </GridPane>
   </children>
   <stylesheets>
-    <URL value="@../style/main.css" />
+    <URL value="@/style/main.css" />
   </stylesheets>
 </AnchorPane>

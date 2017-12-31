@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.controllers.ProcessInstancesController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.kieserverclient.controllers.ProcessInstancesController">
   <children>
     <VBox id="VBox" alignment="CENTER" layoutX="0.0" layoutY="0.0" prefHeight="600.0" prefWidth="800.0" spacing="20.0">
       <children>
@@ -48,6 +48,6 @@
     </VBox>
   </children>
   <stylesheets>
-    <URL value="@../style/main.css" />
+    <URL value="@/style/main.css" />
   </stylesheets>
 </AnchorPane>
