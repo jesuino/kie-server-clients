@@ -10,15 +10,18 @@ import javax.inject.Inject;
 
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
 
 @ApplicationScoped
 public class Navigation {
-	
-	@Inject FXMLLoader fxmlLoader;
-	
+
+	@Inject
+	FXMLLoader fxmlLoader;
+
 	private static final int DEFAULT_H = 600;
 
 	private static final int DEFAULT_W = 800;
@@ -34,6 +37,7 @@ public class Navigation {
 
 	private Screen previousScreen;
 	private Screen currentScreen;
+	private Screen home;
 
 	private Scene scene;
 
@@ -41,11 +45,13 @@ public class Navigation {
 	public void construct() {
 		Parent root;
 		try {
-			root = fxmlLoader.load(Screen.LOGIN.getURL().openStream());
+			root = fxmlLoader.load(Screen.TEMPLATE.getURL().openStream());
 			this.scene = new Scene(root, DEFAULT_W, DEFAULT_H);
-			// we start at login screen
-			currentScreen = Screen.LOGIN;
 			this.data = new HashMap<>();
+			// we start at login screen
+			goTo(Screen.LOGIN);
+			// home screen is the containers
+			this.home = Screen.CONTAINERS;
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.exit(0);
@@ -55,20 +61,20 @@ public class Navigation {
 	public void goTo(Screen screen) {
 		previousScreen = currentScreen;
 		currentScreen = screen;
-		Parent current = scene.getRoot();
+		BorderPane root = (BorderPane) scene.getRoot();
+		Node current = root.getCenter();
 		FadeTransition hideCurrent = new FadeTransition();
 		hideCurrent.setDuration(Duration.millis(TRANSITION_DURATION));
 		hideCurrent.setNode(current);
 		hideCurrent.setFromValue(1);
 		hideCurrent.setToValue(0);
-		hideCurrent.play();
 		hideCurrent.setOnFinished(e -> {
 			try {
 				fxmlLoader.setRoot(null);
 				fxmlLoader.setController(null);
 				Parent newScreen = fxmlLoader.load(screen.getURL().openStream());
 				newScreen.setOpacity(0);
-				scene.setRoot(newScreen);
+				root.setCenter(newScreen);
 				FadeTransition showNew = new FadeTransition();
 				showNew.setDuration(Duration.millis(TRANSITION_DURATION));
 				showNew.setNode(newScreen);
@@ -80,13 +86,22 @@ public class Navigation {
 				throw new Error(e1.getMessage());
 			}
 		});
-
+		hideCurrent.play();
+		if (screen == Screen.LOGIN) {
+			root.getTop().setVisible(false);
+		} else {
+			root.getTop().setVisible(true);
+		}
+	}
+	
+	public void goHome() {
+		goTo(home);
 	}
 
 	public void blockScreen() {
 		scene.getRoot().setDisable(true);
 	}
-	
+
 	public void unblockScreen() {
 		scene.getRoot().setDisable(false);
 	}
