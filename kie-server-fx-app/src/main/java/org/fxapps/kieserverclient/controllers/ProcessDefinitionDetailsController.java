@@ -108,10 +108,6 @@ public class ProcessDefinitionDetailsController implements Initializable {
 		clTaskSkippable.setCellValueFactory(new PropertyValueFactory<>("skippable"));
 	}
 
-	public void goBack() {
-		navigation.goTo(Screen.PROCESSES_DEFINITIONS);
-	}
-
 	public void viewTaskParameters() {
 		UserTaskDefinition def = tblUserTasks.getSelectionModel().getSelectedItem();
 		Navigation n = navigation;

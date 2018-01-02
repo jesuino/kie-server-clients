@@ -3,7 +3,6 @@
 <?import java.lang.String?>
 <?import java.net.URL?>
 <?import javafx.collections.FXCollections?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -14,10 +13,10 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.kieserverclient.controllers.DetailsController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.kieserverclient.controllers.DetailsController">
   <children>
-    <VBox id="VBox" alignment="CENTER" layoutX="0.0" layoutY="0.0" prefHeight="600.0" prefWidth="800.0" spacing="5.0" />
-      <GridPane alignment="CENTER" hgap="10.0" prefHeight="594.0" prefWidth="800.0">
+    <VBox id="VBox" alignment="CENTER" layoutX="0.0" layoutY="0.0" prefHeight="550.0" prefWidth="800.0" spacing="5.0" />
+      <GridPane alignment="CENTER" hgap="10.0" prefHeight="550.0" prefWidth="800.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="154.0" />
           <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="657.0" minWidth="10.0" prefWidth="519.0" />
@@ -26,11 +25,11 @@
         </columnConstraints>
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="466.0" minHeight="10.0" prefHeight="466.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="194.0" minHeight="10.0" prefHeight="16.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="466.0" minHeight="10.0" prefHeight="466.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-      <ComboBox fx:id="cmbFormat" prefHeight="30.0" prefWidth="256.0" promptText="Select Format" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+      <ComboBox fx:id="cmbFormat" prefHeight="30.0" prefWidth="256.0" promptText="Select Format" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
         <items>
           <FXCollections fx:factory="observableArrayList">
             <String fx:value="Item 1" />
@@ -39,14 +38,9 @@
           </FXCollections>
         </items>
       </ComboBox>
-      <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#selectText" prefHeight="31.0" prefWidth="110.0" styleClass="defaultButton, plus" text="Select Text" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-      <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#goBack" prefHeight="31.0" prefWidth="39.0" styleClass="defaultButton, danger" text="←" GridPane.rowIndex="2">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
-      </Button>
+      <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#selectText" prefHeight="31.0" prefWidth="110.0" styleClass="defaultButton, plus" text="Select Text" GridPane.columnIndex="2" GridPane.rowIndex="1" />
         <Label fx:id="lblTitle" prefHeight="25.0" prefWidth="818.0" styleClass="titleLabel" text="Object Details" GridPane.columnSpan="4" />
-        <TextArea id="txtDetail" fx:id="txtDetails" editable="false" prefHeight="257.0" prefWidth="800.0" wrapText="true" GridPane.columnSpan="4" GridPane.rowIndex="1" />
+        <TextArea id="txtDetail" fx:id="txtDetails" editable="false" prefHeight="257.0" prefWidth="800.0" wrapText="true" GridPane.columnSpan="4" GridPane.rowIndex="2" />
          </children>
       </GridPane>
   </children>

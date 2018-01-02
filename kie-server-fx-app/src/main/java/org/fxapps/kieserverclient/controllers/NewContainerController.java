@@ -51,10 +51,6 @@ public class NewContainerController implements Initializable {
 
 	}
 	
-	public void goBack() {
-		navigation.goToPreviousScreen();
-	}
-
 	public void addContainer() {
 		String id = txtContainerId.getText();
 		String artifactId = txtArtifactId.getText();
@@ -68,7 +64,6 @@ public class NewContainerController implements Initializable {
 				logger.warning(response.getMsg());
 			} else {
 				AppUtils.showSuccessDialog("Container created with success!");
-				goBack();
 			}
 		} catch (Exception e) {
 			AppUtils.showExceptionDialog(

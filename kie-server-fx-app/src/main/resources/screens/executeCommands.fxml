@@ -16,38 +16,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.kieserverclient.controllers.ExecuteCommandsController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.kieserverclient.controllers.ExecuteCommandsController">
   <children>
-    <VBox id="VBox" alignment="CENTER" layoutX="-4.0" layoutY="0.0" prefHeight="600.0" prefWidth="800.0" spacing="5.0">
+    <VBox id="VBox" alignment="CENTER" layoutX="-4.0" layoutY="0.0" prefHeight="550.0" prefWidth="800.0" spacing="5.0">
       <children>
         <Label id="lblServerInfo" fx:id="lblContainerId" alignment="CENTER" contentDisplay="LEFT" prefHeight="47.0" prefWidth="797.0" styleClass="titleLabel" text="kie-server-testing" textAlignment="CENTER" textFill="#0021cc">
           <font>
             <Font name="System Bold" size="25.0" />
           </font>
         </Label>
-        <HBox id="HBox" alignment="CENTER" prefHeight="490.0" prefWidth="800.0" spacing="5.0">
+        <HBox id="HBox" alignment="CENTER" prefHeight="75.0" prefWidth="800.0" spacing="3.0">
           <children>
-            <StackPane id="StackPane" minWidth="220.0" prefHeight="506.0" prefWidth="304.0">
-              <children>
-                <ListView fx:id="lstCommands" minWidth="-Infinity" prefHeight="506.0" prefWidth="248.0" />
-                <Label fx:id="lblListEmpty" prefHeight="106.0" prefWidth="248.0" text="List Empty! Add commands to the list using the combo box below" textAlignment="CENTER" wrapText="true">
-                  <font>
-                    <Font name="System Italic" size="20.0" />
-                  </font>
-                </Label>
-              </children>
-            </StackPane>
-            <TextArea fx:id="txtCommand" prefHeight="487.0" prefWidth="513.0" wrapText="true" />
-          </children>
-        </HBox>
-        <HBox id="HBox" alignment="CENTER" prefHeight="35.0" prefWidth="593.0" spacing="3.0">
-          <children>
-            <Button minHeight="-Infinity" minWidth="41.0" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="41.0" styleClass="defaultButton, danger" text="←">
-              <HBox.margin>
-                <Insets />
-              </HBox.margin>
-            </Button>
-                  <Separator orientation="VERTICAL" prefHeight="35.0" prefWidth="26.0" />
             <ComboBox fx:id="cmbCommands" prefWidth="144.0" promptText="Commands">
               <items>
                 <FXCollections fx:factory="observableArrayList">
@@ -57,7 +36,7 @@
                 </FXCollections>
               </items>
               <HBox.margin>
-                <Insets left="6.0" />
+                <Insets />
               </HBox.margin>
             </ComboBox>
             <Button fx:id="btnAdd" defaultButton="true" minHeight="-Infinity" mnemonicParsing="false" onAction="#addCommand" prefHeight="25.0" prefWidth="35.0" styleClass="defaultButton, plus" text="+">
@@ -82,13 +61,28 @@
                         <String fx:value="defaultButton" />
                         <String fx:value="plus" />
                      </styleClass></Button>
-            <Separator orientation="VERTICAL" prefHeight="35.0" prefWidth="242.0" />
+            <Separator orientation="VERTICAL" prefHeight="69.0" prefWidth="331.0" />
             <Button fx:id="btnSave" minHeight="-Infinity" minWidth="70.0" mnemonicParsing="false" onAction="#validateAndSaveCommands" prefHeight="30.0" prefWidth="76.0" styleClass="defaultButton, plus" text="Save" />
             <Button id="btnAdd" fx:id="btnExecute" minHeight="-Infinity" minWidth="70.0" mnemonicParsing="false" onAction="#executeCommands" prefHeight="30.0" prefWidth="76.0" styleClass="defaultButton, plus" text="Execute">
               <HBox.margin>
-                <Insets right="10.0" />
+                <Insets />
               </HBox.margin>
             </Button>
+          </children>
+        </HBox>
+        <HBox id="HBox" alignment="CENTER" prefHeight="448.0" prefWidth="800.0" spacing="5.0">
+          <children>
+            <StackPane id="StackPane" minWidth="220.0" prefHeight="506.0" prefWidth="304.0">
+              <children>
+                <ListView fx:id="lstCommands" minWidth="-Infinity" prefHeight="506.0" prefWidth="248.0" />
+                <Label fx:id="lblListEmpty" prefHeight="106.0" prefWidth="248.0" text="List Empty! Add commands to the list using the combo box below" textAlignment="CENTER" wrapText="true">
+                  <font>
+                    <Font name="System Italic" size="20.0" />
+                  </font>
+                </Label>
+              </children>
+            </StackPane>
+            <TextArea fx:id="txtCommand" prefHeight="487.0" prefWidth="513.0" wrapText="true" />
           </children>
         </HBox>
       </children>

@@ -129,10 +129,6 @@ public class ExecuteCommandsController implements Initializable {
 		previousTextProperty.set(txtCommand.getText());
 	}
 
-	public void goBack() {
-		navigation.goTo(Screen.CONTAINERS);
-	}
-
 	public void executeCommands() {
 		if (validateCommandsString()) {
 			Map<Param, Object> data = navigation.data();

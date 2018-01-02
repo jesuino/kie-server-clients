@@ -68,10 +68,6 @@ public class ProcessesDefinitionsController implements Initializable {
 		clVersion.setCellValueFactory(new PropertyValueFactory("version"));
 	}
 
-	public void goBack() {
-		navigation.goTo(Screen.CONTAINERS);
-	}
-
 	public void openInstancesScreen() {
 		saveSelectedProcess();
 		navigation.goTo(Screen.PROCESS_INSTANCES);

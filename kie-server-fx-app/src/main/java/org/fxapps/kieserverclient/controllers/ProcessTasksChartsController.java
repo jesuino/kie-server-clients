@@ -143,10 +143,6 @@ public class ProcessTasksChartsController implements Initializable {
 		}
 	}
 
-	public void goBack() {
-		navigation.goToPreviousScreen();
-	}
-	
 	@FXML
 	public void selectChart(ActionEvent e) {
 		String id = ((RadioMenuItem)e.getSource()).getId();

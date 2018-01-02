@@ -74,8 +74,4 @@ public class DetailsController implements Initializable {
 		txtDetails.requestFocus();
 	}
 
-	public void goBack() {
-		navigation.goToPreviousScreen();
-	}
-
 }

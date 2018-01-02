@@ -44,7 +44,4 @@ public class ExecutionResultController implements Initializable {
 		txtRequest.setText(req);
 	}
 
-	public void goBack() {
-		navigation.goToPreviousScreen();
-	}
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.kieserverclient.controllers.ImportController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="800.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.kieserverclient.controllers.ImportController">
    <children>
-      <VBox layoutX="1.0" layoutY="1.0" prefHeight="600.0" prefWidth="800.0" spacing="10.0">
+      <VBox layoutX="1.0" layoutY="1.0" prefHeight="555.0" prefWidth="800.0" spacing="10.0">
          <children>
             <Label prefHeight="25.0" prefWidth="680.0" styleClass="titleLabel" text="Import containers" />
             <HBox spacing="25.0">
@@ -38,31 +38,22 @@
                   <Font name="System Bold Italic" size="10.0" />
                </font>
             </Label>
-            <TableView fx:id="tblResponse" prefHeight="440.0" prefWidth="800.0">
-              <columns>
-                <TableColumn fx:id="clType" prefWidth="145.0" text="Response Type" />
-                <TableColumn fx:id="clMessage" minWidth="5.0" prefWidth="494.0" text="Message" />
-              </columns>
-            </TableView>
-            <HBox alignment="CENTER">
+            <Group>
                <children>
-                  <Button mnemonicParsing="false" onAction="#goBack" prefHeight="35.0" prefWidth="40.0" text="←">
-                     <styleClass>
-                        <String fx:value="defaultButton" />
-                        <String fx:value="danger" />
-                     </styleClass>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#details" prefHeight="40.0" text="Details">
-                     <HBox.margin>
-                        <Insets left="680.0" />
-                     </HBox.margin>
+                  <TableView fx:id="tblResponse" prefHeight="440.0" prefWidth="800.0">
+                    <columns>
+                      <TableColumn fx:id="clType" prefWidth="145.0" text="Response Type" />
+                      <TableColumn fx:id="clMessage" minWidth="5.0" prefWidth="494.0" text="Message" />
+                    </columns>
+                  </TableView>
+                  <Button layoutX="727.0" layoutY="395.0" mnemonicParsing="false" onAction="#details" prefHeight="40.0" text="Details">
                      <styleClass>
                         <String fx:value="defaultButton" />
                         <String fx:value="plus" />
                      </styleClass>
                   </Button>
                </children>
-            </HBox>
+            </Group>
          </children>
       </VBox>
    </children>

@@ -90,11 +90,6 @@ public class UserTasksListController implements Initializable {
 		clCreatedOn.setCellValueFactory(new PropertyValueFactory<>("createdOn"));
 	}
 
-	public void back() {
-		Screen previous = (Screen) navigation.data().get(Param.CALLER_SCREEN);
-		navigation.goTo(previous);
-	}
-
 	public void details() {
 		navigation.data().put(Param.DETAILS, tblTaskSummary.getItems());
 		navigation.goTo(Screen.DETAILS);

@@ -52,9 +52,6 @@ public class ContainersController implements Initializable {
 
 	@FXML
 	MenuItem mnJobs;
-	
-	@FXML 
-	MenuItem mnSolvers;
 
 	@FXML
 	MenuItem mnDispose;
@@ -94,10 +91,6 @@ public class ContainersController implements Initializable {
 
 	public void newContainer() {
 		navigation.goTo(Screen.NEW_CONTAINER);
-	}
-
-	public void doLogout() {
-		navigation.goTo(Screen.LOGIN);
 	}
 
 	public void disposeContainer() {
@@ -152,7 +145,7 @@ public class ContainersController implements Initializable {
 		mnProcessTasksCharts.disableProperty().bind(selectedItem);
 		mnProcesses.disableProperty().bind(selectedItem.or(noBPM));
 		mnUserTasks.disableProperty().bind(selectedItem.or(noBPM));
-		mnSolvers.disableProperty().bind(selectedItem.or(noSolver));
+//		mnSolvers.disableProperty().bind(selectedItem.or(noSolver));
 		mnJobs.disableProperty().bind(noBPM);
 		mnCommands.disableProperty().bind(selectedItem.or(noBRM));
 	}

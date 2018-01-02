@@ -32,8 +32,4 @@ public class SolversController implements Initializable {
 		service = KieServerClientManager.getInstance();
 	}
 
-	public void back() {
-		navigation.goTo(Screen.CONTAINERS);
-	}
-
 }

@@ -105,9 +105,6 @@ public class ImportController implements Initializable {
 		}
 	}
 
-	public void goBack() {
-		navigation.goTo(Screen.CONTAINERS);
-	}
 
 	public void selectFile() {
 		FileChooser openFileChooser = new FileChooser();

@@ -80,10 +80,6 @@ public class ProcessInstancesController implements Initializable {
 		fillData();
 	}
 
-	public void goBack() {
-		navigation.goTo(Screen.PROCESSES_DEFINITIONS);
-	}
-
 	public void abort() {
 		String selectedStr = getSelectedAsString();
 		List<Long> ids = getSelectedIds();

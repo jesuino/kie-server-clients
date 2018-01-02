@@ -50,10 +50,6 @@ public class SendSignalController implements Initializable {
 		AppUtils.disableIfNotSelected(cmbSignal.getSelectionModel(), btnSend);
 	}
 
-	public void goBack() {
-		navigation.goToPreviousScreen();
-	}
-
 	public void sendSignal() {
 		String signalName = cmbSignal.getSelectionModel().getSelectedItem();
 		String signalContent = txtContent.getText();
@@ -62,7 +58,6 @@ public class SendSignalController implements Initializable {
 			return null;
 		}, r -> {
 			AppUtils.showSuccessDialog("Processes signal done with success!");
-			goBack();
 		}, AppUtils::showExceptionDialog);
 	}
 

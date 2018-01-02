@@ -28,6 +28,8 @@ public class Navigation {
 
 	private static final int TRANSITION_DURATION = 100;
 
+	private static final String MAIN_CSS = "/style/main.css";
+
 	final Screen INITIAL_SCREEN = Screen.LOGIN;
 
 	/**
@@ -42,11 +44,12 @@ public class Navigation {
 	private Scene scene;
 
 	@PostConstruct
-	public void construct() {
+	private void construct() {
 		Parent root;
 		try {
 			root = fxmlLoader.load(Screen.TEMPLATE.getURL().openStream());
 			this.scene = new Scene(root, DEFAULT_W, DEFAULT_H);
+			this.scene.getStylesheets().add(MAIN_CSS);
 			this.data = new HashMap<>();
 			// we start at login screen
 			goTo(Screen.LOGIN);
@@ -70,9 +73,7 @@ public class Navigation {
 		hideCurrent.setToValue(0);
 		hideCurrent.setOnFinished(e -> {
 			try {
-				fxmlLoader.setRoot(null);
-				fxmlLoader.setController(null);
-				Parent newScreen = fxmlLoader.load(screen.getURL().openStream());
+				Parent newScreen = loadScreen(screen);
 				newScreen.setOpacity(0);
 				root.setCenter(newScreen);
 				FadeTransition showNew = new FadeTransition();
@@ -88,12 +89,12 @@ public class Navigation {
 		});
 		hideCurrent.play();
 		if (screen == Screen.LOGIN) {
-			root.getTop().setVisible(false);
+			root.getBottom().setVisible(false);
 		} else {
-			root.getTop().setVisible(true);
+			root.getBottom().setVisible(true);
 		}
 	}
-	
+
 	public void goHome() {
 		goTo(home);
 	}
@@ -118,4 +119,11 @@ public class Navigation {
 		goTo(previousScreen);
 	}
 
+	private Parent loadScreen(Screen screen) throws IOException {
+		fxmlLoader.setRoot(null);
+		fxmlLoader.setController(null);
+		Parent newScreen = fxmlLoader.load(screen.getURL().openStream());
+		return newScreen;
+	}
+	
 }

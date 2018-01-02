@@ -52,8 +52,4 @@ public class TaskParamsController implements Initializable {
 		lblTitle.setText(t.getName() + " params");
 	}
 
-	public void goBack() {
-		navigation.goToPreviousScreen();
-	}
-
 }
