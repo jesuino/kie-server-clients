@@ -17,6 +17,8 @@ import org.kie.server.api.model.definition.VariablesDefinition;
 import org.kie.server.api.model.instance.JobRequestInstance;
 import org.kie.server.api.model.instance.ProcessInstance;
 import org.kie.server.api.model.instance.RequestInfoInstance;
+import org.kie.server.api.model.instance.SolverInstance;
+import org.kie.server.api.model.instance.SolverInstanceList;
 import org.kie.server.api.model.instance.TaskSummary;
 
 import javafx.beans.property.BooleanProperty;
@@ -34,10 +36,7 @@ public interface KieServerClientService {
 	final BooleanProperty supportsBPM = new SimpleBooleanProperty(false);
 	final BooleanProperty supportsBRM = new SimpleBooleanProperty(false);
 	final BooleanProperty supportsSolvers = new SimpleBooleanProperty(false);
-	
-	enum Type {
-		API;
-	};
+	final BooleanProperty loggedIn = new SimpleBooleanProperty(false);
 	
 	default public BooleanProperty getSupportsBPM() {
 		return supportsBPM;
@@ -50,8 +49,17 @@ public interface KieServerClientService {
 	default public BooleanProperty getSupportsSolver() {
 		return supportsSolvers;	
 	}
+	
+	default public BooleanProperty getLoggedIn() {
+		return loggedIn;
+	}
 
+	default public void logout() {
+		loggedIn.set(false);
+	}
+	
 	public void login(String url, String username, String password);
+	
 
 	public List<KieContainerResource> listContainers();
 
@@ -61,20 +69,6 @@ public interface KieServerClientService {
 
 	public ServiceResponse<KieContainerResource> createContainer(String id, String groupId, String artifactId,
 			String version);
-
-	public default KieServerClientService factory(Type type) {
-		KieServerClientService service;
-		switch (type) {
-		case API:
-			service = new KieServerClientServiceImpl();
-			break;
-
-		default:
-			service = new KieServerClientServiceImpl();
-			break;
-		}
-		return service;
-	}
 
 	public ServiceResponse<ExecutionResults>  executeCommand(String containerId,
 			BatchExecutionCommandImpl batchCmd);

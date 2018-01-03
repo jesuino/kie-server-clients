@@ -9,6 +9,20 @@ import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
+import org.drools.core.command.impl.GenericCommand;
+import org.drools.core.command.runtime.BatchExecutionCommandImpl;
+import org.fxapps.kieserverclient.navigation.Navigation;
+import org.fxapps.kieserverclient.navigation.Param;
+import org.fxapps.kieserverclient.navigation.Screen;
+import org.fxapps.kieserverclient.service.KieServerClientService;
+import org.fxapps.kieserverclient.utils.AppUtils;
+import org.kie.api.KieServices;
+import org.kie.api.command.Command;
+import org.kie.api.command.KieCommands;
+import org.kie.api.runtime.ExecutionResults;
+import org.kie.server.api.model.KieContainerResource;
+import org.kie.server.api.model.ServiceResponse;
+
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.binding.BooleanBinding;
@@ -21,21 +35,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-
-import org.drools.core.command.impl.GenericCommand;
-import org.drools.core.command.runtime.BatchExecutionCommandImpl;
-import org.fxapps.kieserverclient.navigation.Navigation;
-import org.fxapps.kieserverclient.navigation.Param;
-import org.fxapps.kieserverclient.navigation.Screen;
-import org.fxapps.kieserverclient.service.KieServerClientManager;
-import org.fxapps.kieserverclient.service.KieServerClientService;
-import org.fxapps.kieserverclient.utils.AppUtils;
-import org.kie.api.KieServices;
-import org.kie.api.command.Command;
-import org.kie.api.command.KieCommands;
-import org.kie.api.runtime.ExecutionResults;
-import org.kie.server.api.model.KieContainerResource;
-import org.kie.server.api.model.ServiceResponse;
 
 
 /**
@@ -65,6 +64,9 @@ public class ExecuteCommandsController implements Initializable {
 	
 	@Inject
 	Navigation navigation;
+	
+	@Inject
+	KieServerClientService service;
 	
 	@FXML
 	ComboBox<String> cmbCommands;
@@ -109,14 +111,11 @@ public class ExecuteCommandsController implements Initializable {
 
 	private BatchExecutionCommandImpl batchCmd;
 
-	private KieServerClientService service;
-
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		Map<Param, Object> data = navigation.data();
 		container = (KieContainerResource) data.get(Param.CONTAINER);
 		cmdFactory = KieServices.Factory.get().getCommands();
-		service = KieServerClientManager.getInstance();
 		batchCmd = (BatchExecutionCommandImpl) cmdFactory.newBatchExecution(new ArrayList<>());
 		initializeInterface();
 		doBindings();

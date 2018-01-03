@@ -12,7 +12,6 @@ import javax.inject.Inject;
 import org.fxapps.kieserverclient.navigation.Navigation;
 import org.fxapps.kieserverclient.navigation.Param;
 import org.fxapps.kieserverclient.navigation.Screen;
-import org.fxapps.kieserverclient.service.KieServerClientManager;
 import org.fxapps.kieserverclient.service.KieServerClientService;
 import org.fxapps.kieserverclient.utils.AppUtils;
 import org.kie.api.builder.ReleaseId;
@@ -37,6 +36,9 @@ public class ImportController implements Initializable {
 	@Inject
 	Navigation navigation;
 	
+	@Inject
+	KieServerClientService service;
+	
 	@FXML
 	private TextField txtFile;
 	@FXML
@@ -48,7 +50,6 @@ public class ImportController implements Initializable {
 	@FXML
 	private TableColumn<ServiceResponse<?>, String> clMessage;
 
-	private KieServerClientService service;
 	private IntegerProperty containersToProcess;
 
 	@Override
@@ -61,7 +62,6 @@ public class ImportController implements Initializable {
 
 			}
 		});
-		service = KieServerClientManager.getInstance();
 		btnImport.disableProperty().bind(txtFile.textProperty().isEmpty());
 		clType.setCellValueFactory(new PropertyValueFactory<>("type"));
 		clMessage.setCellValueFactory(new PropertyValueFactory<>("msg"));

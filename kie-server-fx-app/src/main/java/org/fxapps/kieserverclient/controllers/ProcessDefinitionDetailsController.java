@@ -6,6 +6,15 @@ import java.util.ResourceBundle;
 
 import javax.inject.Inject;
 
+import org.fxapps.kieserverclient.navigation.Navigation;
+import org.fxapps.kieserverclient.navigation.Param;
+import org.fxapps.kieserverclient.navigation.Screen;
+import org.fxapps.kieserverclient.service.KieServerClientService;
+import org.fxapps.kieserverclient.utils.AppUtils;
+import org.kie.server.api.model.KieContainerResource;
+import org.kie.server.api.model.definition.ProcessDefinition;
+import org.kie.server.api.model.definition.UserTaskDefinition;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -16,20 +25,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.web.WebView;
 import javafx.util.Pair;
 
-import org.fxapps.kieserverclient.navigation.Navigation;
-import org.fxapps.kieserverclient.navigation.Param;
-import org.fxapps.kieserverclient.navigation.Screen;
-import org.fxapps.kieserverclient.service.KieServerClientManager;
-import org.fxapps.kieserverclient.service.KieServerClientService;
-import org.fxapps.kieserverclient.utils.AppUtils;
-import org.kie.server.api.model.KieContainerResource;
-import org.kie.server.api.model.definition.ProcessDefinition;
-import org.kie.server.api.model.definition.UserTaskDefinition;
-
 public class ProcessDefinitionDetailsController implements Initializable {
 	
 	@Inject
 	Navigation navigation;
+	
+	@Inject
+	KieServerClientService service;
 
 	@FXML
 	Label lblTitle;
@@ -71,14 +73,12 @@ public class ProcessDefinitionDetailsController implements Initializable {
 	Label lblSVGNotAvailable;
 
 	private ProcessDefinition definition;
-	private KieServerClientService service;
 	private KieContainerResource container;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		container = (KieContainerResource) navigation.data().get(Param.CONTAINER);
 		definition = (ProcessDefinition) navigation.data().get(Param.PROCESS_DEFINITION);
-		service = KieServerClientManager.getInstance();
 		lblTitle.setText("Process " + definition.getName() + " details");
 		configureColumns();
 		performAsyncCalls();

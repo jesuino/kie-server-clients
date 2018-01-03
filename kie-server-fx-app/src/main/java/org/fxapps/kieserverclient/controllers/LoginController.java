@@ -6,15 +6,15 @@ import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.TextField;
-
 import org.fxapps.kieserverclient.navigation.Navigation;
 import org.fxapps.kieserverclient.navigation.Param;
 import org.fxapps.kieserverclient.navigation.Screen;
-import org.fxapps.kieserverclient.service.KieServerClientManager;
+import org.fxapps.kieserverclient.service.KieServerClientService;
 import org.fxapps.kieserverclient.utils.AppUtils;
+
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.TextField;
 
 public class LoginController implements Initializable {
 
@@ -26,6 +26,9 @@ public class LoginController implements Initializable {
 	
 	@Inject
 	Navigation navigation;
+	
+	@Inject
+	KieServerClientService service;
 	
 	@FXML
 	private TextField txtURL;
@@ -41,7 +44,7 @@ public class LoginController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		KieServerClientManager.logout();
+		service.logout();
 	}
 
 	public void doLogin() {
@@ -64,11 +67,12 @@ public class LoginController implements Initializable {
 			psw = DEFAULT_PASSWORD;
 		}
 		AppUtils.doBlockingAsyncWork(() -> {
-			KieServerClientManager.login(url, usr, psw);
+			service.login(url, usr, psw);
 			return null;
 		} , r -> {
 			navigation.data().put(Param.USER, usr);
 			navigation.data().put(Param.PASSWORD, psw);
+			navigation.data().put(Param.URL, url);
 			navigation.goTo(Screen.CONTAINERS);
 		} , AppUtils::showExceptionDialog);
 	}

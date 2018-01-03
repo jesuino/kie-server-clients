@@ -14,7 +14,6 @@ import javax.inject.Inject;
 import org.fxapps.kieserverclient.navigation.Navigation;
 import org.fxapps.kieserverclient.navigation.Param;
 import org.fxapps.kieserverclient.navigation.Screen;
-import org.fxapps.kieserverclient.service.KieServerClientManager;
 import org.fxapps.kieserverclient.service.KieServerClientService;
 import org.fxapps.kieserverclient.utils.AppUtils;
 import org.kie.server.api.model.KieContainerResource;
@@ -37,6 +36,9 @@ public class ContainersController implements Initializable {
 
 	@Inject
 	Navigation navigation;
+	
+	@Inject
+	KieServerClientService service;
 	
 	@FXML
 	Label lblServerInfo;
@@ -74,14 +76,11 @@ public class ContainersController implements Initializable {
 	@FXML
 	TableColumn<KieContainerResource, String> clStatus;
 
-	private KieServerClientService service;
-
 	/*
 	 * Fill the screen
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		service = KieServerClientManager.getInstance();
 		configureTableColumns();
 		configureBindings();
 		updateData();

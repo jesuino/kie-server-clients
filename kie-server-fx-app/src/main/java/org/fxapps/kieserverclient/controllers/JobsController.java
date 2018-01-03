@@ -8,7 +8,6 @@ import javax.inject.Inject;
 import org.fxapps.kieserverclient.navigation.Navigation;
 import org.fxapps.kieserverclient.navigation.Param;
 import org.fxapps.kieserverclient.navigation.Screen;
-import org.fxapps.kieserverclient.service.KieServerClientManager;
 import org.fxapps.kieserverclient.service.KieServerClientService;
 import org.fxapps.kieserverclient.utils.AppUtils;
 import org.kie.server.api.model.instance.RequestInfoInstance;
@@ -24,6 +23,8 @@ public class JobsController implements Initializable {
 
 	@Inject
 	Navigation navigation;
+	@Inject
+	KieServerClientService service;
 	@FXML
 	private TableView<RequestInfoInstance> tblJobs;
 	@FXML
@@ -43,11 +44,9 @@ public class JobsController implements Initializable {
 	@FXML
 	private Button btnSchedule;
 
-	private KieServerClientService service;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		service = KieServerClientManager.getInstance();
 		configureColumns();
 		updateData();
 		AppUtils.disableIfNotSelected(tblJobs.getSelectionModel(), btnCancel);

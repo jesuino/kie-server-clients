@@ -14,7 +14,6 @@ import javax.inject.Inject;
 
 import org.fxapps.kieserverclient.navigation.Navigation;
 import org.fxapps.kieserverclient.navigation.Screen;
-import org.fxapps.kieserverclient.service.KieServerClientManager;
 import org.fxapps.kieserverclient.service.KieServerClientService;
 import org.fxapps.kieserverclient.utils.AppUtils;
 import org.kie.server.api.model.instance.JobRequestInstance;
@@ -39,6 +38,8 @@ public class JobRequestController implements Initializable {
 			"org.jbpm.executor.commands.RequeueRunningJobsCommand" };
 	@Inject
 	Navigation navigation;
+	@Inject
+	KieServerClientService service;
 	@FXML
 	private TextField txtCommand;
 	@FXML
@@ -55,11 +56,9 @@ public class JobRequestController implements Initializable {
 	private Button btnSend;
 	@FXML
 	private ComboBox<String> cmbCommands;
-	private KieServerClientService service;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		service = KieServerClientManager.getInstance();
 		cmbCommands.getItems().addAll(COMMANDS);
 		configureSpinners();
 		bindings();

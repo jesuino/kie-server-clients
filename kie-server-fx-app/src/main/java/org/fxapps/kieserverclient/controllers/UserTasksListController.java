@@ -11,7 +11,6 @@ import javax.inject.Inject;
 import org.fxapps.kieserverclient.navigation.Navigation;
 import org.fxapps.kieserverclient.navigation.Param;
 import org.fxapps.kieserverclient.navigation.Screen;
-import org.fxapps.kieserverclient.service.KieServerClientManager;
 import org.fxapps.kieserverclient.service.KieServerClientService;
 import org.fxapps.kieserverclient.utils.AppUtils;
 import org.kie.server.api.model.KieContainerResource;
@@ -25,8 +24,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class UserTasksListController implements Initializable {
+	
 	@Inject
 	Navigation navigation;
+
+	@Inject
+	KieServerClientService service;
+	
 	@FXML
 	private TableView<TaskSummary> tblTaskSummary;
 	@FXML
@@ -49,7 +53,6 @@ public class UserTasksListController implements Initializable {
 	private ContextMenu mnTask;
 
 	private Supplier<List<TaskSummary>> updateTasks;
-	private KieServerClientService service;
 	private String userId;
 	private String containerId;
 	private long taskId;
@@ -59,7 +62,6 @@ public class UserTasksListController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// I <3 Java 8
 		updateTasks = (Supplier<List<TaskSummary>>) navigation.data().get(Param.UPDATE_USER_TASKS_ACTION);
-		service = KieServerClientManager.getInstance();
 		userId = (String) navigation.data().get(Param.USER);
 		tblTaskSummary.getSelectionModel().selectedItemProperty().addListener((obs, o, n) -> {
 			if (n != null) {

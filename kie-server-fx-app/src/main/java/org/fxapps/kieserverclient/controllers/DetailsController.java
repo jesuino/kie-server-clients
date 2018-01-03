@@ -6,16 +6,16 @@ import java.util.ResourceBundle;
 
 import javax.inject.Inject;
 
+import org.fxapps.kieserverclient.navigation.Navigation;
+import org.fxapps.kieserverclient.navigation.Param;
+import org.fxapps.kieserverclient.service.KieServerClientService;
+import org.fxapps.kieserverclient.utils.FormatUtils;
+import org.kie.server.api.marshalling.Marshaller;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
-
-import org.fxapps.kieserverclient.navigation.Navigation;
-import org.fxapps.kieserverclient.navigation.Param;
-import org.fxapps.kieserverclient.service.KieServerClientManager;
-import org.fxapps.kieserverclient.utils.FormatUtils;
-import org.kie.server.api.marshalling.Marshaller;
 
 public class DetailsController implements Initializable {
 
@@ -25,6 +25,9 @@ public class DetailsController implements Initializable {
 	
 	@Inject
 	Navigation navigation;
+	
+	@Inject
+	KieServerClientService service;
 	
 	@FXML
 	ComboBox<String> cmbFormat;
@@ -37,7 +40,7 @@ public class DetailsController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		obj = (List<Object>) navigation.data().get(Param.DETAILS);
-		marshaller = KieServerClientManager.getInstance().getMarshaller();
+		marshaller = service.getMarshaller();
 		configureCmbFormat();
 	}
 

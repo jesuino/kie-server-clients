@@ -11,6 +11,16 @@ import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
+import org.fxapps.kieserverclient.navigation.Navigation;
+import org.fxapps.kieserverclient.navigation.Param;
+import org.fxapps.kieserverclient.navigation.Screen;
+import org.fxapps.kieserverclient.service.KieServerClientService;
+import org.fxapps.kieserverclient.utils.AppUtils;
+import org.kie.server.api.model.KieContainerResource;
+import org.kie.server.api.model.definition.ProcessDefinition;
+import org.kie.server.api.model.instance.ProcessInstance;
+import org.kie.server.api.model.instance.TaskSummary;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -20,21 +30,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import org.fxapps.kieserverclient.navigation.Navigation;
-import org.fxapps.kieserverclient.navigation.Param;
-import org.fxapps.kieserverclient.navigation.Screen;
-import org.fxapps.kieserverclient.service.KieServerClientManager;
-import org.fxapps.kieserverclient.service.KieServerClientService;
-import org.fxapps.kieserverclient.utils.AppUtils;
-import org.kie.server.api.model.KieContainerResource;
-import org.kie.server.api.model.definition.ProcessDefinition;
-import org.kie.server.api.model.instance.ProcessInstance;
-import org.kie.server.api.model.instance.TaskSummary;
-
 public class ProcessInstancesController implements Initializable {
 
 	@Inject
 	Navigation navigation;
+	@Inject
+	KieServerClientService service;
 	@FXML
 	TableView<ProcessInstance> tblInstances;
 	@FXML
@@ -64,14 +65,12 @@ public class ProcessInstancesController implements Initializable {
 	@FXML
 	Button btnUserTasks;
 
-	private KieServerClientService service;
 	private ProcessDefinition proc;
 	private KieContainerResource container;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		container = (KieContainerResource) navigation.data().get(Param.CONTAINER);
-		service = KieServerClientManager.getInstance();
 		proc = (ProcessDefinition) navigation.data().get(Param.PROCESS_DEFINITION);
 		lblTitle.setText("Process " + proc.getName() + " v" + proc.getVersion() + " Instances");
 		tblInstances.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);

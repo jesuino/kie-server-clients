@@ -3,7 +3,8 @@ package org.fxapps.kieserverclient.controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import org.fxapps.kieserverclient.service.KieServerClientManager;
+import javax.inject.Inject;
+
 import org.fxapps.kieserverclient.service.KieServerClientService;
 import org.kie.server.api.model.definition.QueryDefinition;
 
@@ -15,6 +16,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class QueryDefinitionController implements Initializable {
 
+	@Inject
+	KieServerClientService service;
+	
 	@FXML
 	TableView<QueryDefinition> tblQueries;
 	@FXML
@@ -26,11 +30,8 @@ public class QueryDefinitionController implements Initializable {
 	@FXML
 	TableColumn<QueryDefinition, String> clTarget;
 
-	private KieServerClientService service;
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		service = KieServerClientManager.getInstance();
 		configureTableColumns();
 		loadData();
 	}

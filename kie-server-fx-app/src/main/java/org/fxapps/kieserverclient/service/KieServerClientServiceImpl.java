@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Default;
+
 import org.drools.core.command.runtime.BatchExecutionCommandImpl;
 import org.kie.api.runtime.ExecutionResults;
 import org.kie.api.runtime.process.WorkflowProcessInstance;
@@ -41,9 +44,9 @@ import org.kie.server.client.UserTaskServicesClient;
  * @author wsiqueir
  *
  */
+@Default
+@ApplicationScoped
 class KieServerClientServiceImpl implements KieServerClientService {
-
-	// TODO: Add UIServiceClient methods once it is available
 
 	private static final MarshallingFormat FORMAT;
 	
@@ -63,7 +66,6 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	private KieServerInfo kieServerInfo;
 	private RuleServicesClient rulesClient;
 	private ProcessServicesClient processesClient;
-//	private SolverServicesClient solversClient;
 	private QueryServicesClient queryClient;
 	private Marshaller marshaller;
 	private UserTaskServicesClient userTasksClient;
@@ -116,7 +118,6 @@ class KieServerClientServiceImpl implements KieServerClientService {
 				supportsBRM.set(true);
 			}
 			if("BRP".equals(capability)) {
-//				solversClient = client.getServicesClient(SolverServicesClient.class);
 				supportsSolvers.set(true);
 			}
 		}
@@ -364,4 +365,5 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	public List<QueryDefinition> queries(int max) {
 		return queryClient.getQueries(0, max);
 	}
+	
 }

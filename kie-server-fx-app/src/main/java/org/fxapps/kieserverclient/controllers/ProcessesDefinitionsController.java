@@ -8,6 +8,14 @@ import java.util.ResourceBundle;
 
 import javax.inject.Inject;
 
+import org.fxapps.kieserverclient.navigation.Navigation;
+import org.fxapps.kieserverclient.navigation.Param;
+import org.fxapps.kieserverclient.navigation.Screen;
+import org.fxapps.kieserverclient.service.KieServerClientService;
+import org.fxapps.kieserverclient.utils.AppUtils;
+import org.kie.server.api.model.KieContainerResource;
+import org.kie.server.api.model.definition.ProcessDefinition;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -16,19 +24,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import org.fxapps.kieserverclient.navigation.Navigation;
-import org.fxapps.kieserverclient.navigation.Param;
-import org.fxapps.kieserverclient.navigation.Screen;
-import org.fxapps.kieserverclient.service.KieServerClientManager;
-import org.fxapps.kieserverclient.service.KieServerClientService;
-import org.fxapps.kieserverclient.utils.AppUtils;
-import org.kie.server.api.model.KieContainerResource;
-import org.kie.server.api.model.definition.ProcessDefinition;
-
 public class ProcessesDefinitionsController implements Initializable {
 
 	@Inject
 	Navigation navigation;
+	@Inject
+	KieServerClientService service;
 	@FXML
 	Button btnDefinitions;
 	@FXML
@@ -84,7 +85,6 @@ public class ProcessesDefinitionsController implements Initializable {
 	}
 
 	public void start() {
-		KieServerClientService service = KieServerClientManager.getInstance();
 		ProcessDefinition processDefinition = tblProcesses.getSelectionModel().getSelectedItem();
 		Map<String, Object> param = new HashMap<String, Object>();
 		AppUtils.doBlockingAsyncWork(
@@ -98,7 +98,7 @@ public class ProcessesDefinitionsController implements Initializable {
 	}
 
 	private void updateTable() {
-		processes = KieServerClientManager.getInstance().getProcessesDefinitions(container.getContainerId());
+		processes = service.getProcessesDefinitions(container.getContainerId());
 		tblProcesses.getItems().setAll(processes);
 	}
 

@@ -12,7 +12,6 @@ import javax.inject.Inject;
 
 import org.fxapps.kieserverclient.navigation.Navigation;
 import org.fxapps.kieserverclient.navigation.Param;
-import org.fxapps.kieserverclient.service.KieServerClientManager;
 import org.fxapps.kieserverclient.service.KieServerClientService;
 import org.fxapps.kieserverclient.utils.AppUtils;
 import org.kie.server.api.model.KieContainerResource;
@@ -40,6 +39,8 @@ public class ProcessTasksChartsController implements Initializable {
 
 	@Inject
 	Navigation navigation;
+	@Inject
+	KieServerClientService service;
 	@FXML
 	BarChart<String, Integer> chartPiByStatus;
 	@FXML
@@ -56,7 +57,6 @@ public class ProcessTasksChartsController implements Initializable {
 	@FXML
 	StackPane spCharts;
 	
-	private KieServerClientService service;
 	private String containerId;
 
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyy\nhh:mm a");
@@ -64,7 +64,6 @@ public class ProcessTasksChartsController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		service = KieServerClientManager.getInstance();
 		configure();
 		loadData();
 	}

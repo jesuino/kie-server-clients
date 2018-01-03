@@ -6,24 +6,26 @@ import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
-import javafx.beans.binding.BooleanBinding;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-
 import org.fxapps.kieserverclient.navigation.Navigation;
-import org.fxapps.kieserverclient.service.KieServerClientManager;
 import org.fxapps.kieserverclient.service.KieServerClientService;
 import org.fxapps.kieserverclient.utils.AppUtils;
 import org.kie.server.api.model.KieContainerResource;
 import org.kie.server.api.model.ServiceResponse;
 import org.kie.server.api.model.ServiceResponse.ResponseType;
 
+import javafx.beans.binding.BooleanBinding;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+
 public class NewContainerController implements Initializable {
 
 	@Inject
 	Navigation navigation;
+	
+	@Inject
+	KieServerClientService service;
 	
 	@FXML
 	TextField txtContainerId;
@@ -40,13 +42,11 @@ public class NewContainerController implements Initializable {
 	@FXML
 	Button btnAdd;
 
-	private KieServerClientService service;
 
 	Logger logger = Logger.getLogger(this.getClass().getName());
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		service = KieServerClientManager.getInstance();
 		addButtonBinding();
 
 	}
