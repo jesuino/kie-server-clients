@@ -10,12 +10,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.kieserverclient.controllers.JobsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.kieserverclient.controllers.JobsController">
    <children>
-      <VBox layoutX="3.0" layoutY="4.0" prefHeight="600.0" prefWidth="800.0" spacing="10.0">
+      <VBox layoutX="3.0" layoutY="4.0" prefHeight="550.0" prefWidth="800.0" spacing="10.0">
          <children>
             <Label prefHeight="25.0" prefWidth="651.0" styleClass="titleLabel" text="Jobs Management" />
-            <TableView fx:id="tblJobs" prefHeight="504.0" prefWidth="800.0">
+            <TableView fx:id="tblJobs" prefHeight="453.0" prefWidth="800.0">
               <columns>
                 <TableColumn fx:id="clId" prefWidth="32.0" text="ID" />
                 <TableColumn fx:id="clStatus" prefWidth="110.0" text="Status" />
@@ -25,24 +25,15 @@
                   <TableColumn fx:id="clCommand" prefWidth="174.0" text="Command" />
               </columns>
             </TableView>
-            <HBox spacing="10.0">
+            <HBox alignment="CENTER" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#back" text="←">
+                  <Button fx:id="btnCancel" alignment="CENTER" minWidth="70.0" mnemonicParsing="false" onAction="#cancel" prefHeight="26.0" prefWidth="73.0" text="Cancel">
+                     <styleClass>
+                        <String fx:value="defaultButton" />
+                        <String fx:value="danger" />
+                     </styleClass>
                      <HBox.margin>
                         <Insets />
-                     </HBox.margin>
-                     <styleClass>
-                        <String fx:value="defaultButton" />
-                        <String fx:value="danger" />
-                     </styleClass>
-                  </Button>
-                  <Button fx:id="btnCancel" minWidth="70.0" mnemonicParsing="false" onAction="#cancel" prefHeight="26.0" prefWidth="73.0" text="Cancel">
-                     <styleClass>
-                        <String fx:value="defaultButton" />
-                        <String fx:value="danger" />
-                     </styleClass>
-                     <HBox.margin>
-                        <Insets left="310.0" />
                      </HBox.margin>
                   </Button>
                   <Button fx:id="btnSchedule" mnemonicParsing="false" onAction="#schedule" prefHeight="40.0" prefWidth="143.0" text="New Job Request ">
