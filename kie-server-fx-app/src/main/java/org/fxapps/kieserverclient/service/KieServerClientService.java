@@ -10,6 +10,7 @@ import org.kie.server.api.model.KieContainerResource;
 import org.kie.server.api.model.KieServerInfo;
 import org.kie.server.api.model.ServiceResponse;
 import org.kie.server.api.model.definition.ProcessDefinition;
+import org.kie.server.api.model.definition.QueryDefinition;
 import org.kie.server.api.model.definition.ServiceTasksDefinition;
 import org.kie.server.api.model.definition.UserTaskDefinitionList;
 import org.kie.server.api.model.definition.VariablesDefinition;
@@ -155,7 +156,6 @@ public interface KieServerClientService {
 	
 	public List<TaskSummary> allUserTasks(int max);
 
-	
-
+	public List<QueryDefinition> queries(int max);
 
 }

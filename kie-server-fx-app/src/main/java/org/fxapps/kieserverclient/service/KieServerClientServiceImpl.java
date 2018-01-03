@@ -16,6 +16,7 @@ import org.kie.server.api.model.KieServerInfo;
 import org.kie.server.api.model.ReleaseId;
 import org.kie.server.api.model.ServiceResponse;
 import org.kie.server.api.model.definition.ProcessDefinition;
+import org.kie.server.api.model.definition.QueryDefinition;
 import org.kie.server.api.model.definition.ServiceTasksDefinition;
 import org.kie.server.api.model.definition.UserTaskDefinitionList;
 import org.kie.server.api.model.definition.VariablesDefinition;
@@ -30,7 +31,6 @@ import org.kie.server.client.KieServicesFactory;
 import org.kie.server.client.ProcessServicesClient;
 import org.kie.server.client.QueryServicesClient;
 import org.kie.server.client.RuleServicesClient;
-import org.kie.server.client.SolverServicesClient;
 import org.kie.server.client.UIServicesClient;
 import org.kie.server.client.UserTaskServicesClient;
 
@@ -63,7 +63,7 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	private KieServerInfo kieServerInfo;
 	private RuleServicesClient rulesClient;
 	private ProcessServicesClient processesClient;
-	private SolverServicesClient solversClient;
+//	private SolverServicesClient solversClient;
 	private QueryServicesClient queryClient;
 	private Marshaller marshaller;
 	private UserTaskServicesClient userTasksClient;
@@ -116,7 +116,7 @@ class KieServerClientServiceImpl implements KieServerClientService {
 				supportsBRM.set(true);
 			}
 			if("BRP".equals(capability)) {
-				solversClient = client.getServicesClient(SolverServicesClient.class);
+//				solversClient = client.getServicesClient(SolverServicesClient.class);
 				supportsSolvers.set(true);
 			}
 		}
@@ -358,5 +358,10 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	@Override
 	public List<TaskSummary> allUserTasks(int max) {
 		return userTasksClient.findTasks(usr, 0, max);
+	}
+
+	@Override
+	public List<QueryDefinition> queries(int max) {
+		return queryClient.getQueries(0, max);
 	}
 }

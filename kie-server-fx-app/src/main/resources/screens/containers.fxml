@@ -27,6 +27,7 @@
                       <MenuItem fx:id="mnProcesses" mnemonicParsing="false" onAction="#openProcesses" text="Processes" />
                       <MenuItem fx:id="mnCommands" mnemonicParsing="false" onAction="#executeCommands" text="Commands" />
                         <MenuItem fx:id="mnUserTasks" mnemonicParsing="false" onAction="#loadTasks" text="User Tasks" />
+                        <MenuItem fx:id="mnQueries" mnemonicParsing="false" onAction="#queries" text="Queries" />
                         <MenuItem fx:id="mnJobs" mnemonicParsing="false" onAction="#jobs" text="Jobs" />
                     </items>
                      <HBox.margin>

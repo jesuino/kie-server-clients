@@ -4,6 +4,7 @@ import java.net.URL;
 
 public enum Screen {
 
+	QUERIES("queryDefinition.fxml"),
 	TEMPLATE("template.fxml"),
 	LOGIN("login.fxml"), 
 	CONTAINERS("containers.fxml"), 

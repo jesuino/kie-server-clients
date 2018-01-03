@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.kieserverclient.controllers.QueryDefinitionController">
+   <children>
+      <VBox layoutX="-6.0" prefHeight="550.0" prefWidth="814.0">
+         <children>
+            <Label prefHeight="47.0" prefWidth="804.0" styleClass="titleLabel" stylesheets="@../style/main.css" text="Query Definitions" />
+            <TableView fx:id="tblQueries" prefHeight="503.0" prefWidth="777.0">
+              <columns>
+                <TableColumn fx:id="clName" prefWidth="127.0" text="Name" />
+                <TableColumn fx:id="clExpression" prefWidth="384.0" text="Expression" />
+                  <TableColumn fx:id="clSource" minWidth="0.0" prefWidth="135.0" text="Source" />
+                  <TableColumn fx:id="clTarget" prefWidth="167.0" text="Target" />
+              </columns>
+            </TableView>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
