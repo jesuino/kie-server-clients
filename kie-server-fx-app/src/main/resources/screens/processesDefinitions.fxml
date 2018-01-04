@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -11,11 +10,19 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.kieserverclient.controllers.ProcessesDefinitionsController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.kieserverclient.controllers.ProcessesDefinitionsController">
   <children>
     <VBox id="VBox" alignment="CENTER" layoutX="-1.0" prefHeight="550.0" prefWidth="800.0" spacing="20.0">
       <children>
         <Label fx:id="lblTitle" prefHeight="16.0" prefWidth="794.0" styleClass="titleLabel" text="container test processes" />
+        <TableView fx:id="tblProcesses" prefHeight="435.0" prefWidth="800.0">
+          <columns>
+            <TableColumn fx:id="clId" maxWidth="5000.0" minWidth="10.0" prefWidth="234.0" text="ID" />
+            <TableColumn fx:id="clName" maxWidth="5000.0" minWidth="10.0" prefWidth="202.0" text="Name" />
+            <TableColumn fx:id="clPackage" maxWidth="5000.0" minWidth="10.0" prefWidth="200.0" text="Package" />
+            <TableColumn fx:id="clVersion" maxWidth="5000.0" minWidth="10.0" prefWidth="153.0" text="Version" />
+          </columns>
+        </TableView>
         <HBox id="HBox" alignment="CENTER" prefHeight="30.0" prefWidth="579.0" spacing="40.0">
           <children>
                   <Button minHeight="35.0" minWidth="0.0" mnemonicParsing="false" onAction="#details" prefHeight="30.0" prefWidth="120.0" text="Details">
@@ -37,18 +44,7 @@
                   </Button>
           </children>
         </HBox>
-        <TableView fx:id="tblProcesses" prefHeight="435.0" prefWidth="800.0">
-          <columns>
-            <TableColumn fx:id="clId" maxWidth="5000.0" minWidth="10.0" prefWidth="234.0" text="ID" />
-            <TableColumn fx:id="clName" maxWidth="5000.0" minWidth="10.0" prefWidth="202.0" text="Name" />
-            <TableColumn fx:id="clPackage" maxWidth="5000.0" minWidth="10.0" prefWidth="200.0" text="Package" />
-            <TableColumn fx:id="clVersion" maxWidth="5000.0" minWidth="10.0" prefWidth="153.0" text="Version" />
-          </columns>
-        </TableView>
       </children>
     </VBox>
   </children>
-  <stylesheets>
-    <URL value="@/style/main.css" />
-  </stylesheets>
 </AnchorPane>

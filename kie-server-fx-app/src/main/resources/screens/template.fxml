@@ -7,24 +7,27 @@
 
 <BorderPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.kieserverclient.controllers.TemplateController">
    <bottom>
-      <HBox alignment="CENTER" prefHeight="49.0" prefWidth="800.0" spacing="25.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="49.0" prefWidth="800.0" spacing="25.0" style="-fx-background-color: lightsteelblue;" BorderPane.alignment="CENTER">
          <children>
-          <Button mnemonicParsing="false" onAction="#goBack" prefHeight="39.0" prefWidth="44.0" text="←">
+          <Button mnemonicParsing="false" onAction="#goBack" prefHeight="39.0" prefWidth="150.0" text="←">
                <styleClass>
                   <String fx:value="defaultButton" />
                   <String fx:value="plus" />
+                  <String fx:value="infoLabel" />
                </styleClass>
             </Button>
-            <Button mnemonicParsing="false" onAction="#goHome" prefHeight="40.0" prefWidth="72.0" text="Home">
+            <Button mnemonicParsing="false" onAction="#goHome" prefHeight="40.0" prefWidth="150.0" text="Home">
                <styleClass>
                   <String fx:value="defaultButton" />
+                  <String fx:value="infoLabel" />
                   <String fx:value="plus" />
                </styleClass>
             </Button>
-            <Button mnemonicParsing="false" onAction="#doLogout" text="Quit">
+            <Button mnemonicParsing="false" onAction="#doLogout" prefHeight="40.0" prefWidth="150.0" text="Quit">
                <styleClass>
                   <String fx:value="danger" />
                   <String fx:value="defaultButton" />
+                  <String fx:value="infoLabel" />
                </styleClass>
             </Button>
          </children>

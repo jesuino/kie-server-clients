@@ -100,7 +100,6 @@ class KieServerClientServiceImpl implements KieServerClientService {
 		kieServerInfo = client.getServerInfo().getResult();
 		
 		for (String capability : kieServerInfo.getCapabilities()) {
-			System.out.println(capability);
 			if ("BPM".equals(capability)) {
 				processesClient = client
 						.getServicesClient(ProcessServicesClient.class);
@@ -366,4 +365,15 @@ class KieServerClientServiceImpl implements KieServerClientService {
 		return queryClient.getQueries(0, max);
 	}
 	
+	@Override
+	public void unregisterQuery(String queryName) {
+		queryClient.unregisterQuery(queryName);
+		
+	}
+	
+	@Override
+	public void registerQuery(QueryDefinition queryDefinition) {
+		queryClient.registerQuery(queryDefinition);
+		
+	}
 }

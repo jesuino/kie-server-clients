@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.kieserverclient.controllers.NewQueryDefinitionController">
+   <children>
+      <VBox layoutX="-6.0" prefHeight="550.0" prefWidth="800.0">
+         <children>
+            <Label prefHeight="47.0" prefWidth="804.0" styleClass="titleLabel" stylesheets="@../style/main.css" text="New Query Definition" />
+            <Separator prefWidth="200.0" />
+            <GridPane alignment="CENTER" hgap="40.0" prefHeight="437.0" prefWidth="800.0">
+               <columnConstraints>
+                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="376.0" minWidth="10.0" prefWidth="184.0" />
+                  <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="576.0" minWidth="0.0" prefWidth="576.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="172.0" minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="172.0" minHeight="10.0" prefHeight="78.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="215.0" minHeight="10.0" prefHeight="215.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label styleClass="infoLabel" text="Source" GridPane.rowIndex="2" />
+                  <Label styleClass="infoLabel" text="Query Expression" GridPane.rowIndex="3" />
+                  <TextField fx:id="txtSource" prefHeight="50.0" prefWidth="568.0" promptText="The datasource where the data will be retrieved from" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextArea fx:id="txtExpression" prefHeight="191.0" prefWidth="567.0" promptText="Add here the SQL command that will be executed" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label prefHeight="19.0" prefWidth="110.0" styleClass="infoLabel" text="Query Name" />
+                  <TextField fx:id="txtName" prefHeight="50.0" prefWidth="568.0" promptText="An unique name for this query" GridPane.columnIndex="1" />
+                  <Label styleClass="infoLabel" text="Target" GridPane.rowIndex="1" />
+                  <ChoiceBox fx:id="cbTarget" prefHeight="43.0" prefWidth="568.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" styleClass="defaultButton">
+               <children>
+                  <Button fx:id="btnRegister" mnemonicParsing="false" onAction="#register" prefHeight="43.0" prefWidth="109.0" text="Register">
+                     <styleClass>
+                        <String fx:value="defaultButton" />
+                        <String fx:value="plus" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

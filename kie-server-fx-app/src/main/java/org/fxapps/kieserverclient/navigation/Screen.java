@@ -4,7 +4,7 @@ import java.net.URL;
 
 public enum Screen {
 
-	QUERIES("queryDefinition.fxml"),
+	
 	TEMPLATE("template.fxml"),
 	LOGIN("login.fxml"), 
 	CONTAINERS("containers.fxml"), 
@@ -22,7 +22,9 @@ public enum Screen {
 	JOBS("jobs.fxml"), 
 	SOLVERS("solvers.fxml"),
 	JOB_REQUEST("jobRequest.fxml"),
-	PROCESS_TASKS_CHARTS("processTasksCharts.fxml");
+	PROCESS_TASKS_CHARTS("processTasksCharts.fxml"), 
+	QUERIES("queryDefinition.fxml"),
+	NEW_QUERY("newQueryDefinition.fxml");
 
 	private String path;
 

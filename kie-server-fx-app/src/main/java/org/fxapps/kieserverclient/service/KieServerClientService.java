@@ -17,8 +17,6 @@ import org.kie.server.api.model.definition.VariablesDefinition;
 import org.kie.server.api.model.instance.JobRequestInstance;
 import org.kie.server.api.model.instance.ProcessInstance;
 import org.kie.server.api.model.instance.RequestInfoInstance;
-import org.kie.server.api.model.instance.SolverInstance;
-import org.kie.server.api.model.instance.SolverInstanceList;
 import org.kie.server.api.model.instance.TaskSummary;
 
 import javafx.beans.property.BooleanProperty;
@@ -151,5 +149,9 @@ public interface KieServerClientService {
 	public List<TaskSummary> allUserTasks(int max);
 
 	public List<QueryDefinition> queries(int max);
+
+	void unregisterQuery(String queryName);
+
+	public void registerQuery(QueryDefinition def);
 
 }

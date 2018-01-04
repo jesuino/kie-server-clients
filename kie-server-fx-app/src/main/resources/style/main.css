@@ -1,11 +1,11 @@
 .root {
 	-fx-base: lightblue;
 	-fx-background: #eeeeee;
-	-fx-font: 13px "System";
+	-fx-font: 13.0px "System";
 }
 
 .defaultButton {
-	-fx-background-radius: 30;
+	-fx-background-radius: 30.0;
 }
 
 .plus {
@@ -14,17 +14,21 @@
 
 .danger {
 	-fx-text-fill: red;
-	-fx-padding: 0, 0, 10px, 0;
-	-fx-pref-width: 45px;
-	-fx-pref-height: 40px;
+	-fx-padding: 0.0, 0.0, 10.0px, 0.0;
+	-fx-min-width: 35.0px;
+	-fx-min-height: 30.0px;
 }
 
 .infoLabel {
-	-fx-font: bold 15px "System";
+	-fx-font: bold 15.0px "System";
 }
 
 .titleLabel {
-	-fx-font: bold 20px "System";
+	-fx-font: bold 20.0px "System";
 	-fx-text-fill: blue;
 	-fx-alignment: center;
+}
+
+.toolbox {
+    -fx-background-color: black;
 }

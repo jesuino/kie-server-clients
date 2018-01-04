@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.kieserverclient.controllers.QueryDefinitionController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.kieserverclient.controllers.QueryDefinitionController">
    <children>
-      <VBox layoutX="-6.0" prefHeight="550.0" prefWidth="800.0">
+      <VBox layoutX="-6.0" prefHeight="550.0" prefWidth="800.0" spacing="10.0">
          <children>
             <Label prefHeight="47.0" prefWidth="804.0" styleClass="titleLabel" stylesheets="@../style/main.css" text="Query Definitions" />
-            <TableView fx:id="tblQueries" prefHeight="503.0" prefWidth="821.0">
+            <Separator prefWidth="200.0" />
+            <TableView fx:id="tblQueries" prefHeight="437.0" prefWidth="800.0">
               <columns>
                 <TableColumn fx:id="clName" prefWidth="127.0" text="Name" />
                 <TableColumn fx:id="clExpression" prefWidth="384.0" text="Expression" />
@@ -20,6 +24,22 @@
                   <TableColumn fx:id="clTarget" prefWidth="167.0" text="Target" />
               </columns>
             </TableView>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" styleClass="defaultButton">
+               <children>
+                  <Button fx:id="btnRegister" mnemonicParsing="false" onAction="#register" prefHeight="43.0" prefWidth="130.0" text="Register New">
+                     <styleClass>
+                        <String fx:value="defaultButton" />
+                        <String fx:value="plus" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="btnUnregister" mnemonicParsing="false" onAction="#removeQuery" prefHeight="43.0" prefWidth="130.0" text="Unregister">
+                     <styleClass>
+                        <String fx:value="defaultButton" />
+                        <String fx:value="danger" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>

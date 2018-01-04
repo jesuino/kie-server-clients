@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
@@ -17,51 +16,49 @@
       <VBox layoutX="-4.0" layoutY="-2.0" prefHeight="550.0" prefWidth="800.0" spacing="10.0">
          <children>
             <Label prefHeight="44.0" prefWidth="800.0" styleClass="titleLabel" text="Tasks List" />
-            <HBox alignment="CENTER_RIGHT" spacing="10.0">
+            <HBox alignment="CENTER_RIGHT" spacing="10.0" />
+            <AnchorPane>
                <children>
-                  <Button alignment="CENTER" minHeight="30.0" mnemonicParsing="false" onAction="#details" text="Details">
+                  <TableView fx:id="tblTaskSummary" prefHeight="500.0" prefWidth="800.0">
+                    <columns>
+                      <TableColumn fx:id="clId" prefWidth="37.0" text="ID" />
+                      <TableColumn fx:id="clName" prefWidth="149.0" text="Name" />
+                        <TableColumn fx:id="clStatus" text="Status" />
+                        <TableColumn fx:id="clPriority" prefWidth="67.0" text="Priority" />
+                        <TableColumn fx:id="clCreatedBy" prefWidth="95.0" text="Created By" />
+                        <TableColumn fx:id="clSubject" prefWidth="95.0" text="Subject" />
+                        <TableColumn fx:id="clProcessId" prefWidth="170.0" text="P. Instance ID" />
+                        <TableColumn fx:id="clCreatedOn" prefWidth="106.0" text="Created On" />
+                    </columns>
+                     <contextMenu>
+                        <ContextMenu fx:id="mnTask">
+                          <items>
+                              <MenuItem mnemonicParsing="false" onAction="#activate" text="Activate" />
+                              <MenuItem mnemonicParsing="false" onAction="#claim" text="Claim" />
+                              <MenuItem mnemonicParsing="false" onAction="#complete" text="Complete" />
+                              <MenuItem mnemonicParsing="false" onAction="#delegate" text="Delegate" />
+                              <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit" />
+                              <MenuItem mnemonicParsing="false" onAction="#fail" text="Fail" />
+                              <MenuItem mnemonicParsing="false" onAction="#forward" text="Forward" />
+                            <MenuItem mnemonicParsing="false" onAction="#release" text="Release" />
+                              <MenuItem mnemonicParsing="false" onAction="#resume" text="Resume" />
+                              <MenuItem mnemonicParsing="false" onAction="#skip" text="Skip" />
+                              <MenuItem mnemonicParsing="false" onAction="#start" text="Start" />
+                              <MenuItem mnemonicParsing="false" onAction="#stop" text="Stop" />
+                              <MenuItem mnemonicParsing="false" onAction="#suspend" text="Suspend" />
+                              <MenuItem mnemonicParsing="false" onAction="#nominate" text="Nominate" />
+                          </items>
+                        </ContextMenu>
+                     </contextMenu>
+                  </TableView>
+                  <Button alignment="CENTER" layoutX="730.0" layoutY="470.0" minHeight="30.0" mnemonicParsing="false" onAction="#details" text="Details">
                      <styleClass>
                         <String fx:value="defaultButton" />
                         <String fx:value="plus" />
                      </styleClass>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
                   </Button>
                </children>
-            </HBox>
-            <TableView fx:id="tblTaskSummary" prefHeight="512.0" prefWidth="800.0">
-              <columns>
-                <TableColumn fx:id="clId" prefWidth="37.0" text="ID" />
-                <TableColumn fx:id="clName" prefWidth="149.0" text="Name" />
-                  <TableColumn fx:id="clStatus" text="Status" />
-                  <TableColumn fx:id="clPriority" prefWidth="67.0" text="Priority" />
-                  <TableColumn fx:id="clCreatedBy" prefWidth="95.0" text="Created By" />
-                  <TableColumn fx:id="clSubject" prefWidth="95.0" text="Subject" />
-                  <TableColumn fx:id="clProcessId" prefWidth="170.0" text="P. Instance ID" />
-                  <TableColumn fx:id="clCreatedOn" prefWidth="106.0" text="Created On" />
-              </columns>
-               <contextMenu>
-                  <ContextMenu fx:id="mnTask">
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#activate" text="Activate" />
-                        <MenuItem mnemonicParsing="false" onAction="#claim" text="Claim" />
-                        <MenuItem mnemonicParsing="false" onAction="#complete" text="Complete" />
-                        <MenuItem mnemonicParsing="false" onAction="#delegate" text="Delegate" />
-                        <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit" />
-                        <MenuItem mnemonicParsing="false" onAction="#fail" text="Fail" />
-                        <MenuItem mnemonicParsing="false" onAction="#forward" text="Forward" />
-                      <MenuItem mnemonicParsing="false" onAction="#release" text="Release" />
-                        <MenuItem mnemonicParsing="false" onAction="#resume" text="Resume" />
-                        <MenuItem mnemonicParsing="false" onAction="#skip" text="Skip" />
-                        <MenuItem mnemonicParsing="false" onAction="#start" text="Start" />
-                        <MenuItem mnemonicParsing="false" onAction="#stop" text="Stop" />
-                        <MenuItem mnemonicParsing="false" onAction="#suspend" text="Suspend" />
-                        <MenuItem mnemonicParsing="false" onAction="#nominate" text="Nominate" />
-                    </items>
-                  </ContextMenu>
-               </contextMenu>
-            </TableView>
+            </AnchorPane>
          </children>
       </VBox>
    </children>

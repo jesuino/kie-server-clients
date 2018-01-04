@@ -20,6 +20,13 @@
             <Font name="System Bold" size="25.0" />
           </font>
         </Label>
+        <TableView fx:id="tblContainers" prefHeight="450.0" prefWidth="800.0">
+          <columns>
+            <TableColumn fx:id="clContainerId" maxWidth="5000.0" minWidth="10.0" prefWidth="238.0" text="ID" />
+            <TableColumn fx:id="clResolvedReleaseId" maxWidth="5000.0" minWidth="10.0" prefWidth="396.0" text="Resolved Release ID" />
+            <TableColumn fx:id="clStatus" maxWidth="5000.0" minWidth="10.0" prefWidth="163.0" text="Status" />
+          </columns>
+        </TableView>
         <HBox id="HBox" alignment="BOTTOM_CENTER" prefHeight="52.0" prefWidth="600.0000999999975" spacing="5.0">
           <children>
                   <MenuButton fx:id="mnExplore" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="Explore">
@@ -49,13 +56,6 @@
                   </MenuButton>
           </children>
         </HBox>
-        <TableView fx:id="tblContainers" prefHeight="450.0" prefWidth="800.0">
-          <columns>
-            <TableColumn fx:id="clContainerId" maxWidth="5000.0" minWidth="10.0" prefWidth="238.0" text="ID" />
-            <TableColumn fx:id="clResolvedReleaseId" maxWidth="5000.0" minWidth="10.0" prefWidth="396.0" text="Resolved Release ID" />
-            <TableColumn fx:id="clStatus" maxWidth="5000.0" minWidth="10.0" prefWidth="163.0" text="Status" />
-          </columns>
-        </TableView>
       </children>
     </VBox>
   </children>
