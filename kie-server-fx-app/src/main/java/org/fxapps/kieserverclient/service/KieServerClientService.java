@@ -15,6 +15,7 @@ import org.kie.server.api.model.definition.ServiceTasksDefinition;
 import org.kie.server.api.model.definition.UserTaskDefinitionList;
 import org.kie.server.api.model.definition.VariablesDefinition;
 import org.kie.server.api.model.instance.JobRequestInstance;
+import org.kie.server.api.model.instance.NodeInstance;
 import org.kie.server.api.model.instance.ProcessInstance;
 import org.kie.server.api.model.instance.RequestInfoInstance;
 import org.kie.server.api.model.instance.TaskSummary;
@@ -153,5 +154,7 @@ public interface KieServerClientService {
 	void unregisterQuery(String queryName);
 
 	public void registerQuery(QueryDefinition def);
+
+	List<NodeInstance> findNodeInstances(long processInstanceId, int max);
 
 }

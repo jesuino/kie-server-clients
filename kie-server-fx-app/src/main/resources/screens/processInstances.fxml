@@ -40,6 +40,12 @@
                      </styleClass>
                   </Button>
             <Button fx:id="btnDetails" minHeight="-Infinity" minWidth="75.0" mnemonicParsing="false" onAction="#details" prefHeight="40.0" prefWidth="100.0" styleClass="defaultButton, plus" text="Details" />
+                  <Button fx:id="btnNodes" mnemonicParsing="false" onAction="#showNodes" prefHeight="40.0" prefWidth="100.0" text="Nodes">
+                     <styleClass>
+                        <String fx:value="defaultButton" />
+                        <String fx:value="plus" />
+                     </styleClass>
+                  </Button>
           </children>
         </HBox>
       </children>

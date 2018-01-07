@@ -24,7 +24,8 @@ public enum Screen {
 	JOB_REQUEST("jobRequest.fxml"),
 	PROCESS_TASKS_CHARTS("processTasksCharts.fxml"), 
 	QUERIES("queryDefinition.fxml"),
-	NEW_QUERY("newQueryDefinition.fxml");
+	NEW_QUERY("newQueryDefinition.fxml"), 
+	NODES("nodeInstances.fxml");
 
 	private String path;
 

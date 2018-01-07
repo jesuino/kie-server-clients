@@ -64,19 +64,30 @@ public class ProcessInstancesController implements Initializable {
 	Button btnDetails;
 	@FXML
 	Button btnUserTasks;
+	@FXML
+	Button btnNodes;
 
 	private ProcessDefinition proc;
 	private KieContainerResource container;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		initializeVariables();
+		configureBindings();
+		configureColumns();
+		fillData();
+	}
+
+	private void configureBindings() {
+		AppUtils.disableIfNotSelected(tblInstances.getSelectionModel(), btnAbort, btnSignal, btnDetails, btnUserTasks,
+				btnNodes);
+	}
+
+	private void initializeVariables() {
 		container = (KieContainerResource) navigation.data().get(Param.CONTAINER);
 		proc = (ProcessDefinition) navigation.data().get(Param.PROCESS_DEFINITION);
 		lblTitle.setText("Process " + proc.getName() + " v" + proc.getVersion() + " Instances");
 		tblInstances.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		AppUtils.disableIfNotSelected(tblInstances.getSelectionModel(), btnAbort, btnSignal, btnDetails, btnUserTasks);
-		configureColumns();
-		fillData();
 	}
 
 	public void abort() {
@@ -138,5 +149,11 @@ public class ProcessInstancesController implements Initializable {
 
 		navigation.data().put(Param.CALLER_SCREEN, Screen.PROCESS_INSTANCES);
 		navigation.goTo(Screen.USER_TASK_LIST);
+	}
+
+	public void showNodes() {
+		ProcessInstance pi = tblInstances.getSelectionModel().getSelectedItem();
+		navigation.data().put(Param.PROCESS_INSTANCE, pi);
+		navigation.goTo(Screen.NODES);
 	}
 }

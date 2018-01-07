@@ -24,6 +24,7 @@ import org.kie.server.api.model.definition.ServiceTasksDefinition;
 import org.kie.server.api.model.definition.UserTaskDefinitionList;
 import org.kie.server.api.model.definition.VariablesDefinition;
 import org.kie.server.api.model.instance.JobRequestInstance;
+import org.kie.server.api.model.instance.NodeInstance;
 import org.kie.server.api.model.instance.ProcessInstance;
 import org.kie.server.api.model.instance.RequestInfoInstance;
 import org.kie.server.api.model.instance.TaskSummary;
@@ -376,4 +377,10 @@ class KieServerClientServiceImpl implements KieServerClientService {
 		queryClient.registerQuery(queryDefinition);
 		
 	}
+	
+	@Override
+	public List<NodeInstance> findNodeInstances(long processInstanceId, int max) {
+		return queryClient.findNodeInstances(processInstanceId, 0, max);
+	}
+	
 }

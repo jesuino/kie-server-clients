@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.kieserverclient.controllers.NodeInstancesController">
+   <children>
+      <VBox prefHeight="550.0" prefWidth="800.0" spacing="10.0">
+         <children>
+            <Label fx:id="lblTitle" prefHeight="25.0" prefWidth="839.0" styleClass="titleLabel" stylesheets="@../style/main.css" text="Node Instances" />
+            <TableView fx:id="tblNodes" prefHeight="529.0" prefWidth="800.0">
+              <columns>
+                <TableColumn fx:id="clId" prefWidth="75.0" text="ID" />
+                  <TableColumn fx:id="clNodeId" prefWidth="75.0" text="Node ID" />
+                  <TableColumn fx:id="clType" prefWidth="109.0" text="Type" />
+                <TableColumn fx:id="clName" prefWidth="133.0" text="Name" />
+                  <TableColumn fx:id="clConnection" prefWidth="108.0" text="Connection" />
+                  <TableColumn fx:id="clStartDate" prefWidth="151.0" text="Start Date" />
+                  <TableColumn fx:id="clCompleted" prefWidth="148.0" text="Completed" />
+              </columns>
+            </TableView>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

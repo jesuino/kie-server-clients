@@ -11,7 +11,6 @@ import org.fxapps.kieserverclient.service.KieServerClientService;
 import org.fxapps.kieserverclient.utils.AppUtils;
 import org.kie.server.api.model.definition.QueryDefinition;
 
-import javafx.beans.binding.BooleanBinding;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -46,13 +45,10 @@ public class QueryDefinitionController implements Initializable {
 		configureBindings();
 		loadData();
 	}
-	
 
 	private void configureBindings() {
-		BooleanBinding queryNotSelected = tblQueries.getSelectionModel().selectedItemProperty().isNull();
-		btnUnregister.disableProperty().bind(queryNotSelected);
+		AppUtils.disableIfNotSelected(tblQueries.getSelectionModel(), btnUnregister);
 	}
-
 
 	private void configureTableColumns() {
 		clName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -84,5 +80,4 @@ public class QueryDefinitionController implements Initializable {
 		navigation.goTo(Screen.NEW_QUERY);
 	}
 			
-
 }
