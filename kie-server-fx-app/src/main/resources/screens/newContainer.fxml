@@ -21,7 +21,7 @@
             <Font name="System Bold" size="25.0" />
           </font>
         </Label>
-        <VBox id="VBox" alignment="CENTER" prefHeight="480.0" prefWidth="800.0" spacing="5.0">
+        <VBox id="VBox" alignment="CENTER" prefHeight="415.0" prefWidth="800.0" spacing="5.0">
           <children>
             <Label minWidth="-Infinity" prefHeight="16.0" prefWidth="791.0" text="Enter container info:">
               <font>
@@ -34,10 +34,10 @@
                 <Label styleClass="infoLabel" text="Group ID" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                 <Label styleClass="infoLabel" text="Artifact ID" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                 <Label styleClass="infoLabel" text="Version" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                <TextField fx:id="txtContainerId" minHeight="-Infinity" prefHeight="35.0" prefWidth="603.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                <TextField fx:id="txtGroupID" minHeight="-Infinity" prefHeight="35.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TextField fx:id="txtArtifactId" minHeight="-Infinity" prefHeight="35.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <TextField fx:id="txtVersion" minHeight="-Infinity" prefHeight="35.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField fx:id="txtContainerId" minHeight="-Infinity" onAction="#addContainer" prefHeight="35.0" prefWidth="603.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <TextField fx:id="txtGroupID" minHeight="-Infinity" onAction="#addContainer" prefHeight="35.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="txtArtifactId" minHeight="-Infinity" onAction="#addContainer" prefHeight="35.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="txtVersion" minHeight="-Infinity" onAction="#addContainer" prefHeight="35.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="232.0" minWidth="10.0" prefWidth="132.0" />
@@ -52,7 +52,7 @@
             </GridPane>
           </children>
         </VBox>
-        <HBox id="HBox" alignment="CENTER" prefHeight="61.0" prefWidth="800.0" spacing="10.0">
+        <HBox id="HBox" alignment="CENTER" prefHeight="86.0" prefWidth="800.0" spacing="10.0">
           <children>
             <Button fx:id="btnAdd" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addContainer" prefHeight="35.0" prefWidth="130.0" styleClass="defaultButton, plus" text="Add Container">
                      <HBox.margin>
