@@ -19,8 +19,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class QueryDefinitionController implements Initializable {
-	
-	
+
 	@Inject
 	Navigation navigation;
 	@Inject
@@ -35,7 +34,7 @@ public class QueryDefinitionController implements Initializable {
 	TableColumn<QueryDefinition, String> clSource;
 	@FXML
 	TableColumn<QueryDefinition, String> clTarget;
-	
+
 	@FXML
 	Button btnUnregister;
 
@@ -59,25 +58,25 @@ public class QueryDefinitionController implements Initializable {
 
 	private void loadData() {
 		tblQueries.getItems().clear();
-		tblQueries.getItems().addAll(service.queries(20));
+		tblQueries.getItems().addAll(service.queries(100));
 	}
-	
+
 	public void removeQuery() {
 		QueryDefinition query = tblQueries.getSelectionModel().getSelectedItem();
 		boolean remove = AppUtils.askIfOk("Would you like to unregister the query " + query.getName() + "?");
-		if(remove) {
+		if (remove) {
 			AppUtils.doBlockingAsyncWork(() -> {
 				service.unregisterQuery(query.getName());
 				loadData();
 				return null;
-			} , r -> {
+			}, r -> {
 				AppUtils.showSuccessDialog("Query Definition removed with sucess!");
-			} , AppUtils::showExceptionDialog);
+			}, AppUtils::showExceptionDialog);
 		}
 	}
-	
+
 	public void register() {
 		navigation.goTo(Screen.NEW_QUERY);
 	}
-			
+
 }
