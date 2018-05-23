@@ -1,36 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.kieserverclient.controllers.TemplateController">
-   <bottom>
-      <HBox alignment="CENTER" prefHeight="49.0" prefWidth="800.0" spacing="25.0" style="-fx-background-color: lightsteelblue;" BorderPane.alignment="CENTER">
-         <children>
-          <Button mnemonicParsing="false" onAction="#goBack" prefHeight="39.0" prefWidth="150.0" text="←">
-               <styleClass>
-                  <String fx:value="defaultButton" />
-                  <String fx:value="plus" />
-                  <String fx:value="infoLabel" />
-               </styleClass>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#goHome" prefHeight="40.0" prefWidth="150.0" text="Home">
-               <styleClass>
-                  <String fx:value="defaultButton" />
-                  <String fx:value="infoLabel" />
-                  <String fx:value="plus" />
-               </styleClass>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#doLogout" prefHeight="40.0" prefWidth="150.0" text="Quit">
-               <styleClass>
-                  <String fx:value="danger" />
-                  <String fx:value="defaultButton" />
-                  <String fx:value="infoLabel" />
-               </styleClass>
-            </Button>
-         </children>
-      </HBox>
-   </bottom>
-</BorderPane>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.kieserverclient.controllers.TemplateController">
+   <children>
+      <BorderPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../style/main.css">
+         <bottom>
+            <HBox alignment="CENTER" prefHeight="49.0" prefWidth="800.0" spacing="25.0" style="-fx-background-color: lightsteelblue;" BorderPane.alignment="CENTER">
+               <children>
+                <Button mnemonicParsing="false" onAction="#goBack" prefHeight="39.0" prefWidth="150.0" text="←">
+                     <styleClass>
+                        <String fx:value="defaultButton" />
+                        <String fx:value="plus" />
+                        <String fx:value="infoLabel" />
+                     </styleClass>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#goHome" prefHeight="40.0" prefWidth="150.0" text="Home">
+                     <styleClass>
+                        <String fx:value="defaultButton" />
+                        <String fx:value="infoLabel" />
+                        <String fx:value="plus" />
+                     </styleClass>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#doLogout" prefHeight="40.0" prefWidth="150.0" text="Quit">
+                     <styleClass>
+                        <String fx:value="danger" />
+                        <String fx:value="defaultButton" />
+                        <String fx:value="infoLabel" />
+                     </styleClass>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </bottom>
+      </BorderPane>
+      <Button defaultButton="true" layoutX="2.0" layoutY="6.0" mnemonicParsing="false" onAction="#showLogs" prefHeight="22.0" prefWidth="38.0" text="logs" translateX="760.0" translateY="570.0" underline="true">
+         <font>
+            <Font name="System Bold Italic" size="9.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

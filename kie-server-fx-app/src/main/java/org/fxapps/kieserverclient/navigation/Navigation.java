@@ -64,7 +64,11 @@ public class Navigation {
 	public void goTo(Screen screen) {
 		previousScreen = currentScreen;
 		currentScreen = screen;
-		BorderPane root = (BorderPane) scene.getRoot();
+		Node border = scene.getRoot().getChildrenUnmodifiable()
+			.stream()
+			.filter(n -> n instanceof BorderPane)
+			.findFirst().get();
+		BorderPane root = (BorderPane) border;
 		Node current = root.getCenter();
 		FadeTransition hideCurrent = new FadeTransition();
 		hideCurrent.setDuration(Duration.millis(TRANSITION_DURATION));
