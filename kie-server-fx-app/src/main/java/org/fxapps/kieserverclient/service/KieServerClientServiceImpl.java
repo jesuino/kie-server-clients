@@ -62,7 +62,6 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	private List<String> JOB_STATUS = Arrays.asList("QUEUED", "DONE",
 			"CANCELLED", "ERROR", "RETRYING", "RUNNING");;
 
-	static KieServerClientServiceImpl INSTANCE;
 	private KieServicesClient client;
 	private KieServerInfo kieServerInfo;
 	private RuleServicesClient rulesClient;
