@@ -55,7 +55,7 @@ public class SendSignalController implements Initializable {
 		String signalContent = txtContent.getText();
 		AppUtils.doBlockingAsyncWork(() -> {
 			service.signalProcessInstances(containerId, pInstances, signalName, signalContent);
-			navigation.goToPreviousScreen();
+			navigation.goBack();
 			return null;
 		}, r -> {
 			AppUtils.showSuccessDialog("Processes signal done with success!");

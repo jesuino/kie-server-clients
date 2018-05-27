@@ -3,6 +3,7 @@ package org.fxapps.kieserverclient.navigation;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -37,14 +38,15 @@ public class Navigation {
 	 */
 	private Map<Param, Object> data;
 
-	private Screen previousScreen;
-	private Screen currentScreen;
 	private Screen home;
 
 	private Scene scene;
-
+	
+	Stack<Screen> screenHistory;
+	
 	@PostConstruct
 	private void construct() {
+		screenHistory = new Stack<>();
 		Parent root;
 		try {
 			root = fxmlLoader.load(Screen.TEMPLATE.getURL().openStream());
@@ -60,10 +62,60 @@ public class Navigation {
 			System.exit(0);
 		}
 	}
-
+	
 	public void goTo(Screen screen) {
-		previousScreen = currentScreen;
-		currentScreen = screen;
+		goTo(screen, true);
+	}
+	
+	public Screen getHome() {
+		return home;
+	}
+
+	public void goHome() {
+		screenHistory.clear();
+		goTo(home, false);
+	}
+	
+	public void blockScreen() {
+		scene.getRoot().setDisable(true);
+	}
+
+	public void unblockScreen() {
+		scene.getRoot().setDisable(false);
+	}
+
+	public Scene getScene() {
+		return scene;
+	}
+
+	public Map<Param, Object> data() {
+		return data;
+	}
+
+	public void goBack() {
+		if(screenHistory.empty()) {
+			return;
+		}
+		screenHistory.pop();
+		goTo(screenHistory.peek(), false);
+	}
+
+	private Parent loadScreen(Screen screen) throws IOException {
+		fxmlLoader.setRoot(null);
+		fxmlLoader.setController(null);
+		Parent newScreen = fxmlLoader.load(screen.getURL().openStream());
+		return newScreen;
+	}
+	
+	public void logout() {
+		goTo(Screen.LOGIN, false);
+	}
+	
+	private void goTo(Screen screen, boolean keepHistory) {
+		System.out.println("GOING TO SCREEN " + screenHistory);
+		if(keepHistory) {
+			screenHistory.push(screen);
+		}
 		Node border = scene.getRoot().getChildrenUnmodifiable()
 			.stream()
 			.filter(n -> n instanceof BorderPane)
@@ -97,37 +149,13 @@ public class Navigation {
 		} else {
 			root.getBottom().setVisible(true);
 		}
+		// improve later plz
+		if (screen == home) {
+			root.lookup("#btnBack").setDisable(true);
+		} else {
+			root.lookup("#btnBack").setDisable(false);
+		}
 	}
 
-	public void goHome() {
-		goTo(home);
-	}
-
-	public void blockScreen() {
-		scene.getRoot().setDisable(true);
-	}
-
-	public void unblockScreen() {
-		scene.getRoot().setDisable(false);
-	}
-
-	public Scene getScene() {
-		return scene;
-	}
-
-	public Map<Param, Object> data() {
-		return data;
-	}
-
-	public void goToPreviousScreen() {
-		goTo(previousScreen);
-	}
-
-	private Parent loadScreen(Screen screen) throws IOException {
-		fxmlLoader.setRoot(null);
-		fxmlLoader.setController(null);
-		Parent newScreen = fxmlLoader.load(screen.getURL().openStream());
-		return newScreen;
-	}
 	
 }

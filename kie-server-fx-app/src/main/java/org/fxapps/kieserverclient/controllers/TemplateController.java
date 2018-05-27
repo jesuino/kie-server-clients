@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 import javax.inject.Inject;
 
 import org.fxapps.kieserverclient.navigation.Navigation;
-import org.fxapps.kieserverclient.navigation.Screen;
 import org.slf4j.LoggerFactory;
 
 import ch.qos.logback.classic.Level;
@@ -16,7 +15,9 @@ import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.AppenderBase;
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TextArea;
@@ -28,13 +29,42 @@ public class TemplateController implements Initializable {
 
 	@Inject
 	Navigation navigation;
+
 	private Dialog<Pair<String, String>> loggingDialog;
 	private TextArea loggingContent;
-	
+
+	@FXML
+	Button btnLogs;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		buildLoggingDialog();
 		createLogger();
+	}
+	
+	public void doLogout() {
+		navigation.logout();
+	}
+
+	public void goBack() {
+		navigation.goBack();
+	}
+
+	public void goHome() {
+		navigation.goHome();
+	}
+
+	public void showLogs() {
+		loggingDialog.showAndWait();
+	}
+
+	public void receiveLogging(ILoggingEvent loggingEvent) {
+		System.out.println("Receiving event");
+		if (loggingDialog.isShowing()) {
+			Platform.runLater(() -> {
+				loggingContent.setText(loggingEvent.getFormattedMessage());
+			});
+		}
 	}
 
 	private void buildLoggingDialog() {
@@ -49,46 +79,20 @@ public class TemplateController implements Initializable {
 		loggingContent.setPrefWidth(600);
 		loggingContent.setPrefHeight(400);
 		loggingDialog.setOnHiding(h -> loggingContent.setText(""));
+		btnLogs.disableProperty().bind(loggingDialog.showingProperty());
 	}
 
-	public void doLogout() {
-		navigation.goTo(Screen.LOGIN);
-	}
-
-	public void goBack() {
-		navigation.goToPreviousScreen();
-	}
-	
-	public void goHome() {
-		navigation.goHome();
-	}
-	
-	public void showLogs() {
-		System.out.println("LOGS");
-		loggingDialog.showAndWait();
-	}
-	
-	public void receiveLogging( ILoggingEvent loggingEvent) {
-		System.out.println("Receiving event");
-		if(loggingDialog.isShowing()) {
-			Platform.runLater(() -> {
-				loggingContent.setText(loggingEvent.getFormattedMessage());
-			});
-		}
-	}
-	
-	 private void createLogger() {
-         LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
-         PatternLayoutEncoder ple = new PatternLayoutEncoder();
-
-         ple.setPattern("%date %msg%n");
-         ple.setContext(lc);
-         ple.start();
-         AppenderBase<ILoggingEvent> fileAppender = new AppenderBase<ILoggingEvent>() {
+	private void createLogger() {
+		LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+		PatternLayoutEncoder ple = new PatternLayoutEncoder();
+		ple.setPattern("%date %msg%n");
+		ple.setContext(lc);
+		ple.start();
+		AppenderBase<ILoggingEvent> customAppender = new AppenderBase<ILoggingEvent>() {
 
 			@Override
 			protected void append(ILoggingEvent eventObject) {
-				if(loggingDialog.isShowing()) {
+				if (loggingDialog.isShowing()) {
 					Platform.runLater(() -> {
 						loggingContent.appendText("\n");
 						loggingContent.appendText(eventObject.getFormattedMessage());
@@ -97,12 +101,12 @@ public class TemplateController implements Initializable {
 					});
 				}
 			}
-         };
-         fileAppender.setContext(lc);
-         fileAppender.start();
-         Logger logger = (Logger) LoggerFactory.getLogger("org.kie.server.client.impl");
-         logger.addAppender(fileAppender);
-         logger.setLevel(Level.TRACE);
-         logger.setAdditive(true);
-   }
+		};
+		customAppender.setContext(lc);
+		customAppender.start();
+		Logger logger = (Logger) LoggerFactory.getLogger("org.kie.server.client.impl");
+		logger.addAppender(customAppender);
+		logger.setLevel(Level.TRACE);
+		logger.setAdditive(true);
+	}
 }

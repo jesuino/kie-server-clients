@@ -61,7 +61,7 @@ public class NewQueryDefinitionController implements Initializable {
 			return null;
 		}, r -> {
 			AppUtils.showSuccessDialog("Query Definition registered with sucess!");
-			navigation.goToPreviousScreen();
+			navigation.goBack();
 		}, AppUtils::showExceptionDialog);
 	}
 

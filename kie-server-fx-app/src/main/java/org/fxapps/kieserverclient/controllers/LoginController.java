@@ -8,7 +8,6 @@ import javax.inject.Inject;
 
 import org.fxapps.kieserverclient.navigation.Navigation;
 import org.fxapps.kieserverclient.navigation.Param;
-import org.fxapps.kieserverclient.navigation.Screen;
 import org.fxapps.kieserverclient.service.KieServerClientService;
 import org.fxapps.kieserverclient.utils.AppUtils;
 
@@ -45,6 +44,9 @@ public class LoginController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		service.logout();
+		txtURL.setOnAction(e -> doLogin());
+		txtUsr.setOnAction(e -> doLogin());
+		txtPsw.setOnAction(e -> doLogin());
 	}
 
 	public void doLogin() {
@@ -73,7 +75,7 @@ public class LoginController implements Initializable {
 			navigation.data().put(Param.USER, usr);
 			navigation.data().put(Param.PASSWORD, psw);
 			navigation.data().put(Param.URL, url);
-			navigation.goTo(Screen.CONTAINERS);
+			navigation.goTo(navigation.getHome());
 		} , AppUtils::showExceptionDialog);
 	}
 

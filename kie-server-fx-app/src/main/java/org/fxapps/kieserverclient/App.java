@@ -13,7 +13,6 @@ public class App extends Application {
 	@Inject
 	Navigation navigation;
 
-
 	public void start(@Observes @StartupScene Stage stage) {
 		Scene scene = navigation.getScene();
 		stage.setScene(scene);

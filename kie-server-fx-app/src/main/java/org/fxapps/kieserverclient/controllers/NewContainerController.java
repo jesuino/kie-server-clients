@@ -67,7 +67,7 @@ public class NewContainerController implements Initializable {
 			} else {
 				AppUtils.showSuccessDialog("Container created with success!");
 			}
-			navigation.goToPreviousScreen();
+			navigation.goBack();
 		}, AppUtils::showExceptionDialog);
 	}
 
