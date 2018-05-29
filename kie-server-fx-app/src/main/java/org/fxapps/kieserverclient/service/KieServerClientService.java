@@ -9,6 +9,7 @@ import org.kie.server.api.marshalling.Marshaller;
 import org.kie.server.api.model.KieContainerResource;
 import org.kie.server.api.model.KieServerInfo;
 import org.kie.server.api.model.ServiceResponse;
+import org.kie.server.api.model.admin.MigrationReportInstance;
 import org.kie.server.api.model.definition.ProcessDefinition;
 import org.kie.server.api.model.definition.QueryDefinition;
 import org.kie.server.api.model.definition.ServiceTasksDefinition;
@@ -156,5 +157,7 @@ public interface KieServerClientService {
 	public void registerQuery(QueryDefinition def);
 
 	List<NodeInstance> findNodeInstances(long processInstanceId, int max);
+	
+	public List<MigrationReportInstance> migrateProcessInstances(String containerId, List<Long> processInstancesId, String targetContainerId, String targetProcessId, Map<String, String> nodeMapping);
 
 }

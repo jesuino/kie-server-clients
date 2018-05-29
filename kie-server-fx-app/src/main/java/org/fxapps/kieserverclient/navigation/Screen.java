@@ -25,7 +25,8 @@ public enum Screen {
 	PROCESS_TASKS_CHARTS("processTasksCharts.fxml"), 
 	QUERIES("queryDefinition.fxml"),
 	NEW_QUERY("newQueryDefinition.fxml"), 
-	NODES("nodeInstances.fxml");
+	NODES("nodeInstances.fxml"),
+	MIGRATION("migration.fxml");
 
 	private String path;
 

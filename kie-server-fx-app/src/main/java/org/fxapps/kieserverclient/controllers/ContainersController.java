@@ -51,6 +51,9 @@ public class ContainersController implements Initializable {
 	
 	@FXML
 	MenuItem mnUserTasks;
+	
+	@FXML
+	MenuItem mnMigration;
 
 	@FXML
 	MenuItem mnJobs;
@@ -151,6 +154,8 @@ public class ContainersController implements Initializable {
 		mnQueries.disableProperty().bind(selectedItem.or(noBPM));
 		mnJobs.disableProperty().bind(noBPM);
 		mnCommands.disableProperty().bind(selectedItem.or(noBRM));
+		mnMigration.disableProperty().bind(selectedItem.or(noBPM));
+		tblContainers.getSelectionModel().selectedItemProperty().addListener((a,b,c) -> saveSelectedContainer());
 	}
 
 	private void fillContainers(List<KieContainerResource> listContainers) {
@@ -180,7 +185,6 @@ public class ContainersController implements Initializable {
 	}
 
 	public void loadTasks() {
-		saveSelectedContainer();
 		String user = (String) navigation.data().get(Param.USER);
 		Supplier<List<TaskSummary>> updateTasks = () -> service.findTasks(user);
 		navigation.data().put(Param.UPDATE_USER_TASKS_ACTION, updateTasks);
@@ -193,7 +197,6 @@ public class ContainersController implements Initializable {
 	}
 	
 	public void processTasksCharts() {
-		saveSelectedContainer();
 		navigation.goTo(Screen.PROCESS_TASKS_CHARTS);
 	}
 	
@@ -203,5 +206,9 @@ public class ContainersController implements Initializable {
 	
 	public void queries() {
 		navigation.goTo(Screen.QUERIES);
+	}
+	
+	public void migration() {
+		navigation.goTo(Screen.MIGRATION);
 	}
 }

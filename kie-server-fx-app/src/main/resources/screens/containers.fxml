@@ -35,6 +35,7 @@
                       <MenuItem fx:id="mnCommands" mnemonicParsing="false" onAction="#executeCommands" text="Commands" />
                         <MenuItem fx:id="mnUserTasks" mnemonicParsing="false" onAction="#loadTasks" text="User Tasks" />
                         <MenuItem fx:id="mnJobs" mnemonicParsing="false" onAction="#jobs" text="Jobs" />
+                        <MenuItem fx:id="mnMigration" mnemonicParsing="false" onAction="#migration" text="Instances Migration" />
                     </items>
                      <HBox.margin>
                         <Insets />

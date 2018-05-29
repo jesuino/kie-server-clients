@@ -58,8 +58,10 @@ public class ProcessDefinitionDetailsController implements Initializable {
 
 	@FXML
 	TableView<Pair<String, String>> tblServiceTasks;
+	
 	@FXML
 	TableColumn<String, String> clServiceName;
+	
 	@FXML
 	TableColumn<String, String> clServiceType;
 

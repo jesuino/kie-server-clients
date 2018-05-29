@@ -18,6 +18,7 @@ import org.kie.server.api.model.KieContainerResource;
 import org.kie.server.api.model.KieServerInfo;
 import org.kie.server.api.model.ReleaseId;
 import org.kie.server.api.model.ServiceResponse;
+import org.kie.server.api.model.admin.MigrationReportInstance;
 import org.kie.server.api.model.definition.ProcessDefinition;
 import org.kie.server.api.model.definition.QueryDefinition;
 import org.kie.server.api.model.definition.ServiceTasksDefinition;
@@ -37,6 +38,7 @@ import org.kie.server.client.QueryServicesClient;
 import org.kie.server.client.RuleServicesClient;
 import org.kie.server.client.UIServicesClient;
 import org.kie.server.client.UserTaskServicesClient;
+import org.kie.server.client.admin.ProcessAdminServicesClient;
 
 /**
  * 
@@ -71,7 +73,10 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	private UserTaskServicesClient userTasksClient;
 	private JobServicesClient jobClient;
 	private UIServicesClient uiClient;
+	private ProcessAdminServicesClient processAdminClient;
+
 	private String usr;
+
 
 	static {
 		String formatType = System.getProperty("kieserverfx.formatType", "json");
@@ -109,6 +114,7 @@ class KieServerClientServiceImpl implements KieServerClientService {
 						.getServicesClient(QueryServicesClient.class);
 				jobClient = client.getServicesClient(JobServicesClient.class);
 				uiClient = client.getServicesClient(UIServicesClient.class);
+				processAdminClient = client.getServicesClient(ProcessAdminServicesClient.class);
 				supportsBPM.set(true);
 			}
 			if ("BRM".equals(capability)) {
@@ -380,6 +386,12 @@ class KieServerClientServiceImpl implements KieServerClientService {
 	@Override
 	public List<NodeInstance> findNodeInstances(long processInstanceId, int max) {
 		return queryClient.findNodeInstances(processInstanceId, 0, max);
+	}
+
+	@Override
+	public List<MigrationReportInstance> migrateProcessInstances(String containerId, List<Long> processInstancesId,
+			String targetContainerId, String targetProcessId, Map<String, String> nodeMapping) {
+		return processAdminClient.migrateProcessInstances(containerId, processInstancesId, targetContainerId, targetProcessId);
 	}
 	
 }

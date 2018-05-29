@@ -112,7 +112,6 @@ public class Navigation {
 	}
 	
 	private void goTo(Screen screen, boolean keepHistory) {
-		System.out.println("GOING TO SCREEN " + screenHistory);
 		if(keepHistory) {
 			screenHistory.push(screen);
 		}
