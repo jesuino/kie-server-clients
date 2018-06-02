@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,7 +11,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.kieserverclient.controllers.MigrationController">
    <children>
@@ -27,7 +27,6 @@
             <RowConstraints maxHeight="97.0" minHeight="10.0" prefHeight="68.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ChoiceBox fx:id="cbDefinitions" prefHeight="35.0" prefWidth="630.0" GridPane.columnIndex="1" />
             <ChoiceBox fx:id="cbNewContainer" prefHeight="35.0" prefWidth="630.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <HBox prefHeight="177.0" prefWidth="590.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
@@ -39,8 +38,8 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="199.0" prefWidth="40.0" spacing="50.0">
                      <children>
-                        <Button fx:id="btnAddInstances" mnemonicParsing="false" text="&gt;&gt;" />
-                        <Button fx:id="btnRemoveInstances" mnemonicParsing="false" text="&lt;&lt;" />
+                        <Button fx:id="btnAddInstances" mnemonicParsing="false" onAction="#selectInstances" text="&gt;&gt;" />
+                        <Button fx:id="btnRemoveInstances" mnemonicParsing="false" onAction="#removeSelectedInstances" text="&lt;&lt;" />
                      </children>
                   </VBox>
                   <VBox>
@@ -51,10 +50,11 @@
                   </VBox>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="178.0" text="Migrate" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="btnMigrate" mnemonicParsing="false" prefHeight="26.0" prefWidth="178.0" text="Migrate" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label styleClass="infoLabel" text="Target Definition" />
             <Label styleClass="infoLabel" text="Process Instances" GridPane.rowIndex="1" />
             <Label styleClass="infoLabel" text="New Container" GridPane.rowIndex="2" />
+            <ComboBox fx:id="cbDefinitions" prefHeight="35.0" prefWidth="630.0" GridPane.columnIndex="1" />
          </children>
       </GridPane>
    </children>
