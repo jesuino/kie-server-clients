@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.kieserverclient.controllers.MigrationController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/8.0.172" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapps.kieserverclient.controllers.MigrationController">
    <children>
       <Label layoutY="14.0" prefHeight="25.0" prefWidth="800.0" styleClass="titleLabel" text="Migrate Process Instances" />
       <GridPane layoutX="11.0" layoutY="57.0" prefHeight="501.0" prefWidth="789.0">
@@ -50,7 +50,7 @@
                   </VBox>
                </children>
             </HBox>
-            <Button fx:id="btnMigrate" mnemonicParsing="false" prefHeight="26.0" prefWidth="178.0" text="Migrate" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="btnMigrate" mnemonicParsing="false" onAction="#migrate" prefHeight="26.0" prefWidth="178.0" text="Migrate" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label styleClass="infoLabel" text="Target Definition" />
             <Label styleClass="infoLabel" text="Process Instances" GridPane.rowIndex="1" />
             <Label styleClass="infoLabel" text="New Container" GridPane.rowIndex="2" />

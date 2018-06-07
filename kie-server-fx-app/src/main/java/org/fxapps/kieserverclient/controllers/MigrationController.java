@@ -1,6 +1,9 @@
 package org.fxapps.kieserverclient.controllers;
 
 import java.net.URL;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.inject.Inject;
@@ -82,6 +85,20 @@ public class MigrationController implements Initializable {
 		btnAddInstances.disableProperty().bind(lstInstances.getSelectionModel().selectedItemProperty().isNull());
 		btnRemoveInstances.disableProperty()
 				.bind(lstSelectedInstances.getSelectionModel().selectedItemProperty().isNull());
+		cbNewContainer.valueProperty().addListener((a, b, c) -> checkSelectedContainer(c));
+	}
+
+	private void checkSelectedContainer(String c) {
+		if (c == null) {
+			return;
+		}
+		String targetDef = cbDefinitions.getValue();
+		List<ProcessDefinition> def = service.getProcessesDefinitions(c);
+		boolean hasDef = def.stream().filter(d -> d.getId().equals(targetDef)).findAny().isPresent();
+		if (!hasDef) {
+			AppUtils.showErrorDialog(c + " does not contain definition " + targetDef);
+			cbNewContainer.setValue(null);
+		}
 	}
 
 	public void selectInstances() {
@@ -94,6 +111,22 @@ public class MigrationController implements Initializable {
 		ObservableList<Long> selectedItems = lstSelectedInstances.getSelectionModel().getSelectedItems();
 		lstInstances.getItems().addAll(selectedItems);
 		lstSelectedInstances.getItems().removeAll(selectedItems);
+	}
+
+	public void migrate() {
+		final String containerId = container.getContainerId();
+		final List<Long> processInstancesId = lstSelectedInstances.getItems();
+		final String targetContainerId = cbNewContainer.getValue();
+		final String targetProcessId = cbDefinitions.getValue();
+		final Map<String, String> emptyMap = Collections.emptyMap();
+		AppUtils.doAsyncWork(() -> {
+			return service.migrateProcessInstances(containerId, processInstancesId, targetContainerId, targetProcessId,
+					emptyMap);
+		}, report -> {
+			// TODO: implement screen for migration results
+			System.out.println("MIGRATION REPORT IS: " + report);
+		}, e -> {
+		});
 	}
 
 }
