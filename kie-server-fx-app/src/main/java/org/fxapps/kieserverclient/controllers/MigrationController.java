@@ -125,8 +125,7 @@ public class MigrationController implements Initializable {
 		}, report -> {
 			// TODO: implement screen for migration results
 			System.out.println("MIGRATION REPORT IS: " + report);
-		}, e -> {
-		});
+		}, AppUtils::showExceptionDialog);
 	}
 
 }
