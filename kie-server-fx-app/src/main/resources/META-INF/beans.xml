@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://xmlns.jcp.org/xml/ns/javaee">
+  <scan>
+    <exclude name="org.dom4j.**" />
+    <exclude name="org.apache.commons.vfs2.**" />
+    <exclude name="com.sun.jdi.request.**" />
+    <exclude name="javax.servlet.http.**" />
+  </scan>
+</beans>
